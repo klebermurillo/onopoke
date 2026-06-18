@@ -3,6 +3,7 @@ const state = {
   activeCategory: "Todos",
   activeProductId: 1,
   activeImageIndex: 0,
+  activeAdminOrderId: "ONO-4201",
   cart: [
     {
       productId: 2,
@@ -237,18 +238,72 @@ const testimonials = [
 ];
 
 const adminOrders = [
-  { id: "ONO-4201", customer: "Helena Siqueira", item: "Poke Bowl Maui", total: "R$ 112,00", status: "Em produção" },
-  { id: "ONO-4202", customer: "Clara Menezes", item: "Combo Waikiki", total: "R$ 245,00", status: "Confirmado" },
-  { id: "ONO-4203", customer: "Bianca Freitas", item: "Loco Moco da Ilha", total: "R$ 158,00", status: "Sai para entrega" },
-  { id: "ONO-4204", customer: "Patrícia Lins", item: "Frango Huli Huli", total: "R$ 98,00", status: "Novo pedido" }
+  {
+    id: "ONO-4201",
+    customer: "Helena Siqueira",
+    phone: "(11) 99820-1144",
+    items: ["Poke Bowl Maui", "Bebida hibisco"],
+    total: "R$ 112,00",
+    status: "Em produção",
+    channel: "Delivery",
+    payment: "Pix",
+    mode: "Entrega",
+    eta: "12 min"
+  },
+  {
+    id: "ONO-4202",
+    customer: "Clara Menezes",
+    phone: "(11) 99741-2203",
+    items: ["Combo Waikiki", "Chips de batata-doce"],
+    total: "R$ 245,00",
+    status: "Pronto",
+    channel: "App",
+    payment: "Cartão",
+    mode: "Retirada",
+    eta: "Pronto para chamar"
+  },
+  {
+    id: "ONO-4203",
+    customer: "Bianca Freitas",
+    phone: "(11) 99688-9901",
+    items: ["Loco Moco da Ilha"],
+    total: "R$ 158,00",
+    status: "Saiu para entrega",
+    channel: "WhatsApp",
+    payment: "Pix",
+    mode: "Entrega",
+    eta: "5 min"
+  },
+  {
+    id: "ONO-4204",
+    customer: "Patrícia Lins",
+    phone: "(11) 99555-1040",
+    items: ["Frango Huli Huli", "Calda extra"],
+    total: "R$ 98,00",
+    status: "Novo pedido",
+    channel: "Mesa",
+    payment: "Dinheiro",
+    mode: "Retirada",
+    eta: "Aguardando"
+  }
 ];
 
 const adminMetrics = [
   { icon: "fa-solid fa-sack-dollar", label: "Faturamento do mês", value: "R$ 18.450" },
   { icon: "fa-solid fa-bag-shopping", label: "Pedidos ativos", value: "32" },
-  { icon: "fa-solid fa-users", label: "Clientes recorrentes", value: "71%" },
-  { icon: "fa-solid fa-bowl-food", label: "Produto líder", value: "Poke Bowl Maui" }
+  { icon: "fa-solid fa-circle-check", label: "Pedidos prontos", value: "9" },
+  { icon: "fa-solid fa-clock", label: "Tempo médio", value: "24 min" }
 ];
+
+const adminStatusFlow = ["Novo pedido", "Confirmado", "Em produção", "Pronto", "Saiu para entrega", "Entregue"];
+
+function getStatusClass(status) {
+  return status
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-");
+}
 
 const deliveryFee = 18;
 
@@ -290,7 +345,8 @@ const elements = {
   orderNumber: document.getElementById("orderNumber"),
   whatsappButton: document.getElementById("whatsappButton"),
   ordersList: document.getElementById("ordersList"),
-  adminMetrics: document.getElementById("adminMetrics")
+  adminMetrics: document.getElementById("adminMetrics"),
+  trackingPanel: document.getElementById("trackingPanel")
 };
 
 function formatPrice(value) {
@@ -563,22 +619,85 @@ function renderAdmin() {
   elements.ordersList.innerHTML = adminOrders
     .map(
       (order) => `
-        <div class="order-item">
+        <div class="order-item admin-order-card ${order.id === state.activeAdminOrderId ? "active" : ""}">
           <div class="order-item-head">
             <div>
               <strong>#${order.id}</strong>
-              <span>${order.customer}</span>
+              <span>${order.customer} · ${order.channel}</span>
             </div>
-            <span class="order-status">${order.status}</span>
+            <span class="order-status status-${getStatusClass(order.status)}">${order.status}</span>
           </div>
-          <div class="summary-line">
-            <span>${order.item}</span>
+          <div class="admin-order-details">
+            <span>${order.items.join(", ")}</span>
             <strong>${order.total}</strong>
+          </div>
+          <div class="admin-order-meta">
+            <span><i class="fa-solid fa-user"></i> ${order.customer}</span>
+            <span><i class="fa-solid fa-phone"></i> ${order.phone}</span>
+            <span><i class="fa-solid fa-credit-card"></i> ${order.payment}</span>
+            <span><i class="fa-solid fa-motorcycle"></i> ${order.mode}</span>
+          </div>
+          <div class="order-progress" aria-hidden="true">
+            <span style="width: ${Math.max(18, (adminStatusFlow.indexOf(order.status) / (adminStatusFlow.length - 1)) * 100)}%"></span>
+          </div>
+          <div class="order-action-row">
+            <button type="button" class="btn btn-secondary btn-small" data-admin-select="${order.id}">Ver pedido</button>
+            <button type="button" class="btn btn-primary btn-small" data-admin-advance="${order.id}">Avançar status</button>
           </div>
         </div>
       `
     )
     .join("");
+
+  const activeOrder = adminOrders.find((order) => order.id === state.activeAdminOrderId) || adminOrders[0];
+  const activeStatusIndex = Math.max(adminStatusFlow.indexOf(activeOrder.status), 0);
+
+  elements.trackingPanel.innerHTML = `
+    <div class="tracking-header">
+      <div>
+        <span class="eyebrow">Acompanhamento do cliente</span>
+        <h3>${activeOrder.customer}</h3>
+      </div>
+      <span class="order-status status-${getStatusClass(activeOrder.status)}">${activeOrder.status}</span>
+    </div>
+    <div class="tracking-order-number">${activeOrder.id}</div>
+    <div class="tracking-summary">
+      <div>
+        <span>Itens</span>
+        <strong>${activeOrder.items.join(", ")}</strong>
+      </div>
+      <div>
+        <span>Previsão</span>
+        <strong>${activeOrder.eta}</strong>
+      </div>
+      <div>
+        <span>Pagamento</span>
+        <strong>${activeOrder.payment}</strong>
+      </div>
+      <div>
+        <span>Contato</span>
+        <strong>${activeOrder.phone}</strong>
+      </div>
+    </div>
+    <div class="tracking-timeline">
+      ${adminStatusFlow
+        .map(
+          (status, index) => `
+            <div class="tracking-step ${index < activeStatusIndex ? "done" : ""} ${index === activeStatusIndex ? "current" : ""}">
+              <span></span>
+              <div>
+                <strong>${status}</strong>
+                <small>${index === activeStatusIndex ? "Etapa atual" : index < activeStatusIndex ? "Concluída" : "Pendente"}</small>
+              </div>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+    <div class="tracking-note ${activeOrder.status === "Pronto" ? "ready" : ""}">
+      ${activeOrder.status === "Pronto" ? "Pedido pronto para retirada ou despacho." : `Pedido em ${activeOrder.status.toLowerCase()}.`}
+    </div>
+  `;
 }
 
 function renderAll() {
@@ -679,6 +798,22 @@ function removeCartItem(index) {
   renderCheckoutSummary();
 }
 
+function selectAdminOrder(orderId) {
+  state.activeAdminOrderId = orderId;
+  renderAdmin();
+}
+
+function advanceAdminOrder(orderId) {
+  const order = adminOrders.find((item) => item.id === orderId);
+  if (!order) return;
+
+  const currentIndex = adminStatusFlow.indexOf(order.status);
+  const nextIndex = Math.min(currentIndex + 1, adminStatusFlow.length - 1);
+  order.status = adminStatusFlow[nextIndex];
+  state.activeAdminOrderId = order.id;
+  renderAdmin();
+}
+
 function updateOptionPills(container) {
   container.querySelectorAll(".pill-option").forEach((pill) => {
     const input = pill.querySelector("input");
@@ -739,6 +874,18 @@ function bindEvents() {
   });
 
   document.body.addEventListener("click", (event) => {
+    const adminSelectButton = event.target.closest("[data-admin-select]");
+    if (adminSelectButton) {
+      selectAdminOrder(adminSelectButton.dataset.adminSelect);
+      return;
+    }
+
+    const adminAdvanceButton = event.target.closest("[data-admin-advance]");
+    if (adminAdvanceButton) {
+      advanceAdminOrder(adminAdvanceButton.dataset.adminAdvance);
+      return;
+    }
+
     const openProductButton = event.target.closest("[data-open-product]");
     if (openProductButton) {
       setActiveProduct(Number(openProductButton.dataset.openProduct));

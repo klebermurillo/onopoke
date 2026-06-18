@@ -948,6 +948,169 @@ main {
   gap: 1rem;
 }
 
+.admin-order-card {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-order-card:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.admin-order-card.active {
+  background: rgba(255, 255, 255, 0.5);
+  margin: 0 -0.35rem;
+  padding: 1rem 0.35rem;
+  border-radius: 18px;
+}
+
+.admin-order-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.admin-order-details span {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.admin-order-meta,
+.tracking-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+}
+
+.admin-order-meta span,
+.tracking-summary span,
+.tracking-step small {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.admin-order-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.order-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(173, 132, 94, 0.1);
+  overflow: hidden;
+}
+
+.order-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--primary-strong), var(--accent));
+}
+
+.order-action-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn-small {
+  padding: 0.72rem 1rem;
+  font-size: 0.92rem;
+}
+
+.tracking-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.tracking-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.tracking-header h3 {
+  margin: 0.35rem 0 0;
+  font-size: 1.9rem;
+}
+
+.tracking-order-number {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--text);
+}
+
+.tracking-timeline {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.tracking-step {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 0.8rem;
+  align-items: start;
+}
+
+.tracking-step span {
+  width: 16px;
+  height: 16px;
+  margin-top: 0.2rem;
+  border-radius: 50%;
+  background: rgba(173, 132, 94, 0.16);
+  box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+.tracking-step.done span,
+.tracking-step.current span {
+  background: linear-gradient(135deg, var(--primary-strong), var(--accent));
+}
+
+.tracking-step strong {
+  display: block;
+  margin-bottom: 0.1rem;
+}
+
+.tracking-note {
+  padding: 1rem 1.05rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.tracking-note.ready {
+  background: rgba(156, 217, 203, 0.18);
+  border-color: rgba(88, 184, 166, 0.22);
+  color: var(--text);
+}
+
+.status-novo-pedido,
+.status-confirmado,
+.status-em-producao,
+.status-pronto,
+.status-saiu-para-entrega,
+.status-entregue {
+  background: rgba(232, 185, 195, 0.18);
+}
+
+.status-pronto {
+  background: rgba(156, 217, 203, 0.24);
+}
+
+.status-saiu-para-entrega,
+.status-entregue {
+  background: rgba(226, 181, 92, 0.18);
+}
+
 .order-item-head {
   align-items: center;
 }
