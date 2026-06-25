@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ono Poke | Comida Havaiana Premium</title>
+  <meta name="description" content="Protótipo visual premium para um restaurante de comida havaiana com poke bowls, pratos quentes e combos tropicais.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-glow page-glow-left"></div>
+  <div class="page-glow page-glow-right"></div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <a href="#home" class="brand" data-nav="home" aria-label="Ono Poke">
+        <span class="brand-mark"><i class="fa-solid fa-bowl-food"></i></span>
+        <span class="brand-copy">
+          <strong>Ono Poke</strong>
+          <small>Comida havaiana premium</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Principal">
+        <a href="#home" data-nav="home">Home</a>
+        <a href="#menu" data-nav="menu">Cardápio</a>
+        <a href="#product" data-nav="product">Produto</a>
+        <a href="#cart" data-nav="cart">Carrinho</a>
+        <a href="#checkout" data-nav="checkout">Checkout</a>
+        <a href="#confirmation" data-nav="confirmation">Confirmação</a>
+        <a href="#admin" data-nav="admin">Painel</a>
+      </nav>
+
+      <button class="cart-pill" id="cartShortcut" data-nav="cart" aria-label="Abrir carrinho">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Carrinho</span>
+        <strong id="cartCount">0</strong>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="view is-active" id="homeView" data-view="home" aria-labelledby="homeTitle">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Poke bowls, pratos quentes e combos tropicais</span>
+          <h1 id="homeTitle">Sabores havaianos frescos com apresentação vibrante para pedidos online.</h1>
+          <p>
+            Ono Poke combina ingredientes frescos, molhos artesanais e montagens coloridas em uma experiência premium para delivery e retirada.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-nav="menu">Faça seu pedido</button>
+            <button class="btn btn-secondary" data-nav="product">Ver prato em destaque</button>
+          </div>
+
+          <div class="hero-badges">
+            <div class="badge-card">
+              <i class="fa-solid fa-star"></i>
+              <div>
+                <strong>4.9 de 5</strong>
+                <span>Avaliação média de clientes</span>
+              </div>
+            </div>
+            <div class="badge-card">
+              <i class="fa-solid fa-truck-fast"></i>
+              <div>
+                <strong>Entrega delicada</strong>
+                <span>Embalagens premium e refrigeradas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal reveal-delay-1">
+          <div class="hero-card hero-card-main">
+            <div class="hero-card-label">Destaque da Ilha</div>
+            <h2>Poke Bowl Maui</h2>
+            <p>Arroz japonês, salmão fresco, manga, pepino e molho shoyu cítrico.</p>
+            <div class="hero-price">R$ 56,00</div>
+          </div>
+
+          <div class="hero-photo-frame">
+            <div class="hero-photo" id="heroPhoto" aria-label="Imagem ilustrativa do poke destaque"></div>
+          </div>
+
+          <div class="floating-note floating-note-top">
+            <strong>Ingredientes selecionados</strong>
+            <span>Salmão fresco, manga, pepino e arroz temperado.</span>
+          </div>
+          <div class="floating-note floating-note-bottom">
+            <strong>Personalização sob medida</strong>
+            <span>Escolha o peixe, o ponto da proteína e os acompanhamentos.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="container section-shell reveal reveal-delay-1">
+        <div class="section-heading">
+          <span class="eyebrow">Mais pedidos</span>
+          <h2>Favoritos da casa para matar a fome com estilo</h2>
+          <p>Uma curadoria visual de bowls, pratos e combos que representam a linha principal do restaurante.</p>
+        </div>
+        <div class="product-grid compact-grid" id="bestSellersGrid"></div>
+      </div>
+
+      <div class="container section-shell reveal reveal-delay-2">
+        <div class="section-heading split-heading">
+          <div>
+            <span class="eyebrow">Diferenciais</span>
+            <h2>Experiência premium do pedido à entrega</h2>
+          </div>
+          <p>Cada detalhe foi pensado para transmitir frescor, rapidez e consistência visual inspirada na cozinha havaiana moderna.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <i class="fa-solid fa-gem"></i>
+            <h3>Montagem impecável</h3>
+            <p>Bowls bem distribuídos, cores vivas e uma composição que valoriza cada ingrediente.</p>
+          </article>
+          <article class="feature-card">
+            <i class="fa-solid fa-leaf"></i>
+            <h3>Ingredientes frescos</h3>
+            <p>Peixes, vegetais, molhos cítricos e elementos tropicais escolhidos para transmitir qualidade e leveza.</p>
+          </article>
+          <article class="feature-card">
+            <i class="fa-solid fa-heart"></i>
+            <h3>Pedidos rápidos</h3>
+            <p>Fluxo pensado para encomendas online, retirada prática e entregas com atendimento ágil.</p>
+          </article>
+          <article class="feature-card">
+            <i class="fa-solid fa-box-open"></i>
+            <h3>Embalagem térmica</h3>
+            <p>Caixas resistentes e apresentação organizada para preservar frescor e reforçar o padrão premium.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="container section-shell reveal reveal-delay-2">
+        <div class="section-heading">
+          <span class="eyebrow">Avaliações</span>
+          <h2>O que os clientes dizem</h2>
+        </div>
+        <div class="testimonial-grid" id="testimonialGrid"></div>
+      </div>
+    </section>
+
+    <section class="view" id="menuView" data-view="menu" aria-labelledby="menuTitle">
+      <div class="container section-shell">
+        <div class="section-heading split-heading">
+          <div>
+            <span class="eyebrow">Cardápio</span>
+            <h2 id="menuTitle">Pokes, pratos quentes e combos para pronta entrega</h2>
+          </div>
+          <p>Busque categorias, filtre sabores e apresente uma vitrine profissional com foco em pedidos rápidos e frescos.</p>
+        </div>
+
+        <div class="toolbar-card">
+          <div class="search-field">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" id="searchInput" placeholder="Busque por poke, prato, combo..." aria-label="Buscar produtos">
+          </div>
+          <div class="category-chips" id="categoryChips"></div>
+        </div>
+
+        <div class="product-grid" id="menuGrid"></div>
+      </div>
+    </section>
+
+    <section class="view" id="productView" data-view="product" aria-labelledby="productTitle">
+      <div class="container section-shell product-layout">
+        <div class="product-gallery-panel">
+          <div class="product-gallery-main" id="productMainImage"></div>
+          <div class="product-thumb-row" id="productThumbRow"></div>
+        </div>
+
+        <div class="product-info-panel">
+          <span class="eyebrow" id="productCategoryTag">Prato destaque</span>
+          <h2 id="productTitle">Selecione um prato</h2>
+          <p id="productDescription"></p>
+
+          <div class="product-meta">
+            <div>
+              <span>Preço base</span>
+              <strong id="productPrice"></strong>
+            </div>
+            <div>
+              <span>Disponibilidade</span>
+              <strong>Pronto em até 30 min</strong>
+            </div>
+          </div>
+
+          <div class="option-group">
+            <h3>Tamanho</h3>
+            <div class="size-options" id="sizeOptions"></div>
+          </div>
+
+          <div class="option-group">
+            <h3>Adicionais</h3>
+            <div class="addon-list" id="addonList"></div>
+          </div>
+
+          <div class="option-group">
+            <h3>Observações</h3>
+            <textarea id="productNotes" rows="4" placeholder="Ex.: menos açúcar, mensagem personalizada, cores da decoração..."></textarea>
+          </div>
+
+          <div class="detail-actions">
+            <button class="btn btn-secondary" data-nav="menu">Voltar ao cardápio</button>
+            <button class="btn btn-primary" id="addProductButton">Adicionar ao Carrinho</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="cartView" data-view="cart" aria-labelledby="cartTitle">
+      <div class="container section-shell cart-layout">
+        <div class="cart-items-panel">
+          <div class="section-heading left-heading">
+            <span class="eyebrow">Carrinho</span>
+            <h2 id="cartTitle">Itens selecionados</h2>
+          </div>
+          <div id="cartItems"></div>
+        </div>
+
+        <aside class="summary-panel">
+          <h3>Resumo do pedido</h3>
+          <div class="summary-line">
+            <span>Subtotal</span>
+            <strong id="cartSubtotal">R$ 0,00</strong>
+          </div>
+          <div class="summary-line">
+            <span>Entrega estimada</span>
+            <strong id="cartDeliveryFee">R$ 18,00</strong>
+          </div>
+          <div class="summary-line total-line">
+            <span>Total</span>
+            <strong id="cartTotal">R$ 0,00</strong>
+          </div>
+
+          <label for="cartNotes">Observações gerais</label>
+          <textarea id="cartNotes" rows="4" placeholder="Ex.: tocar interfone, incluir cartão com dedicatória..."></textarea>
+
+          <button class="btn btn-primary btn-block" id="goToCheckout">Finalizar Pedido</button>
+        </aside>
+      </div>
+    </section>
+
+    <section class="view" id="checkoutView" data-view="checkout" aria-labelledby="checkoutTitle">
+      <div class="container section-shell checkout-layout">
+        <form class="checkout-form" id="checkoutForm">
+          <div class="section-heading left-heading">
+            <span class="eyebrow">Checkout</span>
+            <h2 id="checkoutTitle">Dados para concluir o pedido</h2>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Nome
+              <input type="text" id="customerName" placeholder="Seu nome completo" required>
+            </label>
+            <label>
+              Telefone
+              <input type="tel" id="customerPhone" placeholder="(11) 99999-9999" required>
+            </label>
+            <label class="span-2">
+              Endereço
+              <input type="text" id="customerAddress" placeholder="Rua, número, complemento e bairro" required>
+            </label>
+          </div>
+
+          <div class="form-block">
+            <h3>Recebimento</h3>
+            <div class="pill-options" id="deliveryOptions">
+              <label class="pill-option active">
+                <input type="radio" name="deliveryMode" value="entrega" checked>
+                <span><i class="fa-solid fa-motorcycle"></i> Entrega</span>
+              </label>
+              <label class="pill-option">
+                <input type="radio" name="deliveryMode" value="retirada">
+                <span><i class="fa-solid fa-shop"></i> Retirada na loja</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-block">
+            <h3>Forma de pagamento</h3>
+            <div class="pill-options" id="paymentOptions">
+              <label class="pill-option active">
+                <input type="radio" name="paymentMethod" value="Pix" checked>
+                <span><i class="fa-solid fa-qrcode"></i> Pix</span>
+              </label>
+              <label class="pill-option">
+                <input type="radio" name="paymentMethod" value="Cartão">
+                <span><i class="fa-regular fa-credit-card"></i> Cartão</span>
+              </label>
+              <label class="pill-option">
+                <input type="radio" name="paymentMethod" value="Dinheiro">
+                <span><i class="fa-solid fa-money-bill-wave"></i> Dinheiro</span>
+              </label>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Confirmar pedido</button>
+        </form>
+
+        <aside class="summary-panel summary-sticky">
+          <h3>Resumo do pedido</h3>
+          <div id="checkoutSummary"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="view" id="confirmationView" data-view="confirmation" aria-labelledby="confirmationTitle">
+      <div class="container confirmation-wrap section-shell">
+        <div class="confirmation-card">
+          <div class="success-mark">
+            <i class="fa-solid fa-check"></i>
+          </div>
+          <span class="eyebrow">Pedido confirmado</span>
+          <h2 id="confirmationTitle">Pedido realizado com sucesso</h2>
+            <p>Seu pedido foi registrado e a equipe da Ono Poke dará sequência ao atendimento com todos os detalhes da encomenda.</p>
+          <div class="confirmation-number">
+            <span>Número do pedido</span>
+            <strong id="orderNumber">#DEC-0000</strong>
+          </div>
+          <div class="confirmation-actions">
+            <button class="btn btn-secondary" data-nav="home">Voltar para Home</button>
+            <a class="btn btn-primary" id="whatsappButton" href="https://wa.me/5519971160068" target="_blank" rel="noreferrer">Enviar Pedido pelo WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="adminView" data-view="admin" aria-labelledby="adminTitle">
+      <div class="container section-shell">
+        <div class="section-heading split-heading">
+          <div>
+            <span class="eyebrow">Painel administrativo</span>
+            <h2 id="adminTitle">Demonstração visual para gestão do restaurante</h2>
+          </div>
+          <p>Uma proposta de dashboard elegante para pedidos, estoque visual e acompanhamento comercial.</p>
+        </div>
+
+        <div class="admin-metrics" id="adminMetrics"></div>
+
+        <div class="admin-grid">
+          <article class="admin-card">
+            <div class="admin-card-head">
+              <h3>Pedidos recentes</h3>
+              <span>Atualizado hoje</span>
+            </div>
+            <div id="ordersList" class="orders-list"></div>
+          </article>
+
+          <article class="admin-card">
+            <div class="admin-card-head">
+              <h3>Acompanhamento do cliente</h3>
+              <span>Exibição em tempo real</span>
+            </div>
+            <div id="trackingPanel" class="tracking-panel"></div>
+          </article>
+
+          <article class="admin-card">
+            <div class="admin-card-head">
+              <h3>Cadastro de produtos</h3>
+              <span>Visual demonstrativo</span>
+            </div>
+            <form class="admin-form">
+              <label>
+                Nome do produto
+                <input type="text" value="Poke de Atum Premium">
+              </label>
+              <label>
+                Categoria
+                <select>
+                  <option>Pokes</option>
+                  <option selected>Pratos Quentes</option>
+                  <option>Combos</option>
+                  <option>Sobremesas Tropicais</option>
+                </select>
+              </label>
+              <label>
+                Preço
+                <input type="text" value="R$ 59,00">
+              </label>
+              <label>
+                Descrição
+                <textarea rows="4">Atum fresco, manga, pepino, arroz japonês e molho cítrico com apresentação premium.</textarea>
+              </label>
+              <button type="button" class="btn btn-primary btn-block">Salvar produto</button>
+            </form>
+          </article>
+
+          <article class="admin-card admin-card-wide">
+            <div class="admin-card-head">
+              <h3>Estatísticas rápidas</h3>
+              <span>Últimos 30 dias</span>
+            </div>
+            <div class="stats-bars">
+              <div class="stats-bar-row">
+                <span>Pokes</span>
+                <div class="stats-track"><div class="stats-fill fill-1"></div></div>
+                <strong>78%</strong>
+              </div>
+              <div class="stats-bar-row">
+                <span>Pratos quentes</span>
+                <div class="stats-track"><div class="stats-fill fill-2"></div></div>
+                <strong>61%</strong>
+              </div>
+              <div class="stats-bar-row">
+                <span>Combos</span>
+                <div class="stats-track"><div class="stats-fill fill-3"></div></div>
+                <strong>84%</strong>
+              </div>
+              <div class="stats-bar-row">
+                <span>Sobremesas tropicais</span>
+                <div class="stats-track"><div class="stats-fill fill-4"></div></div>
+                <strong>43%</strong>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="#home" class="brand footer-brand" data-nav="home">
+          <span class="brand-mark"><i class="fa-solid fa-bowl-food"></i></span>
+          <span class="brand-copy">
+            <strong>Ono Poke</strong>
+            <small>Comida havaiana premium</small>
+          </span>
+        </a>
+        <p>Bowls tropicais, pratos quentes e combinações frescas para pedidos online com apresentação premium.</p>
+      </div>
+      <div>
+        <h3>Navegação</h3>
+        <ul>
+          <li><a href="#home" data-nav="home">Home</a></li>
+          <li><a href="#menu" data-nav="menu">Cardápio</a></li>
+          <li><a href="#cart" data-nav="cart">Carrinho</a></li>
+          <li><a href="#admin" data-nav="admin">Painel</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Atendimento</h3>
+        <ul>
+          <li><i class="fa-brands fa-whatsapp"></i> (19) 97116-0068</li>
+          <li><i class="fa-regular fa-envelope"></i> contato@onopoke.com</li>
+          <li><i class="fa-solid fa-location-dot"></i> Rua das Palmeiras, 214</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Redes sociais</h3>
+        <div class="social-row">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+        <p>Pedidos para almoço, delivery corporativo e combinações tropicais para o dia a dia.</p>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <p>&copy; 2026 Ono Poke. Desenvolvido por <strong>Murilo Quitzau</strong>. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
