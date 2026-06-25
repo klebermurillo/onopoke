@@ -1,24 +1,32 @@
 :root {
-  --bg: #f4fbf8;
-  --surface: rgba(255, 255, 255, 0.86);
+  --bg: #F5EFE4;
+  --surface: #FFFFFF;
+  --border: #319EA9;
+
+  --primary: #319EA9;
+  --secondary: #28787A;
+  --accent: #E97680;
+
+  --text: #28787A;
+  --muted: #6B7280;
+  --soft: #E4DFCF;
+
   --surface-strong: #ffffff;
-  --surface-soft: #e8f3ee;
-  --line: rgba(95, 143, 122, 0.16);
-  --line-strong: rgba(95, 143, 122, 0.28);
-  --text: #26433c;
-  --muted: #5f756f;
-  --primary: #9cd9cb;
-  --primary-strong: #58b8a6;
-  --accent: #e2b55c;
-  --accent-soft: rgba(226, 181, 92, 0.18);
-  --shadow: 0 24px 60px rgba(55, 98, 87, 0.12);
-  --shadow-soft: 0 14px 30px rgba(55, 98, 87, 0.1);
+  --surface-soft: #f7f2e8;
+  --line: rgba(49, 158, 169, 0.24);
+  --line-strong: rgba(49, 158, 169, 0.36);
+  --primary-strong: #28787A;
+  --accent-soft: rgba(233, 118, 128, 0.2);
+  --shadow: 0 24px 56px rgba(40, 120, 122, 0.14);
+  --shadow-soft: 0 14px 28px rgba(40, 120, 122, 0.12);
   --radius-xl: 34px;
   --radius-lg: 24px;
   --radius-md: 18px;
   --radius-sm: 14px;
   --container: 1180px;
   --transition: 260ms ease;
+  --font-display: "Aloha Vibes", "Afacad Flux", "Open Sans", sans-serif;
+  --font-text: "Open Sans", "Afacad Flux", sans-serif;
 }
 
 * {
@@ -31,12 +39,12 @@ html {
 
 body {
   margin: 0;
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-text);
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(156, 217, 203, 0.34), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(226, 181, 92, 0.16), transparent 24%),
-    linear-gradient(180deg, #fbfffd 0%, #eef9f4 44%, #f4fbf8 100%);
+    radial-gradient(circle at 10% 8%, rgba(49, 158, 169, 0.24), transparent 35%),
+    radial-gradient(circle at 88% 16%, rgba(233, 118, 128, 0.2), transparent 30%),
+    linear-gradient(180deg, #f7f1e6 0%, #fdfbf6 52%, #f5efe4 100%);
   min-height: 100vh;
 }
 
@@ -77,8 +85,8 @@ select {
 textarea:focus,
 input:focus,
 select:focus {
-  border-color: var(--primary-strong);
-  box-shadow: 0 0 0 4px rgba(216, 154, 168, 0.14);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(49, 158, 169, 0.14);
 }
 
 .container {
@@ -100,13 +108,13 @@ select:focus {
 .page-glow-left {
   top: 8%;
   left: -140px;
-  background: rgba(156, 217, 203, 0.26);
+  background: rgba(49, 158, 169, 0.26);
 }
 
 .page-glow-right {
   right: -140px;
   bottom: 10%;
-  background: rgba(226, 181, 92, 0.18);
+  background: rgba(233, 118, 128, 0.2);
 }
 
 .site-header,
@@ -121,8 +129,8 @@ main,
   top: 0;
   z-index: 50;
   backdrop-filter: blur(18px);
-  background: rgba(244, 251, 248, 0.76);
-  border-bottom: 1px solid rgba(95, 143, 122, 0.08);
+  background: rgba(245, 239, 228, 0.84);
+  border-bottom: 1px solid rgba(49, 158, 169, 0.15);
 }
 
 .header-inner {
@@ -145,9 +153,9 @@ main,
   display: grid;
   place-items: center;
   border-radius: 18px;
-  background: linear-gradient(145deg, rgba(156, 217, 203, 0.82), rgba(255, 255, 255, 0.95));
+  background: linear-gradient(145deg, rgba(49, 158, 169, 0.22), rgba(255, 255, 255, 0.98));
   box-shadow: var(--shadow-soft);
-  color: var(--accent);
+  color: var(--primary);
 }
 
 .brand-copy {
@@ -162,7 +170,7 @@ main,
 .admin-card h3,
 .summary-panel h3,
 .checkout-form h2 {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-display);
   letter-spacing: 0.02em;
 }
 
@@ -200,7 +208,7 @@ main,
 .main-nav a.is-current,
 .footer-grid a:hover {
   color: var(--text);
-  background: rgba(232, 185, 195, 0.16);
+  background: rgba(49, 158, 169, 0.16);
 }
 
 .menu-toggle {
@@ -240,7 +248,8 @@ main,
   display: inline-grid;
   place-items: center;
   border-radius: 50%;
-  background: var(--primary);
+  background: var(--accent);
+  color: #fff;
 }
 
 main {
@@ -294,13 +303,13 @@ main {
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.62);
-  border: 1px solid rgba(215, 178, 109, 0.16);
+  border: 1px solid rgba(49, 158, 169, 0.2);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-size: 0.71rem;
   font-weight: 800;
-  color: var(--accent);
+  color: var(--secondary);
 }
 
 .hero-actions,
@@ -328,15 +337,15 @@ main {
 }
 
 .btn-primary {
-  color: #fff9f6;
-  background: linear-gradient(135deg, var(--primary-strong), #d07d91);
-  box-shadow: 0 18px 32px rgba(208, 125, 145, 0.24);
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  box-shadow: 0 18px 32px rgba(40, 120, 122, 0.24);
 }
 
 .btn-secondary {
   background: rgba(255, 255, 255, 0.84);
   color: var(--text);
-  border: 1px solid rgba(173, 132, 94, 0.12);
+  border: 1px solid rgba(49, 158, 169, 0.2);
   box-shadow: var(--shadow-soft);
 }
 
@@ -416,6 +425,16 @@ main {
   color: var(--accent);
 }
 
+.badge-emoji {
+  min-width: 48px;
+  height: 48px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 16px;
+  background: var(--accent-soft);
+  font-size: 1.2rem;
+}
+
 .hero-visual {
   position: relative;
   min-height: 620px;
@@ -460,7 +479,7 @@ main {
   aspect-ratio: 0.88;
   padding: 1.1rem;
   border-radius: 42px;
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(248, 236, 230, 0.66));
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(228, 223, 207, 0.62));
   box-shadow: var(--shadow);
 }
 
@@ -637,7 +656,7 @@ main {
   display: inline-grid;
   place-items: center;
   border-radius: 14px;
-  background: rgba(232, 185, 195, 0.18);
+  background: rgba(233, 118, 128, 0.18);
   color: var(--text);
 }
 
@@ -723,9 +742,9 @@ main {
 .size-chip.active,
 .addon-chip.active,
 .pill-option.active {
-  background: linear-gradient(135deg, rgba(232, 185, 195, 0.24), rgba(255, 255, 255, 0.95));
+  background: linear-gradient(135deg, rgba(49, 158, 169, 0.2), rgba(255, 255, 255, 0.95));
   color: var(--text);
-  border-color: rgba(216, 154, 168, 0.3);
+  border-color: rgba(49, 158, 169, 0.32);
   box-shadow: var(--shadow-soft);
 }
 
@@ -838,7 +857,7 @@ main {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: rgba(232, 185, 195, 0.22);
+  background: rgba(49, 158, 169, 0.2);
 }
 
 .summary-panel {
@@ -1065,7 +1084,7 @@ main {
   height: 16px;
   margin-top: 0.2rem;
   border-radius: 50%;
-  background: rgba(173, 132, 94, 0.16);
+  background: rgba(49, 158, 169, 0.2);
   box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.8);
 }
 
@@ -1099,16 +1118,16 @@ main {
 .status-pronto,
 .status-saiu-para-entrega,
 .status-entregue {
-  background: rgba(232, 185, 195, 0.18);
+  background: rgba(49, 158, 169, 0.16);
 }
 
 .status-pronto {
-  background: rgba(156, 217, 203, 0.24);
+  background: rgba(49, 158, 169, 0.26);
 }
 
 .status-saiu-para-entrega,
 .status-entregue {
-  background: rgba(226, 181, 92, 0.18);
+  background: rgba(233, 118, 128, 0.18);
 }
 
 .order-item-head {
@@ -1118,7 +1137,7 @@ main {
 .order-status {
   padding: 0.42rem 0.75rem;
   border-radius: 999px;
-  background: rgba(232, 185, 195, 0.18);
+  background: rgba(49, 158, 169, 0.18);
   color: var(--text);
   font-size: 0.84rem;
   font-weight: 800;
@@ -1153,8 +1172,8 @@ main {
   gap: 1.2rem;
   padding: 2rem;
   border-radius: var(--radius-xl);
-  background: rgba(74, 53, 43, 0.96);
-  color: rgba(255, 248, 244, 0.92);
+  background: linear-gradient(145deg, #28787A, #319EA9);
+  color: rgba(255, 255, 255, 0.94);
   box-shadow: var(--shadow);
 }
 
@@ -1166,7 +1185,7 @@ main {
 
 .footer-grid h3 {
   margin-top: 0;
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-display);
   font-size: 1.6rem;
 }
 
@@ -1386,7 +1405,7 @@ main {
   border-top: 1px solid var(--line);
   font-size: 0.875rem;
   color: var(--muted);
-  background: rgba(244, 251, 248, 0.5);
+  background: rgba(245, 239, 228, 0.88);
 }
 
 .footer-copyright p {

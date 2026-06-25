@@ -1,3 +1,57 @@
+const pokeImages = {
+  salmonMango: [
+    "https://source.unsplash.com/1200x900/?poke,salmon,mango,bowl",
+    "https://source.unsplash.com/1200x900/?salmon,poke,avocado",
+    "https://source.unsplash.com/1200x900/?hawaiian,poke,salmon",
+    "https://source.unsplash.com/1200x900/?poke,bowl,fresh,salmon"
+  ],
+  tuna: [
+    "https://source.unsplash.com/1200x900/?poke,tuna,cucumber,bowl",
+    "https://source.unsplash.com/1200x900/?tuna,poke,bowl,fresh",
+    "https://source.unsplash.com/1200x900/?ahi,tuna,poke",
+    "https://source.unsplash.com/1200x900/?poke,tuna,avocado"
+  ],
+  shrimp: [
+    "https://source.unsplash.com/1200x900/?shrimp,poke,bowl",
+    "https://source.unsplash.com/1200x900/?prawn,poke,hawaiian",
+    "https://source.unsplash.com/1200x900/?shrimp,bowl,avocado",
+    "https://source.unsplash.com/1200x900/?seafood,poke,bowl"
+  ],
+  warm: [
+    "https://source.unsplash.com/1200x900/?rice,bowl,teriyaki",
+    "https://source.unsplash.com/1200x900/?hawaiian,rice,bowl",
+    "https://source.unsplash.com/1200x900/?grilled,bowl,food",
+    "https://source.unsplash.com/1200x900/?asian,bowl,meal"
+  ],
+  dessert: [
+    "https://source.unsplash.com/1200x900/?coconut,dessert,tropical",
+    "https://source.unsplash.com/1200x900/?passionfruit,dessert",
+    "https://source.unsplash.com/1200x900/?cheesecake,tropical",
+    "https://source.unsplash.com/1200x900/?dessert,fruit,plate"
+  ]
+};
+
+const bestSellerHighlights = [
+  {
+    emoji: "🥭",
+    title: "Tropical Salmão",
+    description: "Salmão fresco, manga e molho tropical.",
+    image: pokeImages.salmonMango[0]
+  },
+  {
+    emoji: "🐟",
+    title: "Tradicional Atum",
+    description: "Atum fresco, pepino japonês e cebola roxa.",
+    image: pokeImages.tuna[0]
+  },
+  {
+    emoji: "🍤",
+    title: "Especial Camarão",
+    description: "Camarão grelhado com molho especial da casa.",
+    image: pokeImages.shrimp[0]
+  }
+];
+
 const state = {
   activeView: "home",
   activeCategory: "Todos",
@@ -10,7 +64,7 @@ const state = {
       name: "Loco Moco da Ilha",
       size: "Individual",
       quantity: 1,
-      image: createDessertImage("Loco Moco da Ilha", { background: ["#e7f4ef", "#fffaf4"], dessert: ["#b7dccd", "#7db9a9"], cream: "#fffdf8", accent: "#d8b56a", garnish: "#4f8d7b" }),
+      image: pokeImages.warm[0],
       unitPrice: 68,
       notes: "Molho extra à parte.",
       addons: ["Ovo mollet extra"]
@@ -23,62 +77,15 @@ const state = {
   }
 };
 
-function createDessertImage(title, palette) {
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900">
-      <defs>
-        <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stop-color="${palette.background[0]}" />
-          <stop offset="100%" stop-color="${palette.background[1]}" />
-        </linearGradient>
-        <linearGradient id="dessert" x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stop-color="${palette.dessert[0]}" />
-          <stop offset="100%" stop-color="${palette.dessert[1]}" />
-        </linearGradient>
-        <linearGradient id="cream" x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stop-color="#fffdfb" />
-          <stop offset="100%" stop-color="${palette.cream}" />
-        </linearGradient>
-        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="#9b7867" flood-opacity="0.22"/>
-        </filter>
-      </defs>
-      <rect width="900" height="900" rx="56" fill="url(#bg)"/>
-      <circle cx="730" cy="180" r="120" fill="${palette.accent}" opacity="0.14"/>
-      <circle cx="170" cy="760" r="160" fill="#ffffff" opacity="0.28"/>
-      <ellipse cx="450" cy="665" rx="220" ry="52" fill="#e7d7cf" opacity="0.8"/>
-      <g filter="url(#shadow)">
-        <rect x="255" y="280" width="390" height="250" rx="70" fill="url(#dessert)"/>
-        <rect x="280" y="245" width="340" height="78" rx="38" fill="url(#cream)"/>
-        <rect x="305" y="360" width="290" height="58" rx="29" fill="#fff5f1" opacity="0.85"/>
-        <rect x="275" y="500" width="350" height="38" rx="19" fill="${palette.accent}" opacity="0.32"/>
-        <circle cx="345" cy="262" r="24" fill="${palette.garnish}"/>
-        <circle cx="445" cy="228" r="30" fill="#fff8f4"/>
-        <circle cx="545" cy="262" r="24" fill="${palette.garnish}"/>
-        <path d="M365 260c28-38 42-58 80-58s52 20 80 58" fill="none" stroke="#fffaf8" stroke-width="16" stroke-linecap="round"/>
-      </g>
-      <rect x="295" y="615" width="310" height="82" rx="24" fill="rgba(255,255,255,0.58)"/>
-      <text x="450" y="654" text-anchor="middle" font-family="Georgia, serif" font-size="40" fill="#5a4439">${title}</text>
-    </svg>
-  `;
-
-  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
-}
-
 const products = [
   {
     id: 1,
     category: "Pokes",
-    name: "Poke Bowl Maui",
-    description: "Arroz japonês, salmão fresco, manga, pepino e molho shoyu cítrico servido em bowl premium.",
-    detail: "Um bowl leve, fresco e colorido, inspirado nos sabores da ilha. Ideal para almoço rápido, delivery elegante e pedidos saudáveis sem perder sofisticação.",
+    name: "Poke Salmão Tropical",
+    description: "Salmão fresco, manga, pepino japonês, arroz temperado e molho especial da casa.",
+    detail: "Poke fresco com ingredientes selecionados e apresentação premium para uma experiência tropical sofisticada em delivery ou retirada.",
     price: 56,
-    images: [
-      createDessertImage("Poke Bowl Maui", { background: ["#dff4ef", "#fffaf4"], dessert: ["#a7d8cb", "#6eb8a6"], cream: "#fffdf8", accent: "#d8b56a", garnish: "#5f9e8c" }),
-      createDessertImage("Maui Bowl", { background: ["#e4f6f2", "#fff8f0"], dessert: ["#b1dfd2", "#7bbfae"], cream: "#fffdfb", accent: "#d7b96e", garnish: "#4f8d7d" }),
-      createDessertImage("Ono Poke", { background: ["#def1ea", "#fff9f2"], dessert: ["#9ed6c5", "#67b3a0"], cream: "#fffef8", accent: "#d8b56a", garnish: "#4a8776" }),
-      createDessertImage("Bowl Tropical", { background: ["#e3f3ee", "#fffaf3"], dessert: ["#a8dbca", "#6fae9b"], cream: "#fffdf9", accent: "#d4ae67", garnish: "#569785" })
-    ],
+    images: pokeImages.salmonMango,
     sizes: [
       { label: "Individual", price: 56 },
       { label: "Duplo", price: 94 },
@@ -98,12 +105,7 @@ const products = [
     description: "Arroz branco, hambúrguer artesanal, ovo mollet e molho gravy teriyaki com toque havaiano.",
     detail: "Um clássico comfort food da ilha com acabamento premium. Ideal para quem quer um prato farto, saboroso e com apelo visual caseiro e elegante.",
     price: 68,
-    images: [
-      createDessertImage("Loco Moco", { background: ["#e8f4eb", "#fffaf4"], dessert: ["#c2dbc6", "#93c49e"], cream: "#fffdf8", accent: "#d8b56a", garnish: "#629a71" }),
-      createDessertImage("Ono Plate", { background: ["#edf6ea", "#fff8f0"], dessert: ["#cde0bb", "#9ec77f"], cream: "#fffdfb", accent: "#d7b86d", garnish: "#6d9f52" }),
-      createDessertImage("Island Comfort", { background: ["#eaf5ef", "#fff9f2"], dessert: ["#bfdacb", "#8ec2a8"], cream: "#fffef8", accent: "#d8b56a", garnish: "#5f9478" }),
-      createDessertImage("Havaiano Quente", { background: ["#e5f2ec", "#fffaf2"], dessert: ["#b7d8c8", "#81b99f"], cream: "#fffdf9", accent: "#d4ae67", garnish: "#5a8f76" })
-    ],
+    images: pokeImages.warm,
     sizes: [
       { label: "Individual", price: 68 },
       { label: "Duplo", price: 112 },
@@ -119,16 +121,11 @@ const products = [
   {
     id: 3,
     category: "Combos",
-    name: "Combo Waikiki",
-    description: "Seleção com poke mini, saladinha tropical e bebida refrescante para uma refeição prática e elegante.",
-    detail: "Perfeito para delivery executivo, almoço leve e combos de assinatura. Une variedade, frescor e apresentação sofisticada em uma única experiência.",
+    name: "Especial Camarão",
+    description: "Camarão grelhado, base leve e molho especial da casa com toque cítrico.",
+    detail: "Uma combinação elegante com camarão e ingredientes frescos para quem busca um poke sofisticado, equilibrado e cheio de personalidade.",
     price: 94,
-    images: [
-      createDessertImage("Waikiki Combo", { background: ["#e6f5f0", "#fff9f2"], dessert: ["#bddfce", "#8dc7b3"], cream: "#fffdf8", accent: "#d8b56a", garnish: "#5b9c83" }),
-      createDessertImage("Combo Ilha", { background: ["#edf7f1", "#fff8f3"], dessert: ["#c7e3d3", "#98ccb9"], cream: "#fffdfb", accent: "#d7b86d", garnish: "#5f9f8a" }),
-      createDessertImage("Tropical Set", { background: ["#eaf6ed", "#fffaf4"], dessert: ["#c1ddc8", "#90c69a"], cream: "#fffef9", accent: "#d8b56a", garnish: "#62956b" }),
-      createDessertImage("Ono Combo", { background: ["#e6f3ed", "#fffaf3"], dessert: ["#b7d8c9", "#83be9f"], cream: "#fffdf9", accent: "#d4ae67", garnish: "#5a8f78" })
-    ],
+    images: pokeImages.shrimp,
     sizes: [
       { label: "Individual", price: 94 },
       { label: "Duplo", price: 162 },
@@ -148,12 +145,7 @@ const products = [
     description: "Carne de porco desfiada, arroz de coco, salada de repolho e molho da ilha.",
     detail: "Um prato clássico havaiano com textura suculenta e equilíbrio entre conforto e frescor. Excelente para refeições completas com visual apetitoso.",
     price: 72,
-    images: [
-      createDessertImage("Kalua Pork", { background: ["#e8f3e9", "#fffaf3"], dessert: ["#c7dfc9", "#96c49b"], cream: "#fffdf8", accent: "#d8b56a", garnish: "#6ea074" }),
-      createDessertImage("Island Plate", { background: ["#edf6ed", "#fff8f2"], dessert: ["#d2e4d2", "#a3cda7"], cream: "#fffefb", accent: "#d7b86d", garnish: "#7aa57f" }),
-      createDessertImage("Ono Pork", { background: ["#eaf4eb", "#fffaf4"], dessert: ["#bfd8c2", "#8ebe95"], cream: "#fffdf9", accent: "#d8b56a", garnish: "#6b9872" }),
-      createDessertImage("Hawaii Plate", { background: ["#e6f0e7", "#fffaf4"], dessert: ["#b9d6bb", "#83b88a"], cream: "#fffdf9", accent: "#d4ae67", garnish: "#5f8f66" })
-    ],
+    images: pokeImages.warm,
     sizes: [
       { label: "Individual", price: 72 },
       { label: "Duplo", price: 126 },
@@ -173,12 +165,7 @@ const products = [
     description: "Base crocante, creme leve de coco e calda de maracujá com acabamento tropical.",
     detail: "Uma sobremesa fresca para fechar a refeição com leveza e contraste. Funciona bem para delivery, menu do dia e combos especiais.",
     price: 34,
-    images: [
-      createDessertImage("Coco e Maracujá", { background: ["#e7f5ee", "#fff9f2"], dessert: ["#c7e2cc", "#95c0a0"], cream: "#fffdf8", accent: "#d8b56a", garnish: "#6fa57b" }),
-      createDessertImage("Tropical Cheesecake", { background: ["#ebf7f0", "#fffaf4"], dessert: ["#d0e5d7", "#a8ceb4"], cream: "#fffefb", accent: "#d7b86d", garnish: "#76aa83" }),
-      createDessertImage("Ono Sweet", { background: ["#e4f3ea", "#fffaf3"], dessert: ["#c1dcc7", "#8fbd96"], cream: "#fffdf9", accent: "#d8b56a", garnish: "#65986f" }),
-      createDessertImage("Island Dessert", { background: ["#e8f4ee", "#fffaf5"], dessert: ["#c9e0d0", "#98c8a3"], cream: "#fffdf9", accent: "#d4ae67", garnish: "#6ea07a" })
-    ],
+    images: pokeImages.dessert,
     sizes: [
       { label: "Individual", price: 34 },
       { label: "Duplo", price: 58 },
@@ -193,16 +180,11 @@ const products = [
   {
     id: 6,
     category: "Pokes",
-    name: "Poke Spicy de Atum",
-    description: "Atum fresco, manga, pepino, cebolinha e maionese sriracha com crocância leve.",
-    detail: "Uma versão vibrante e equilibrada do poke clássico, com frescor, picância na medida e montagem premium para delivery rápido.",
+    name: "Tradicional Atum",
+    description: "Atum fresco, pepino japonês e cebola roxa com finalização artesanal.",
+    detail: "Versão clássica de poke com atum fresco, textura equilibrada e montagem premium para uma refeição tropical e sofisticada.",
     price: 59,
-    images: [
-      createDessertImage("Spicy Tuna", { background: ["#def2ef", "#fffaf2"], dessert: ["#abd8d2", "#78bbb0"], cream: "#fffdf8", accent: "#d8b56a", garnish: "#5f9f98" }),
-      createDessertImage("Tuna Bowl", { background: ["#e4f5f2", "#fff9f3"], dessert: ["#bddfd9", "#86c2b7"], cream: "#fffdfb", accent: "#d7b86d", garnish: "#4f8f88" }),
-      createDessertImage("Ono Tuna", { background: ["#e0f1ee", "#fffaf4"], dessert: ["#a8d5cf", "#70b5aa"], cream: "#fffef8", accent: "#d8b56a", garnish: "#4d8b84" }),
-      createDessertImage("Poke Fresh", { background: ["#e5f3f0", "#fffaf5"], dessert: ["#b9ddd7", "#7fbfae"], cream: "#fffdf9", accent: "#d4ae67", garnish: "#578f86" })
-    ],
+    images: pokeImages.tuna,
     sizes: [
       { label: "Individual", price: 59 },
       { label: "Duplo", price: 102 },
@@ -306,6 +288,7 @@ function getStatusClass(status) {
 }
 
 const deliveryFee = 18;
+const whatsappPhone = "5519971160068";
 
 const elements = {
   views: [...document.querySelectorAll(".view")],
@@ -383,11 +366,26 @@ function setupInitialState() {
 }
 
 function renderBestSellers() {
-  elements.bestSellersGrid.innerHTML = products
-    .filter((product) => product.featured)
-    .slice(0, 4)
-    .map((product) => createProductCard(product, true))
+  elements.bestSellersGrid.innerHTML = bestSellerHighlights
+    .map((item) => createBestSellerCard(item))
     .join("");
+}
+
+function createBestSellerCard(item) {
+  return `
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <div class="product-image" style="background-image: url('${item.image}')"></div>
+      </div>
+      <div class="product-card-content">
+        <div class="product-copy">
+          <span class="product-tag">${item.emoji} Mais pedido</span>
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+        </div>
+      </div>
+    </article>
+  `;
 }
 
 function renderTestimonials() {
@@ -824,11 +822,46 @@ function updateOptionPills(container) {
 function buildWhatsappLink(orderId) {
   const deliveryMode = document.querySelector('input[name="deliveryMode"]:checked')?.value || "entrega";
   const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value || "Pix";
-  const summaryText = state.cart
-    .map((item) => `${item.quantity}x ${item.name} (${item.size}) - ${formatPrice(item.unitPrice * item.quantity)}`)
-    .join("%0A");
 
-  return `https://wa.me/5511999999999?text=Olá!%20Segue%20o%20pedido%20${orderId}.%0A%0ACliente:%20${encodeURIComponent(elements.customerName.value)}%0ATelefone:%20${encodeURIComponent(elements.customerPhone.value)}%0ARecebimento:%20${encodeURIComponent(deliveryMode)}%0APagamento:%20${encodeURIComponent(paymentMethod)}%0A%0AItens:%0A${summaryText}`;
+  const customerAddress = elements.customerAddress.value.trim();
+  const cartNotes = elements.cartNotes.value.trim();
+
+  const summaryText = state.cart
+    .map((item) => {
+      const addonsText = item.addons.length
+        ? ` | Adicionais: ${item.addons.join(", ")}`
+        : "";
+
+      const notesText = item.notes
+        ? ` | Obs: ${item.notes}`
+        : "";
+
+      return `${item.quantity}x ${item.name} (${item.size}) - ${formatPrice(item.unitPrice * item.quantity)}${addonsText}${notesText}`;
+    })
+    .join("\n");
+
+  const message = [
+    `Olá! Segue o pedido ${orderId}.`,
+    "",
+    `Cliente: ${elements.customerName.value.trim()}`,
+    `Telefone: ${elements.customerPhone.value.trim()}`,
+    customerAddress ? `Endereço: ${customerAddress}` : null,
+    `Recebimento: ${deliveryMode}`,
+    `Pagamento: ${paymentMethod}`,
+    cartNotes ? `Observações gerais: ${cartNotes}` : null,
+    "",
+    "Itens:",
+    summaryText || "Carrinho vazio"
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  return `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`;
+}
+
+function syncWhatsappLink() {
+  const orderId = elements.orderNumber.textContent?.trim() || "#DEC-0000";
+  elements.whatsappButton.href = buildWhatsappLink(orderId);
 }
 
 function submitCheckout(event) {
@@ -941,9 +974,18 @@ function bindEvents() {
   elements.addProductButton.addEventListener("click", addConfiguredProductToCart);
   elements.goToCheckout.addEventListener("click", () => setActiveView("checkout"));
   elements.checkoutForm.addEventListener("submit", submitCheckout);
+  elements.checkoutForm.addEventListener("input", syncWhatsappLink);
+  elements.cartNotes.addEventListener("input", syncWhatsappLink);
 
-  elements.deliveryOptions.addEventListener("change", () => updateOptionPills(elements.deliveryOptions));
-  elements.paymentOptions.addEventListener("change", () => updateOptionPills(elements.paymentOptions));
+  elements.deliveryOptions.addEventListener("change", () => {
+    updateOptionPills(elements.deliveryOptions);
+    syncWhatsappLink();
+  });
+
+  elements.paymentOptions.addEventListener("change", () => {
+    updateOptionPills(elements.paymentOptions);
+    syncWhatsappLink();
+  });
 
   document.addEventListener("click", (event) => {
     if (!event.target.closest(".header-inner")) {
@@ -958,3 +1000,4 @@ bindEvents();
 setActiveView("home");
 updateOptionPills(elements.deliveryOptions);
 updateOptionPills(elements.paymentOptions);
+syncWhatsappLink();
