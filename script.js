@@ -1,33 +1,33 @@
 const pokeImages = {
   salmonMango: [
-    "https://source.unsplash.com/featured/1200x900/?poke,bowl,salmon,mango&sig=101",
-    "https://source.unsplash.com/featured/1200x900/?salmon,poke,avocado&sig=102",
-    "https://source.unsplash.com/featured/1200x900/?hawaiian,poke,bowl&sig=103",
-    "https://source.unsplash.com/featured/1200x900/?fresh,poke,salmon&sig=104"
+    "https://emagreceja.com.br/wp-content/uploads/2023/03/mobile-1200-%C3%97-1200-px-1200-%C3%97-628-px-1200-%C3%97-1200-px-1200-%C3%97-1100-px-1200-%C3%97-628-px-1200-%C3%97-1200-px-6.png",
+    "https://poke-house.com/wp-content/uploads/2023/06/usa-roasted-salmon.jpg",
+    "https://nomeular.com.br/content/images/size/w960/2023/02/poke-1.jpg",
+    "https://i.pinimg.com/736x/a4/7e/9f/a47e9f7b1520c2cbfc481b1e6261957c.jpg"
   ],
   tuna: [
-    "https://source.unsplash.com/featured/1200x900/?tuna,poke,bowl&sig=201",
-    "https://source.unsplash.com/featured/1200x900/?ahi,tuna,bowl&sig=202",
-    "https://source.unsplash.com/featured/1200x900/?poke,cucumber,red,onion&sig=203",
-    "https://source.unsplash.com/featured/1200x900/?tuna,avocado,poke&sig=204"
+    "https://static.wixstatic.com/media/84770f_d6055d34eb504de2b7a7857a016ae82ef003.jpg/v1/fill/w_599,h_599,fp_0.50_0.50,q_90/84770f_d6055d34eb504de2b7a7857a016ae82ef003.jpg",
+    "https://tse2.mm.bing.net/th/id/OIP.wmu76aBmzcWHz6IpZyf-GgHaGl?w=792&h=704&rs=1&pid=ImgDetMain&o=7&rm=3",
+    "https://tse1.mm.bing.net/th/id/OIP.owHU7mLcHjMfu9PHOXBrdQHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "https://i.pinimg.com/originals/c1/f8/0b/c1f80baaa3b20323242b861ab8d7ac69.png"
   ],
   shrimp: [
-    "https://source.unsplash.com/featured/1200x900/?shrimp,poke,bowl&sig=301",
-    "https://source.unsplash.com/featured/1200x900/?prawn,hawaiian,bowl&sig=302",
-    "https://source.unsplash.com/featured/1200x900/?shrimp,avocado,bowl&sig=303",
-    "https://source.unsplash.com/featured/1200x900/?seafood,poke,plate&sig=304"
+    "https://tse2.mm.bing.net/th/id/OIP.EJ1O9Tx4rR9xf8Y0Z3vuigHaEK?w=1920&h=1080&rs=1&pid=ImgDetMain&o=7&rm=3",
+    "https://nomeular.com.br/content/images/size/w960/2023/02/poke-1.jpg",
+    "https://i.pinimg.com/736x/a4/7e/9f/a47e9f7b1520c2cbfc481b1e6261957c.jpg",
+    "https://static.wixstatic.com/media/84770f_d6055d34eb504de2b7a7857a016ae82ef003.jpg/v1/fill/w_599,h_599,fp_0.50_0.50,q_90/84770f_d6055d34eb504de2b7a7857a016ae82ef003.jpg"
   ],
   warm: [
-    "https://source.unsplash.com/featured/1200x900/?rice,teriyaki,bowl&sig=401",
-    "https://source.unsplash.com/featured/1200x900/?hawaiian,rice,meal&sig=402",
-    "https://source.unsplash.com/featured/1200x900/?grilled,protein,bowl&sig=403",
-    "https://source.unsplash.com/featured/1200x900/?asian,bowl,lunch&sig=404"
+    "https://poke-house.com/wp-content/uploads/2023/06/usa-roasted-salmon.jpg",
+    "https://emagreceja.com.br/wp-content/uploads/2023/03/mobile-1200-%C3%97-1200-px-1200-%C3%97-628-px-1200-%C3%97-1200-px-1200-%C3%97-1100-px-1200-%C3%97-628-px-1200-%C3%97-1200-px-6.png",
+    "https://tse1.mm.bing.net/th/id/OIP.owHU7mLcHjMfu9PHOXBrdQHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "https://tse2.mm.bing.net/th/id/OIP.EJ1O9Tx4rR9xf8Y0Z3vuigHaEK?w=1920&h=1080&rs=1&pid=ImgDetMain&o=7&rm=3"
   ],
   dessert: [
-    "https://source.unsplash.com/featured/1200x900/?coconut,dessert,tropical&sig=501",
-    "https://source.unsplash.com/featured/1200x900/?passionfruit,dessert&sig=502",
-    "https://source.unsplash.com/featured/1200x900/?cheesecake,fruit&sig=503",
-    "https://source.unsplash.com/featured/1200x900/?dessert,plate,tropical&sig=504"
+    "https://www.corriecooks.com/wp-content/uploads/2023/06/Passion-Fruit-Cheesecake-500x500.jpg",
+    "https://i.pinimg.com/originals/c1/f8/0b/c1f80baaa3b20323242b861ab8d7ac69.png",
+    "https://tse2.mm.bing.net/th/id/OIP.wmu76aBmzcWHz6IpZyf-GgHaGl?w=792&h=704&rs=1&pid=ImgDetMain&o=7&rm=3",
+    "https://www.corriecooks.com/wp-content/uploads/2023/06/Passion-Fruit-Cheesecake-500x500.jpg"
   ]
 };
 
