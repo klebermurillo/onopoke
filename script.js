@@ -278,6 +278,36 @@ const adminMetrics = [
 ];
 
 const adminStatusFlow = ["Novo pedido", "Confirmado", "Em produção", "Pronto", "Saiu para entrega", "Entregue"];
+const kdsStorageKey = "onopoke_kds_orders";
+let lastTvReadyOrderId = null;
+
+function mapAdminStatusToKds(status) {
+  if (status === "Pronto") return "pronto";
+  if (status === "Em produção") return "preparo";
+  if (status === "Novo pedido" || status === "Confirmado") return "aguardando";
+  return "aguardando";
+}
+
+function mapOrderSourceToKds(order) {
+  const channel = String(order.channel || "").toLowerCase();
+  if (channel === "mesa") return "local";
+  return "online";
+}
+
+function syncKdsOrders() {
+  const kdsOrders = adminOrders
+    .filter((order) => order.status !== "Entregue")
+    .map((order) => ({
+      id: order.id,
+      cliente: order.customer,
+      origem: mapOrderSourceToKds(order),
+      status: mapAdminStatusToKds(order.status),
+      itens: order.items.map((itemName) => ({ qty: 1, nome: itemName })),
+      updatedAt: Date.now()
+    }));
+
+  localStorage.setItem(kdsStorageKey, JSON.stringify(kdsOrders));
+}
 
 function getStatusClass(status) {
   return status
@@ -329,8 +359,134 @@ const elements = {
   whatsappButton: document.getElementById("whatsappButton"),
   ordersList: document.getElementById("ordersList"),
   adminMetrics: document.getElementById("adminMetrics"),
-  trackingPanel: document.getElementById("trackingPanel")
+  trackingPanel: document.getElementById("trackingPanel"),
+  tvClock: document.getElementById("tvClock"),
+  tvColMain: document.getElementById("tvColMain"),
+  tvNextList: document.getElementById("tvNextList"),
+  tvReadyBanner: document.getElementById("tvReadyBanner")
 };
+
+function updateTvClock() {
+  if (!elements.tvClock) return;
+  elements.tvClock.textContent = new Date().toLocaleTimeString("pt-BR");
+}
+
+function normalizeKdsStatus(statusRaw) {
+  const status = String(statusRaw || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  if (status.includes("cancel")) return "cancelado";
+  if (status.includes("pronto")) return "pronto";
+  if (status.includes("producao") || status.includes("preparo")) return "preparo";
+  if (status.includes("novo") || status.includes("confirmado") || status.includes("aguardando")) return "aguardando";
+  return "aguardando";
+}
+
+function getKdsOrdersFromStorage() {
+  const parsed = JSON.parse(localStorage.getItem(kdsStorageKey) || "[]");
+
+  if (!Array.isArray(parsed)) return [];
+
+  return parsed
+    .map((order) => ({
+      id: order.id,
+      cliente: order.cliente || "Cliente",
+      origem: order.origem === "local" ? "local" : "online",
+      status: normalizeKdsStatus(order.status),
+      itens: Array.isArray(order.itens) ? order.itens : []
+    }))
+    .filter((order) => order.status !== "cancelado");
+}
+
+function formatTvOrderNumber(orderId) {
+  if (typeof orderId === "number") return `#${String(orderId).padStart(3, "0")}`;
+  const text = String(orderId || "").trim();
+  if (!text) return "#---";
+  return text.startsWith("#") ? text : `#${text}`;
+}
+
+function renderTvBannerReady() {
+  if (!elements.tvReadyBanner) return;
+  elements.tvReadyBanner.classList.add("show");
+  setTimeout(() => elements.tvReadyBanner.classList.remove("show"), 4000);
+}
+
+function renderTvPanel() {
+  if (!elements.tvColMain || !elements.tvNextList) return;
+
+  const pedidos = getKdsOrdersFromStorage();
+  const prontos = pedidos.filter((order) => order.status === "pronto");
+  const emPreparo = pedidos.filter((order) => order.status === "preparo");
+  const aguardando = pedidos.filter((order) => order.status === "aguardando");
+  const fila = pedidos.filter((order) => order.status !== "pronto");
+  const destaque = prontos[0] || emPreparo[0] || aguardando[0] || null;
+
+  if (prontos.length && prontos[0].id !== lastTvReadyOrderId) {
+    lastTvReadyOrderId = prontos[0].id;
+    renderTvBannerReady();
+  }
+
+  if (!destaque) {
+    elements.tvColMain.innerHTML = `
+      <div class="tv-empty-state">
+        <div class="icon-big">🍽️</div>
+        <p>Aguardando pedidos...</p>
+      </div>`;
+  } else {
+    const statusLabel = {
+      aguardando: "⏳ Aguardando",
+      preparo: "🔥 Em preparo",
+      pronto: "✅ Pronto!"
+    };
+
+    const itemsHtml = destaque.itens
+      .map((item) => `
+        <div class="tv-item-highlight">
+          <span class="qty">${item.qty || 1}x</span>
+          <span>${item.nome || "Item"}</span>
+        </div>`)
+      .join("");
+
+    elements.tvColMain.innerHTML = `
+      <div class="tv-label-call">${statusLabel[destaque.status] || ""}</div>
+      <div class="tv-order-number">${formatTvOrderNumber(destaque.id)}</div>
+      <div class="tv-customer">${destaque.cliente}</div>
+      <div class="tv-divider"></div>
+      <div class="tv-items-highlight">${itemsHtml || '<div class="tv-item-highlight"><span>Sem itens</span></div>'}</div>
+      <div class="tv-origin-badge ${destaque.origem}">
+        ${destaque.origem === "online" ? "🌐 Pedido online" : "🏠 Pedido presencial"}
+      </div>`;
+  }
+
+  const proximos = fila.filter((order) => order.id !== destaque?.id).slice(0, 12);
+
+  if (!proximos.length) {
+    elements.tvNextList.innerHTML = '<div style="padding:24px;color:#555;font-size:.85rem;text-align:center;">Nenhum pedido aguardando.</div>';
+    return;
+  }
+
+  const statusLabel = {
+    aguardando: "Aguardando",
+    preparo: "Em preparo"
+  };
+
+  elements.tvNextList.innerHTML = proximos
+    .map((order) => {
+      const itensResumo = order.itens.map((item) => `${item.qty || 1}x ${item.nome || "Item"}`).join(" · ");
+      return `
+        <div class="tv-next-item">
+          <div class="tv-next-number">${formatTvOrderNumber(order.id)}</div>
+          <div class="tv-next-info">
+            <div class="tv-next-name">${order.cliente}</div>
+            <div class="tv-next-items">${itensResumo || "Sem itens"}</div>
+          </div>
+          <div class="tv-next-status ${order.status}">${statusLabel[order.status] || order.status}</div>
+        </div>`;
+    })
+    .join("");
+}
 
 function formatPrice(value) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -601,6 +757,8 @@ function renderCheckoutSummary() {
 }
 
 function renderAdmin() {
+  syncKdsOrders();
+
   elements.adminMetrics.innerHTML = adminMetrics
     .map(
       (metric) => `
@@ -706,6 +864,7 @@ function renderAll() {
   renderCart();
   renderCheckoutSummary();
   renderAdmin();
+  renderTvPanel();
 }
 
 function toggleNav(forceOpen) {
@@ -719,6 +878,13 @@ function setActiveView(viewName) {
   document.querySelectorAll(".main-nav a").forEach((link) => {
     link.classList.toggle("is-current", link.dataset.nav === viewName);
   });
+
+  if (viewName === "tv") {
+    syncKdsOrders();
+    renderTvPanel();
+    updateTvClock();
+  }
+
   toggleNav(false);
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -1000,3 +1166,6 @@ setActiveView("home");
 updateOptionPills(elements.deliveryOptions);
 updateOptionPills(elements.paymentOptions);
 syncWhatsappLink();
+updateTvClock();
+setInterval(updateTvClock, 1000);
+setInterval(renderTvPanel, 2000);

@@ -39,6 +39,7 @@
         <a href="#checkout" data-nav="checkout">Checkout</a>
         <a href="#confirmation" data-nav="confirmation">Confirmação</a>
         <a href="#admin" data-nav="admin">Painel</a>
+        <a href="#tv" data-nav="tv">Painel TV</a>
       </nav>
 
       <button class="cart-pill" id="cartShortcut" data-nav="cart" aria-label="Abrir carrinho">
@@ -440,6 +441,36 @@
         </div>
       </div>
     </section>
+
+    <section class="view" id="tvView" data-view="tv" aria-labelledby="tvTitle">
+      <div class="container tv-shell">
+        <div class="tv-board">
+          <header class="tv-header">
+            <div class="tv-logo">Ono <span>Poke</span></div>
+            <div class="tv-header-center">Acompanhe seu pedido</div>
+            <div class="tv-clock" id="tvClock">--:--:--</div>
+          </header>
+
+          <div class="tv-layout">
+            <div class="tv-col-main" id="tvColMain">
+              <div class="tv-empty-state">
+                <div class="icon-big">🍽️</div>
+                <p>Aguardando pedidos...</p>
+              </div>
+            </div>
+
+            <div class="tv-col-next">
+              <div class="tv-col-next-header">
+                <h2 id="tvTitle">Próximos na fila</h2>
+              </div>
+              <div class="tv-next-list" id="tvNextList"></div>
+            </div>
+          </div>
+
+          <div class="tv-ready-banner" id="tvReadyBanner">✅ &nbsp; Pedido pronto! Retire no balcão.</div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -461,6 +492,7 @@
           <li><a href="#menu" data-nav="menu">Cardápio</a></li>
           <li><a href="#cart" data-nav="cart">Carrinho</a></li>
           <li><a href="#admin" data-nav="admin">Painel</a></li>
+          <li><a href="#tv" data-nav="tv">Painel TV</a></li>
         </ul>
       </div>
       <div>

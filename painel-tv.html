@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ono Poke | Painel de Pedidos</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700;800&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5efe4;
+    --surface: #ffffff;
+    --surface-soft: #fbf8f1;
+    --border: rgba(49, 158, 169, 0.2);
+    --text: #28787a;
+    --muted: #6b7280;
+    --primary: #319ea9;
+    --primary-strong: #28787a;
+    --accent: #e97680;
+    --line: rgba(49, 158, 169, 0.2);
+    --green: #319ea9;
+  }
+
+  body {
+    background: linear-gradient(180deg, #faf6ee 0%, #f5efe4 100%);
+    color: var(--text);
+    font-family: 'Open Sans', sans-serif;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px;
+    background: rgba(255, 255, 255, 0.88);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .logo {
+    font-family: 'Afacad Flux', 'Open Sans', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--primary-strong);
+    letter-spacing: -1px;
+  }
+
+  .logo span { color: var(--accent); }
+
+  .header-center {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .clock {
+    font-family: 'Afacad Flux', 'Open Sans', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary-strong);
+    letter-spacing: 2px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .col-principal {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--line);
+    padding: 48px 56px;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .col-principal::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    left: -120px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(49,158,169,.14) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .label-chamada {
+    font-size: .8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .numero-pedido {
+    font-family: 'Afacad Flux', 'Open Sans', sans-serif;
+    font-size: clamp(5rem, 14vw, 10rem);
+    font-weight: 800;
+    color: var(--primary-strong);
+    line-height: 1;
+    margin-bottom: 12px;
+    animation: pulseIn .4s ease;
+  }
+
+  .nome-cliente {
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 32px;
+    animation: slideUp .4s ease;
+  }
+
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-strong), var(--accent));
+    border-radius: 999px;
+    margin-bottom: 32px;
+  }
+
+  .itens-destaque {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: slideUp .45s ease;
+  }
+
+  .item-destaque {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .item-destaque .qty {
+    font-family: 'Afacad Flux', 'Open Sans', sans-serif;
+    font-size: .9em;
+    color: var(--primary-strong);
+    background: rgba(49,158,169,.12);
+    border-radius: 6px;
+    padding: 2px 10px;
+    min-width: 46px;
+    text-align: center;
+  }
+
+  .badge-origem-tv {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: .8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-top: 28px;
+    width: fit-content;
+  }
+
+  .badge-origem-tv.local { background: rgba(49,158,169,.12); color: var(--primary-strong); border: 1px solid rgba(49,158,169,.25); }
+  .badge-origem-tv.online { background: rgba(233,118,128,.12); color: var(--accent); border: 1px solid rgba(233,118,128,.25); }
+
+  .empty-state {
+    text-align: center;
+    color: var(--muted);
+  }
+
+  .empty-state .icon-big { font-size: 5rem; margin-bottom: 16px; }
+  .empty-state p { font-size: 1.2rem; }
+
+  .col-proximos {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .col-proximos-header {
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+
+  .col-proximos-header h2 {
+    font-size: .75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--muted);
+  }
+
+  .proximos-lista {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 0;
+    scrollbar-width: none;
+  }
+
+  .proximos-lista::-webkit-scrollbar { display: none; }
+
+  .proximo-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeIn .3s ease;
+  }
+
+  .proximo-item:last-child { border-bottom: none; }
+
+  .proximo-num {
+    font-family: 'Afacad Flux', 'Open Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--primary-strong);
+    min-width: 52px;
+  }
+
+  .proximo-info { flex: 1; }
+
+  .proximo-nome {
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .proximo-itens {
+    font-size: .75rem;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+  }
+
+  .proximo-status {
+    font-size: .65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .proximo-status.aguardando { background: rgba(233,118,128,.12); color: var(--accent); }
+  .proximo-status.preparo { background: rgba(49,158,169,.12); color: var(--primary-strong); }
+
+  .pronto-banner {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    animation: slideUp .3s ease;
+    z-index: 50;
+  }
+
+  .pronto-banner.show { display: block; }
+
+  @keyframes pulseIn {
+    from { opacity: 0; transform: scale(.92); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Ono <span>Poke</span></div>
+  <div class="header-center">Acompanhe seu pedido</div>
+  <div class="clock" id="clock">--:--:--</div>
+</header>
+
+<div class="layout">
+  <div class="col-principal" id="col-principal">
+    <div class="empty-state">
+      <div class="icon-big">🍽️</div>
+      <p>Aguardando pedidos...</p>
+    </div>
+  </div>
+
+  <div class="col-proximos">
+    <div class="col-proximos-header">
+      <h2>Próximos na fila</h2>
+    </div>
+    <div class="proximos-lista" id="proximos-lista"></div>
+  </div>
+</div>
+
+<div class="pronto-banner" id="pronto-banner">✅ &nbsp; Pedido pronto! Retire no balcão.</div>
+
+<script>
+const KDS_STORAGE_KEY = 'onopoke_kds_orders';
+
+function atualizarRelogio() {
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString('pt-BR');
+}
+
+setInterval(atualizarRelogio, 1000);
+atualizarRelogio();
+
+function normalizeStatus(statusRaw) {
+  const status = String(statusRaw || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+
+  if (status.includes('cancel')) return 'cancelado';
+  if (status.includes('pronto')) return 'pronto';
+  if (status.includes('producao') || status.includes('preparo')) return 'preparo';
+  if (status.includes('novo') || status.includes('confirmado') || status.includes('aguardando')) return 'aguardando';
+  return 'aguardando';
+}
+
+function getPedidos() {
+  const raw = localStorage.getItem(KDS_STORAGE_KEY);
+  const parsed = JSON.parse(raw || '[]');
+
+  if (!Array.isArray(parsed)) return [];
+
+  return parsed
+    .map((p) => ({
+      id: p.id,
+      cliente: p.cliente || 'Cliente',
+      origem: p.origem === 'local' ? 'local' : 'online',
+      status: normalizeStatus(p.status),
+      itens: Array.isArray(p.itens) ? p.itens : [],
+      updatedAt: p.updatedAt || 0
+    }))
+    .filter((p) => p.status !== 'cancelado');
+}
+
+function formatOrderNumber(id) {
+  if (typeof id === 'number') return `#${String(id).padStart(3, '0')}`;
+  const text = String(id || '').trim();
+  if (!text) return '#---';
+  return text.startsWith('#') ? text : `#${text}`;
+}
+
+let ultimoProntoId = null;
+
+function render() {
+  const pedidos = getPedidos();
+
+  const prontos = pedidos.filter((p) => p.status === 'pronto');
+  const emPreparo = pedidos.filter((p) => p.status === 'preparo');
+  const aguardando = pedidos.filter((p) => p.status === 'aguardando');
+
+  const fila = pedidos.filter((p) => p.status !== 'pronto');
+  const destaque = prontos[0] || emPreparo[0] || aguardando[0] || null;
+
+  if (prontos.length > 0 && prontos[0].id !== ultimoProntoId) {
+    ultimoProntoId = prontos[0].id;
+    mostrarBannerPronto();
+  }
+
+  renderPrincipal(destaque);
+  renderProximos(fila, destaque);
+}
+
+function renderPrincipal(pedido) {
+  const col = document.getElementById('col-principal');
+
+  if (!pedido) {
+    col.innerHTML = `
+      <div class="empty-state">
+        <div class="icon-big">🍽️</div>
+        <p>Aguardando pedidos...</p>
+      </div>`;
+    return;
+  }
+
+  const statusLabel = {
+    aguardando: '⏳ Aguardando',
+    preparo: '🔥 Em preparo',
+    pronto: '✅ Pronto!'
+  };
+
+  const itensHTML = pedido.itens
+    .map((item) => {
+      const nome = item.nome || 'Item';
+      const qty = item.qty || 1;
+      return `
+        <div class="item-destaque">
+          <span class="qty">${qty}x</span>
+          <span>${nome}</span>
+        </div>`;
+    })
+    .join('');
+
+  col.innerHTML = `
+    <div class="label-chamada">${statusLabel[pedido.status] || ''}</div>
+    <div class="numero-pedido">${formatOrderNumber(pedido.id)}</div>
+    <div class="nome-cliente">${pedido.cliente}</div>
+    <div class="divider"></div>
+    <div class="itens-destaque">${itensHTML || '<div class="item-destaque"><span>Sem itens</span></div>'}</div>
+    <div class="badge-origem-tv ${pedido.origem}">
+      ${pedido.origem === 'online' ? '🌐 Pedido online' : '🏠 Pedido presencial'}
+    </div>`;
+}
+
+function renderProximos(fila, destaque) {
+  const lista = document.getElementById('proximos-lista');
+  const proximos = fila.filter((p) => p.id !== (destaque && destaque.id)).slice(0, 12);
+
+  if (proximos.length === 0) {
+    lista.innerHTML = '<div style="padding:24px;color:#555;font-size:.85rem;text-align:center;">Nenhum pedido aguardando.</div>';
+    return;
+  }
+
+  const statusLabel = {
+    aguardando: 'Aguardando',
+    preparo: 'Em preparo'
+  };
+
+  lista.innerHTML = proximos
+    .map((p) => {
+      const itensResumo = p.itens
+        .map((i) => `${i.qty || 1}x ${i.nome || 'Item'}`)
+        .join(' · ');
+
+      return `
+        <div class="proximo-item">
+          <div class="proximo-num">${formatOrderNumber(p.id)}</div>
+          <div class="proximo-info">
+            <div class="proximo-nome">${p.cliente}</div>
+            <div class="proximo-itens">${itensResumo || 'Sem itens'}</div>
+          </div>
+          <div class="proximo-status ${p.status}">${statusLabel[p.status] || p.status}</div>
+        </div>`;
+    })
+    .join('');
+}
+
+function mostrarBannerPronto() {
+  const banner = document.getElementById('pronto-banner');
+  banner.classList.add('show');
+  setTimeout(() => banner.classList.remove('show'), 4000);
+}
+
+render();
+setInterval(render, 2000);
+</script>
+</body>
+</html>
