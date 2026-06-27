@@ -624,8 +624,8 @@ function renderOrders() {
       </td>
       <td>
         <div class="table-action-buttons">
-          <button class="btn-table-action" title="Editar"><i class="fa-solid fa-pencil"></i></button>
-          <button class="btn-table-action" title="Detalhes"><i class="fa-solid fa-eye"></i></button>
+          <button class="btn-table-action" data-action="edit-order" data-order-id="${order.id}" title="Editar"><i class="fa-solid fa-pencil"></i></button>
+          <button class="btn-table-action" data-action="view-order" data-order-id="${order.id}" title="Detalhes"><i class="fa-solid fa-eye"></i></button>
         </div>
       </td>
     </tr>
@@ -704,11 +704,87 @@ function renderCustomers() {
       <td>R$ ${c.avg.toFixed(2)}</td>
       <td>
         <div class="table-action-buttons">
-          <button class="btn-table-action" title="Ver detalhes"><i class="fa-solid fa-eye"></i></button>
+          <button class="btn-table-action" data-action="view-customer" data-customer-name="${c.name}" title="Ver detalhes"><i class="fa-solid fa-eye"></i></button>
         </div>
       </td>
     </tr>
   `).join('');
+}
+
+// ========== FUNÇÕES DE AÇÃO ADMIN ==========
+function viewOrder(orderId) {
+  // Encontrar pedido nos dados mock
+  const mockOrders = [
+    { id: 'ONO-5234', customer: 'João Silva', date: '10:30', value: 156.50, status: 'novo', items: ['Poke Salmão Tropical x1'], address: 'Rua das Palmeiras, 214' },
+    { id: 'ONO-5233', customer: 'Maria Santos', date: '10:15', value: 89.90, status: 'preparando', items: ['Atum Premium x1'], address: 'Av. Paulista, 1000' },
+    { id: 'ONO-5232', customer: 'Carlos Costa', date: '09:45', value: 234.80, status: 'pronto', items: ['Loco Moco x2', 'Combo Tropical x1'], address: 'Rua Augusta, 500' },
+    { id: 'ONO-5231', customer: 'Ana Lima', date: '09:20', value: 112.40, status: 'entregue', items: ['Cheesecake x2'], address: 'Rua Bandeira, 800' }
+  ];
+  
+  const order = mockOrders.find(o => o.id === orderId);
+  if (order) {
+    const message = `
+📋 DETALHES DO PEDIDO
+
+ID do Pedido: ${order.id}
+Cliente: ${order.customer}
+Data/Hora: ${order.date}
+Endereço: ${order.address}
+Valor Total: R$ ${order.value.toFixed(2)}
+Status: ${order.status.toUpperCase()}
+
+Itens:
+${order.items.map(item => `• ${item}`).join('\n')}
+
+Observações: Nenhuma observação
+    `;
+    alert(message);
+  }
+}
+
+function editOrder(orderId) {
+  // Mostrar modal
+  const modal = document.getElementById('editOrderModal');
+  const modalOrderId = document.getElementById('modalOrderId');
+  const statusSelect = document.getElementById('orderStatus');
+  const notesInput = document.getElementById('orderNotes');
+  
+  modalOrderId.textContent = orderId;
+  statusSelect.value = 'novo'; // valor padrão
+  notesInput.value = '';
+  
+  modal.style.display = 'flex';
+  
+  // Armazenar o orderId para quando salvar
+  modal.dataset.currentOrderId = orderId;
+}
+
+function viewCustomer(customerName) {
+  const mockCustomers = [
+    { name: 'João Silva', email: 'joao@email.com', phone: '(11) 99999-1111', orders: 15, spent: 1850, avg: 123.33, lastOrder: '2026-06-27' },
+    { name: 'Maria Santos', email: 'maria@email.com', phone: '(11) 99999-2222', orders: 8, spent: 956, avg: 119.50, lastOrder: '2026-06-26' },
+    { name: 'Carlos Costa', email: 'carlos@email.com', phone: '(11) 99999-3333', orders: 23, spent: 2780, avg: 120.87, lastOrder: '2026-06-27' }
+  ];
+  
+  const customer = mockCustomers.find(c => c.name === customerName);
+  if (customer) {
+    const message = `
+👤 DETALHES DO CLIENTE
+
+Nome: ${customer.name}
+Email: ${customer.email}
+Telefone: ${customer.phone}
+
+📊 HISTÓRICO:
+Total de Pedidos: ${customer.orders}
+Gasto Total: R$ ${customer.spent.toFixed(2)}
+Ticket Médio: R$ ${customer.avg.toFixed(2)}
+Último Pedido: ${customer.lastOrder}
+
+Status: Cliente ativo ✅
+    `;
+    alert(message);
+  }
 }
 
 // ========== EVENT LISTENERS ==========
@@ -782,6 +858,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Ações de tabela (Editar/Visualizar Pedidos e Clientes)
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.btn-table-action')) {
+      const btn = e.target.closest('.btn-table-action');
+      const action = btn.dataset.action;
+      
+      if (action === 'view-order') {
+        const orderId = btn.dataset.orderId;
+        viewOrder(orderId);
+      } else if (action === 'edit-order') {
+        const orderId = btn.dataset.orderId;
+        editOrder(orderId);
+      } else if (action === 'view-customer') {
+        const customerName = btn.dataset.customerName;
+        viewCustomer(customerName);
+      }
+    }
+  });
+
   // Add to cart
   const addBtn = document.getElementById('addProductButton');
   if (addBtn) {
@@ -822,6 +917,44 @@ document.addEventListener('DOMContentLoaded', () => {
     renderFinancialMetrics();
     renderProducts();
     renderCustomers();
+  }
+
+  // Modal de editar pedido
+  const editOrderModal = document.getElementById('editOrderModal');
+  const closeEditModal = document.getElementById('closeEditModal');
+  const cancelEditBtn = document.getElementById('cancelEditBtn');
+  const saveEditBtn = document.getElementById('saveEditBtn');
+  
+  if (closeEditModal) {
+    closeEditModal.addEventListener('click', () => {
+      editOrderModal.style.display = 'none';
+    });
+  }
+  
+  if (cancelEditBtn) {
+    cancelEditBtn.addEventListener('click', () => {
+      editOrderModal.style.display = 'none';
+    });
+  }
+  
+  if (saveEditBtn) {
+    saveEditBtn.addEventListener('click', () => {
+      const orderId = editOrderModal.dataset.currentOrderId;
+      const newStatus = document.getElementById('orderStatus').value;
+      const notes = document.getElementById('orderNotes').value;
+      
+      alert(`✅ Pedido ${orderId} atualizado!\n\nNovo Status: ${newStatus}\nObservações: ${notes || 'Nenhuma'}`);
+      editOrderModal.style.display = 'none';
+    });
+  }
+  
+  // Fechar modal ao clicar fora
+  if (editOrderModal) {
+    editOrderModal.addEventListener('click', (e) => {
+      if (e.target === editOrderModal) {
+        editOrderModal.style.display = 'none';
+      }
+    });
   }
 
   // TV Clock
