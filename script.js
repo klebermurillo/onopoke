@@ -831,6 +831,177 @@ function viewCustomer(customerName) {
   }
 }
 
+// ========== CATEGORIAS E BEBIDAS ==========
+// Armazenar categorias em estado
+if (!state.categories) {
+  state.categories = [
+    { id: 1, name: 'Pokes', description: 'Bowls tropicais frescos' },
+    { id: 2, name: 'Pratos Quentes', description: 'Pratos quentes sazonados' },
+    { id: 3, name: 'Combos', description: 'Combinações e promoções' },
+    { id: 4, name: 'Sobremesas Tropicais', description: 'Doces frescos e gelados' }
+  ];
+  state.nextCategoryId = 5;
+}
+
+// Produtos de Bebidas
+const beverageProducts = [
+  {
+    id: 101,
+    category: 'Bebidas',
+    name: 'Refrigerante Tropical',
+    description: 'Refrigerante gelado de frutas tropicais, perfeito para acompanhar seu poke.',
+    price: 8.90,
+    images: ['https://thfvnextfalcon.blob.core.windows.net/th/id/OIP.kS86c8N5nCZ19sOo7yFMAwHaFj?w=255&h=191&c=7&r=0&o=7&cb=thfvnextfalcon3&pid=1.7&rm=3'],
+    featured: false
+  },
+  {
+    id: 102,
+    category: 'Bebidas',
+    name: 'Água de Coco Natural',
+    description: 'Água de coco fresca e natural, hidratante e refrescante.',
+    price: 12.90,
+    images: ['https://static.paodeacucar.com/img/uploads/1/626/24660626.png'],
+    featured: false
+  },
+  {
+    id: 103,
+    category: 'Bebidas',
+    name: 'Suco Natural de Frutas',
+    description: 'Suco fresco feito com frutas selecionadas, sem conservantes.',
+    price: 14.90,
+    images: ['https://s2-ge.glbimg.com/64QeEkjeZkr4WG0cQY0gFzTCAC4=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2022/3/3/92w4EYREyRINApxl77eQ/suco-frutas.jpg'],
+    featured: false
+  }
+];
+
+// Adicionar bebidas aos produtos
+if (!products.some(p => p.category === 'Bebidas')) {
+  products.push(...beverageProducts);
+}
+
+// ========== FUNÇÕES DE CATEGORIAS ==========
+function addCategory(name, description) {
+  const newCategory = {
+    id: state.nextCategoryId++,
+    name: name,
+    description: description
+  };
+  state.categories.push(newCategory);
+  renderCategories();
+  updateCategorySelects();
+  return newCategory;
+}
+
+function deleteCategory(categoryId) {
+  const index = state.categories.findIndex(c => c.id === categoryId);
+  if (index > -1) {
+    state.categories.splice(index, 1);
+    renderCategories();
+    updateCategorySelects();
+  }
+}
+
+function renderCategories() {
+  const container = document.getElementById('categoriesList');
+  if (!container) return;
+  
+  container.innerHTML = state.categories.map(cat => `
+    <div class="category-item">
+      <div class="category-info">
+        <div class="category-name">${cat.name}</div>
+        <div class="category-desc">${cat.description}</div>
+      </div>
+      <div class="category-actions">
+        <button class="category-btn" onclick="editCategory(${cat.id})" title="Editar">Editar</button>
+        <button class="category-btn delete" onclick="deleteCategory(${cat.id})" title="Deletar">Deletar</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateCategorySelects() {
+  const select = document.getElementById('productCategorySelect');
+  if (!select) return;
+  
+  const currentValue = select.value;
+  select.innerHTML = '<option value="">Selecione uma categoria...</option>' + 
+    state.categories.map(cat => `<option value="${cat.name}">${cat.name}</option>`).join('');
+  select.value = currentValue;
+}
+
+function editCategory(categoryId) {
+  const cat = state.categories.find(c => c.id === categoryId);
+  if (cat) {
+    const newName = prompt('Novo nome da categoria:', cat.name);
+    if (newName) {
+      cat.name = newName;
+      renderCategories();
+      updateCategorySelects();
+    }
+  }
+}
+
+// ========== FUNÇÕES DE AUTH ==========
+function toggleAuthTab(tab) {
+  // Atualizar abas
+  document.querySelectorAll('.auth-tab').forEach(t => {
+    t.classList.remove('active');
+    if (t.dataset.tab === tab) {
+      t.classList.add('active');
+    }
+  });
+  
+  // Mostrar/ocultar forms
+  document.querySelectorAll('[data-auth-form]').forEach(form => {
+    form.style.display = form.dataset.authForm === tab ? 'grid' : 'none';
+  });
+  
+  // Limpar erros
+  document.getElementById('loginError').style.display = 'none';
+  document.getElementById('signupError').style.display = 'none';
+  document.getElementById('signupSuccess').style.display = 'none';
+}
+
+function signup(name, email, password, phone) {
+  // Validações básicas
+  if (!name || !email || !password) {
+    document.getElementById('signupError').textContent = 'Preencha todos os campos obrigatórios!';
+    document.getElementById('signupError').style.display = 'block';
+    return false;
+  }
+  
+  if (password.length < 6) {
+    document.getElementById('signupError').textContent = 'Senha deve ter pelo menos 6 caracteres!';
+    document.getElementById('signupError').style.display = 'block';
+    return false;
+  }
+  
+  // "Registrar" usuário (em um app real, seria via API)
+  const newUser = {
+    email: email,
+    password: password,
+    name: name,
+    phone: phone || '',
+    role: 'customer',
+    avatar: '👤'
+  };
+  
+  // Mostrar mensagem de sucesso
+  document.getElementById('signupError').style.display = 'none';
+  document.getElementById('signupSuccess').textContent = `✅ Conta criada com sucesso! Você pode fazer login agora.`;
+  document.getElementById('signupSuccess').style.display = 'block';
+  
+  // Limpar form
+  document.getElementById('signupForm').reset();
+  
+  // Voltar para login após 2 segundos
+  setTimeout(() => {
+    toggleAuthTab('login');
+  }, 2000);
+  
+  return true;
+}
+
 // ========== EVENT LISTENERS ==========
 document.addEventListener('DOMContentLoaded', () => {
   // Inicialização
@@ -854,6 +1025,44 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Auth Tabs Toggle
+  document.querySelectorAll('.auth-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      toggleAuthTab(tab.dataset.tab);
+    });
+  });
+
+  // Signup Form
+  const signupForm = document.getElementById('signupForm');
+  if (signupForm) {
+    signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+      const phone = document.getElementById('signupPhone').value;
+      signup(name, email, password, phone);
+    });
+  }
+
+  // Add Category Form
+  const addCategoryForm = document.getElementById('addCategoryForm');
+  if (addCategoryForm) {
+    addCategoryForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('categoryName').value;
+      const desc = document.getElementById('categoryDesc').value;
+      if (name && desc) {
+        addCategory(name, desc);
+        addCategoryForm.reset();
+      }
+    });
+  }
+
+  // Renderizar categorias na primeira carga
+  renderCategories();
+  updateCategorySelects();
 
   // Demo buttons
   document.querySelectorAll('.login-demo-card').forEach(btn => {

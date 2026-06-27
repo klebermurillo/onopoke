@@ -102,7 +102,14 @@
             </div>
           </div>
 
-          <form id="loginForm" class="login-form">
+          <!-- Abas de Login/Cadastro -->
+          <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="login">Entrar</button>
+            <button class="auth-tab" data-tab="signup">Cadastro</button>
+          </div>
+
+          <!-- FORMULÁRIO DE LOGIN -->
+          <form id="loginForm" class="login-form auth-form" data-auth-form="login">
             <div class="form-group">
               <label for="loginEmail">Email</label>
               <input type="email" id="loginEmail" name="email" placeholder="seu@email.com" required>
@@ -116,6 +123,34 @@
             <button type="submit" class="btn btn-primary btn-block">Entrar</button>
 
             <div id="loginError" class="login-error" style="display: none;"></div>
+          </form>
+
+          <!-- FORMULÁRIO DE CADASTRO -->
+          <form id="signupForm" class="login-form auth-form" data-auth-form="signup" style="display: none;">
+            <div class="form-group">
+              <label for="signupName">Nome completo</label>
+              <input type="text" id="signupName" name="name" placeholder="Seu nome" required>
+            </div>
+
+            <div class="form-group">
+              <label for="signupEmail">Email</label>
+              <input type="email" id="signupEmail" name="email" placeholder="seu@email.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="signupPassword">Senha</label>
+              <input type="password" id="signupPassword" name="password" placeholder="Crie uma senha" required>
+            </div>
+
+            <div class="form-group">
+              <label for="signupPhone">Telefone</label>
+              <input type="tel" id="signupPhone" name="phone" placeholder="(11) 99999-9999">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Criar conta</button>
+
+            <div id="signupError" class="login-error" style="display: none;"></div>
+            <div id="signupSuccess" class="login-success" style="display: none;"></div>
           </form>
 
           <div class="login-divider">Credenciais de teste</div>
@@ -807,6 +842,29 @@
 
         <div class="products-grid" id="productsGrid"></div>
 
+        <!-- Gerenciamento de Categorias -->
+        <article class="admin-card admin-card-wide">
+          <div class="admin-card-head">
+            <h3>Categorias de Produtos</h3>
+            <span>Gerencie as categorias do cardápio</span>
+          </div>
+          <div class="categories-list" id="categoriesList"></div>
+          <form class="admin-form" id="addCategoryForm" style="margin-top: 20px; border-top: 2px solid var(--line); padding-top: 20px;">
+            <div class="form-grid">
+              <label>
+                Nome da categoria
+                <input type="text" id="categoryName" placeholder="Ex: Bebidas, Aperitivos..." required>
+              </label>
+              <label>
+                Descrição
+                <input type="text" id="categoryDesc" placeholder="Descrição da categoria" required>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary">+ Adicionar categoria</button>
+          </form>
+        </article>
+
+        <!-- Adicionar novo produto -->
         <article class="admin-card admin-card-wide">
           <div class="admin-card-head">
             <h3>Adicionar novo produto</h3>
@@ -820,7 +878,8 @@
               </label>
               <label>
                 Categoria
-                <select required>
+                <select id="productCategorySelect" required>
+                  <option value="">Selecione uma categoria...</option>
                   <option>Pokes</option>
                   <option>Pratos Quentes</option>
                   <option>Combos</option>
