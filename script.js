@@ -922,7 +922,7 @@ const beverageProducts = [
     name: 'Refrigerante',
     description: 'Escolha entre os principais refrigerantes gelados.',
     price: 7.00,
-    images: ['https://thumbs.dreamstime.com/b/latas-de-marcas-populares-refrigerantes-poznan-pol-refrigerante-incluindo-coca-cola-fanta-dr-pepper-sprite-lipton-ice-tea-e-220229107.jpg'],
+    images: ['./img/soda.jpg'],
     sizes: [
       { label: 'Coca-Cola', price: 7.00 },
       { label: 'Coca-Cola Zero', price: 7.00 },
@@ -938,7 +938,7 @@ const beverageProducts = [
     name: 'Suco Natural',
     description: 'Escolha entre nossos sucos naturais frescos.',
     price: 9.00,
-    images: ['https://thfvnext.bing.com/th/id/OIP.EOy5KhgSfVXJmrekqngapwHaE8?w=276&h=184&c=7&r=0&o=7&cb=thfvnextfalcon3&pid=1.7&rm=3'],
+    images: ['./img/juice.jpg'],
     sizes: [
       { label: 'Laranja Natural', price: 9.00 },
       { label: 'Maracujá', price: 9.00 },
