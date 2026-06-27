@@ -903,7 +903,7 @@ const beverageProducts = [
     name: 'Refrigerante Tropical',
     description: 'Refrigerante gelado de frutas tropicais, perfeito para acompanhar seu poke.',
     price: 8.90,
-    images: ['https://thfvnextfalcon.blob.core.windows.net/th/id/OIP.kS86c8N5nCZ19sOo7yFMAwHaFj?w=255&h=191&c=7&r=0&o=7&cb=thfvnextfalcon3&pid=1.7&rm=3'],
+    images: ['https://thumbs.dreamstime.com/b/latas-de-marcas-populares-refrigerantes-poznan-pol-refrigerante-incluindo-coca-cola-fanta-dr-pepper-sprite-lipton-ice-tea-e-220229107.jpg'],
     featured: false
   },
   {
