@@ -452,14 +452,15 @@ main {
   position: absolute;
   top: 1.4rem;
   left: 0.3rem;
-  width: min(280px, 48vw);
-  padding: 1.5rem;
+  width: min(320px, 55vw);
+  padding: 3.3rem;
   z-index: 2;
 }
 
 .hero-card-main h2 {
-  margin: 0.65rem 0 0.4rem;
-  font-size: 2rem;
+  margin: 0.6rem 0 0.5rem;
+  font-size: 1.85rem;
+  line-height: 1.2;
 }
 
 .hero-card-label,
@@ -513,38 +514,18 @@ main {
 
 .hero-photo::before,
 .hero-photo::after {
-  content: "";
-  position: absolute;
-  border-radius: 999px;
-  filter: blur(0.4px);
-  animation: floaty 7s ease-in-out infinite;
-}
-
-.hero-photo::before {
-  width: 190px;
-  height: 190px;
-  left: 14%;
-  top: 16%;
-  background: rgba(49, 158, 169, 0.18);
-}
-
-.hero-photo::after {
-  width: 140px;
-  height: 140px;
-  right: 14%;
-  bottom: 16%;
-  background: rgba(233, 118, 128, 0.2);
-  animation-delay: 0.8s;
+  display: none;
 }
 
 .floating-note {
   position: absolute;
   max-width: 230px;
-  padding: 1rem 1.1rem;
+  padding: 1.3rem 1.4rem;
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.95);
+  background: #ffffff;
   border: 1px solid var(--line);
   box-shadow: var(--shadow-soft);
+  text-align: left;
 }
 
 .floating-note strong,
@@ -572,13 +553,13 @@ main {
 }
 
 .floating-note-top {
-  right: 0.2rem;
+  right: 0.5rem;
   top: 16%;
 }
 
 .floating-note-bottom {
   left: 1rem;
-  bottom: 10%;
+  bottom: 8%;
 }
 
 .section-shell {
