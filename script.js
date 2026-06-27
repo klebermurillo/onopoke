@@ -908,7 +908,7 @@ const beverageProducts = [
     name: 'Água',
     description: 'Escolha entre água mineral ou com gás.',
     price: 4.00,
-    images: ['https://i.imgur.com/h3T8mhU.jpg'],
+    images: ['./images/water.jpg'],
     sizes: [
       { label: 'Água Mineral', price: 4.00 },
       { label: 'Água com Gás', price: 5.00 }
@@ -922,7 +922,7 @@ const beverageProducts = [
     name: 'Refrigerante',
     description: 'Escolha entre os principais refrigerantes gelados.',
     price: 7.00,
-    images: ['https://i.imgur.com/dMuAy0L.jpg'],
+    images: ['./images/soda.jpg'],
     sizes: [
       { label: 'Coca-Cola', price: 7.00 },
       { label: 'Coca-Cola Zero', price: 7.00 },
@@ -938,7 +938,7 @@ const beverageProducts = [
     name: 'Suco Natural',
     description: 'Escolha entre nossos sucos naturais frescos.',
     price: 9.00,
-    images: ['https://i.imgur.com/wh1JRME.jpg'],
+    images: ['./images/juice.jpg'],
     sizes: [
       { label: 'Laranja Natural', price: 9.00 },
       { label: 'Maracujá', price: 9.00 },
