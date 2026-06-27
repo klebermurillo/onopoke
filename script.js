@@ -909,10 +909,14 @@ const beverageProducts = [
   {
     id: 102,
     category: 'Bebidas',
-    name: 'Água de Coco Natural',
-    description: 'Água de coco fresca e natural, hidratante e refrescante.',
+    name: 'Água Natural',
+    description: 'Água natural fresca, hidratante e refrescante.',
     price: 12.90,
     images: ['https://static.paodeacucar.com/img/uploads/1/626/24660626.png'],
+    sizes: [
+      { label: 'Sem gás', price: 12.90 },
+      { label: 'Com gás', price: 14.90 }
+    ],
     featured: false
   },
   {
