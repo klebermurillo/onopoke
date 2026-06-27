@@ -361,6 +361,15 @@ function navigateTo(view) {
   }
 }
 
+// Toggle navegação mobile
+function toggleNav(forceOpen) {
+  const mainNav = document.getElementById('mainNav');
+  if (!mainNav) return;
+  
+  const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : !mainNav.classList.contains('is-open');
+  mainNav.classList.toggle('is-open', shouldOpen);
+}
+
 // ========== RENDERIZAÇÃO DE DADOS ==========
 function renderBestSellers() {
   const grid = document.getElementById('bestSellersGrid');
@@ -1178,6 +1187,14 @@ document.addEventListener('DOMContentLoaded', () => {
     logoutBtn.addEventListener('click', (e) => {
       e.preventDefault();
       logout();
+    });
+  }
+
+  // Menu toggle (mobile)
+  const menuToggle = document.getElementById('menuToggle');
+  if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+      toggleNav();
     });
   }
 
