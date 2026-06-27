@@ -715,30 +715,54 @@ function renderCustomers() {
 function viewOrder(orderId) {
   // Encontrar pedido nos dados mock
   const mockOrders = [
-    { id: 'ONO-5234', customer: 'João Silva', date: '10:30', value: 156.50, status: 'novo', items: ['Poke Salmão Tropical x1'], address: 'Rua das Palmeiras, 214' },
-    { id: 'ONO-5233', customer: 'Maria Santos', date: '10:15', value: 89.90, status: 'preparando', items: ['Atum Premium x1'], address: 'Av. Paulista, 1000' },
-    { id: 'ONO-5232', customer: 'Carlos Costa', date: '09:45', value: 234.80, status: 'pronto', items: ['Loco Moco x2', 'Combo Tropical x1'], address: 'Rua Augusta, 500' },
-    { id: 'ONO-5231', customer: 'Ana Lima', date: '09:20', value: 112.40, status: 'entregue', items: ['Cheesecake x2'], address: 'Rua Bandeira, 800' }
+    { id: 'ONO-5234', customer: 'João Silva', date: '10:30', value: 156.50, status: 'novo', items: [{ name: 'Poke Salmão Tropical', qty: 1, price: 45.90 }, { name: 'Refrigerante', qty: 1, price: 8.50 }, { name: 'Sobremesa Premium', qty: 1, price: 28.00 }], address: 'Rua das Palmeiras, 214 - Apto 302', subtotal: 82.40, delivery: 10.00 },
+    { id: 'ONO-5233', customer: 'Maria Santos', date: '10:15', value: 89.90, status: 'preparando', items: [{ name: 'Atum Premium', qty: 1, price: 42.90 }, { name: 'Sushi Combo', qty: 1, price: 35.50 }], address: 'Av. Paulista, 1000 - Apto 1200', subtotal: 78.40, delivery: 11.50 },
+    { id: 'ONO-5232', customer: 'Carlos Costa', date: '09:45', value: 234.80, status: 'pronto', items: [{ name: 'Loco Moco', qty: 2, price: 38.90 }, { name: 'Combo Tropical', qty: 1, price: 156.00 }], address: 'Rua Augusta, 500 - Apto 512', subtotal: 233.80, delivery: 15.00 },
+    { id: 'ONO-5231', customer: 'Ana Lima', date: '09:20', value: 112.40, status: 'entregue', items: [{ name: 'Cheesecake', qty: 2, price: 28.90 }], address: 'Rua Bandeira, 800', subtotal: 57.80, delivery: 12.00 }
   ];
   
   const order = mockOrders.find(o => o.id === orderId);
   if (order) {
-    const message = `
-📋 DETALHES DO PEDIDO
-
-ID do Pedido: ${order.id}
-Cliente: ${order.customer}
-Data/Hora: ${order.date}
-Endereço: ${order.address}
-Valor Total: R$ ${order.value.toFixed(2)}
-Status: ${order.status.toUpperCase()}
-
-Itens:
-${order.items.map(item => `• ${item}`).join('\n')}
-
-Observações: Nenhuma observação
-    `;
-    alert(message);
+    // Preencher modal
+    document.getElementById('viewOrderTitle').textContent = `Pedido ${order.id}`;
+    document.getElementById('viewOrderId').textContent = order.id;
+    document.getElementById('viewOrderDate').textContent = order.date;
+    document.getElementById('viewOrderCustomer').textContent = order.customer;
+    document.getElementById('viewOrderStatus').textContent = order.status === 'novo' ? '🆕 Novo' : order.status === 'preparando' ? '👨‍🍳 Preparando' : order.status === 'pronto' ? '✅ Pronto' : '🚚 Entregue';
+    document.getElementById('viewOrderAddress').textContent = order.address;
+    
+    // Timeline
+    document.querySelectorAll('.timeline-item').forEach(item => {
+      item.classList.remove('active', 'completed');
+    });
+    const statusOrder = { novo: 0, preparando: 1, pronto: 2, entregue: 3 };
+    const currentStatus = statusOrder[order.status];
+    document.querySelectorAll('.timeline-item').forEach((item, idx) => {
+      if (idx <= currentStatus) {
+        if (idx === currentStatus) item.classList.add('active');
+        else item.classList.add('completed');
+      }
+    });
+    
+    // Itens
+    const itemsHtml = order.items.map(item => `
+      <div class="order-item">
+        <div class="order-item-info">
+          <div class="order-item-name">${item.name}</div>
+          <div class="order-item-qty">Quantidade: ${item.qty}</div>
+        </div>
+        <div class="order-item-price">R$ ${item.price.toFixed(2)}</div>
+      </div>
+    `).join('');
+    document.getElementById('viewOrderItems').innerHTML = itemsHtml;
+    
+    // Valores
+    document.getElementById('viewOrderSubtotal').textContent = `R$ ${order.subtotal.toFixed(2)}`;
+    document.getElementById('viewOrderDelivery').textContent = `R$ ${order.delivery.toFixed(2)}`;
+    document.getElementById('viewOrderTotal').textContent = `R$ ${order.value.toFixed(2)}`;
+    
+    // Mostrar modal
+    document.getElementById('viewOrderModal').style.display = 'flex';
   }
 }
 
@@ -761,29 +785,49 @@ function editOrder(orderId) {
 
 function viewCustomer(customerName) {
   const mockCustomers = [
-    { name: 'João Silva', email: 'joao@email.com', phone: '(11) 99999-1111', orders: 15, spent: 1850, avg: 123.33, lastOrder: '2026-06-27' },
-    { name: 'Maria Santos', email: 'maria@email.com', phone: '(11) 99999-2222', orders: 8, spent: 956, avg: 119.50, lastOrder: '2026-06-26' },
-    { name: 'Carlos Costa', email: 'carlos@email.com', phone: '(11) 99999-3333', orders: 23, spent: 2780, avg: 120.87, lastOrder: '2026-06-27' }
+    { name: 'João Silva', email: 'joao@email.com', phone: '(11) 99999-1111', orders: 15, spent: 1850, avg: 123.33, lastOrder: '2026-06-27', history: [
+      { order: 'ONO-5234', date: '2026-06-27' },
+      { order: 'ONO-5220', date: '2026-06-26' },
+      { order: 'ONO-5210', date: '2026-06-25' }
+    ]},
+    { name: 'Maria Santos', email: 'maria@email.com', phone: '(11) 99999-2222', orders: 8, spent: 956, avg: 119.50, lastOrder: '2026-06-26', history: [
+      { order: 'ONO-5233', date: '2026-06-26' },
+      { order: 'ONO-5225', date: '2026-06-24' },
+      { order: 'ONO-5215', date: '2026-06-20' }
+    ]},
+    { name: 'Carlos Costa', email: 'carlos@email.com', phone: '(11) 99999-3333', orders: 23, spent: 2780, avg: 120.87, lastOrder: '2026-06-27', history: [
+      { order: 'ONO-5232', date: '2026-06-27' },
+      { order: 'ONO-5230', date: '2026-06-25' },
+      { order: 'ONO-5228', date: '2026-06-23' }
+    ]}
   ];
   
   const customer = mockCustomers.find(c => c.name === customerName);
   if (customer) {
-    const message = `
-👤 DETALHES DO CLIENTE
-
-Nome: ${customer.name}
-Email: ${customer.email}
-Telefone: ${customer.phone}
-
-📊 HISTÓRICO:
-Total de Pedidos: ${customer.orders}
-Gasto Total: R$ ${customer.spent.toFixed(2)}
-Ticket Médio: R$ ${customer.avg.toFixed(2)}
-Último Pedido: ${customer.lastOrder}
-
-Status: Cliente ativo ✅
-    `;
-    alert(message);
+    // Preencher modal
+    document.getElementById('viewCustomerName').textContent = customer.name;
+    document.getElementById('viewCustomerStatus').textContent = '✅ Cliente ativo';
+    document.getElementById('viewCustomerEmail').textContent = customer.email;
+    document.getElementById('viewCustomerPhone').textContent = customer.phone;
+    document.getElementById('viewCustomerOrders').textContent = customer.orders;
+    document.getElementById('viewCustomerSpent').textContent = `R$ ${customer.spent.toFixed(2)}`;
+    document.getElementById('viewCustomerAverage').textContent = `R$ ${customer.avg.toFixed(2)}`;
+    document.getElementById('viewCustomerLast').textContent = customer.lastOrder;
+    
+    // Histórico
+    const historyHtml = customer.history.map(item => `
+      <div class="history-item">
+        <div class="history-icon">📦</div>
+        <div class="history-content">
+          <div class="history-order">${item.order}</div>
+          <div class="history-date">${item.date}</div>
+        </div>
+      </div>
+    `).join('');
+    document.getElementById('viewCustomerHistory').innerHTML = historyHtml;
+    
+    // Mostrar modal
+    document.getElementById('viewCustomerModal').style.display = 'flex';
   }
 }
 
@@ -953,6 +997,40 @@ document.addEventListener('DOMContentLoaded', () => {
     editOrderModal.addEventListener('click', (e) => {
       if (e.target === editOrderModal) {
         editOrderModal.style.display = 'none';
+      }
+    });
+  }
+
+  // Modals de visualização customizados
+  const viewOrderModal = document.getElementById('viewOrderModal');
+  const closeViewOrderModal = document.getElementById('closeViewOrderModal');
+  const viewCustomerModal = document.getElementById('viewCustomerModal');
+  const closeViewCustomerModal = document.getElementById('closeViewCustomerModal');
+
+  if (closeViewOrderModal) {
+    closeViewOrderModal.addEventListener('click', () => {
+      viewOrderModal.style.display = 'none';
+    });
+  }
+
+  if (viewOrderModal) {
+    viewOrderModal.addEventListener('click', (e) => {
+      if (e.target === viewOrderModal) {
+        viewOrderModal.style.display = 'none';
+      }
+    });
+  }
+
+  if (closeViewCustomerModal) {
+    closeViewCustomerModal.addEventListener('click', () => {
+      viewCustomerModal.style.display = 'none';
+    });
+  }
+
+  if (viewCustomerModal) {
+    viewCustomerModal.addEventListener('click', (e) => {
+      if (e.target === viewCustomerModal) {
+        viewCustomerModal.style.display = 'none';
       }
     });
   }

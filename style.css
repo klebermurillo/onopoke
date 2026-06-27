@@ -2604,3 +2604,355 @@ main {
 .btn-secondary:hover {
   background: #5a5f67;
 }
+
+/* ============================================
+   MODAL VIEW ORDER - CUSTOMIZADO
+   ============================================ */
+
+.modal-view-order .view-body {
+  gap: 24px;
+}
+
+.order-timeline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5efe4 0%, #fbf8f1 100%);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.timeline-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.4;
+  transition: opacity var(--transition);
+}
+
+.timeline-item.active {
+  opacity: 1;
+}
+
+.timeline-item.completed {
+  opacity: 1;
+}
+
+.timeline-icon {
+  font-size: 1.8rem;
+}
+
+.timeline-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+  max-width: 60px;
+}
+
+.timeline-separator {
+  width: 24px;
+  height: 2px;
+  background: var(--line-strong);
+  flex-shrink: 0;
+}
+
+.timeline-separator:last-of-type {
+  display: none;
+}
+
+.info-section {
+  background: var(--surface-soft);
+  padding: 18px;
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--primary);
+}
+
+.info-section h3 {
+  margin: 0 0 14px 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-section h3 i {
+  color: var(--primary);
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.info-status {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.address-box {
+  background: white;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.order-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: white;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--primary);
+  gap: 12px;
+}
+
+.order-item-info {
+  flex: 1;
+}
+
+.order-item-name {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.order-item-qty {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.order-item-price {
+  font-weight: 600;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.values-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: white;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+}
+
+.value-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.value-total {
+  border-top: 2px solid var(--line);
+  padding-top: 10px;
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--primary);
+}
+
+/* ============================================
+   MODAL VIEW CUSTOMER - CUSTOMIZADO
+   ============================================ */
+
+.modal-view-customer .view-body {
+  gap: 18px;
+}
+
+.customer-header-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--primary) 0%, #28787A 100%);
+  color: white;
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+}
+
+.customer-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.customer-info h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.customer-status {
+  display: inline-block;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 4px 10px;
+  border-radius: 20px;
+  color: white;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: white;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  transition: all var(--transition);
+}
+
+.stat-card:hover {
+  border-color: var(--primary);
+  background: var(--surface-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.stat-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-value {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.customer-history {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.customer-history::-webkit-scrollbar {
+  width: 6px;
+}
+
+.customer-history::-webkit-scrollbar-track {
+  background: var(--line);
+  border-radius: 3px;
+}
+
+.customer-history::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: white;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent);
+  font-size: 0.9rem;
+}
+
+.history-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.history-content {
+  flex: 1;
+}
+
+.history-order {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.history-date {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.view-body {
+  display: flex;
+  flex-direction: column;
+}
