@@ -505,12 +505,16 @@ function renderProductDetail() {
   // Adicionais
   const addonList = document.getElementById('addonList');
   if (addonList) {
-    addonList.innerHTML = product.addons.map(addon => `
-      <label class="addon-chip">
-        <input type="checkbox" name="addon" value="${addon.label}">
-        <span>+ ${addon.label} (R$ ${addon.price.toFixed(2)})</span>
-      </label>
-    `).join('');
+    if (product.addons && product.addons.length > 0) {
+      addonList.innerHTML = product.addons.map(addon => `
+        <label class="addon-chip">
+          <input type="checkbox" name="addon" value="${addon.label}">
+          <span>+ ${addon.label} (R$ ${addon.price.toFixed(2)})</span>
+        </label>
+      `).join('');
+    } else {
+      addonList.innerHTML = '<p style="color: #999; font-size: 0.9rem;">Nenhum adicional disponível para este produto</p>';
+    }
   }
 }
 
