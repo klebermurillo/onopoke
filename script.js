@@ -1,4 +1,5 @@
-const pokeImages = {
+// ========== DADOS DO APLICATIVO ==========
+window.pokeImages = {
   salmonMango: [
     "https://emagreceja.com.br/wp-content/uploads/2023/03/mobile-1200-%C3%97-1200-px-1200-%C3%97-628-px-1200-%C3%97-1200-px-1200-%C3%97-1100-px-1200-%C3%97-628-px-1200-%C3%97-1200-px-6.png",
     "https://poke-house.com/wp-content/uploads/2023/06/usa-roasted-salmon.jpg",
@@ -52,31 +53,6 @@ const bestSellerHighlights = [
   }
 ];
 
-const state = {
-  activeView: "home",
-  activeCategory: "Todos",
-  activeProductId: 1,
-  activeImageIndex: 0,
-  activeAdminOrderId: "ONO-4201",
-  cart: [
-    {
-      productId: 2,
-      name: "Loco Moco da Ilha",
-      size: "Individual",
-      quantity: 1,
-      image: pokeImages.warm[0],
-      unitPrice: 68,
-      notes: "Molho extra à parte.",
-      addons: ["Ovo mollet extra"]
-    }
-  ],
-  checkout: {
-    name: "Camila Azevedo",
-    phone: "(11) 99888-1122",
-    address: "Rua das Acácias, 320 - Jardim Bela Vista"
-  }
-};
-
 const products = [
   {
     id: 1,
@@ -100,1072 +76,760 @@ const products = [
   },
   {
     id: 2,
-    category: "Pratos Quentes",
-    name: "Loco Moco da Ilha",
-    description: "Arroz branco, hambúrguer artesanal, ovo mollet e molho gravy teriyaki com toque havaiano.",
-    detail: "Um clássico comfort food da ilha com acabamento premium. Ideal para quem quer um prato farto, saboroso e com apelo visual caseiro e elegante.",
-    price: 68,
-    images: pokeImages.warm,
-    sizes: [
-      { label: "Individual", price: 68 },
-      { label: "Duplo", price: 112 },
-      { label: "Família", price: 198 }
-    ],
-    addons: [
-      { label: "Ovo mollet extra", price: 9 },
-      { label: "Arroz de coco", price: 8 },
-      { label: "Molho gravy", price: 7 }
-    ],
-    featured: true
-  },
-  {
-    id: 3,
-    category: "Combos",
-    name: "Especial Camarão",
-    description: "Camarão grelhado, base leve e molho especial da casa com toque cítrico.",
-    detail: "Uma combinação elegante com camarão e ingredientes frescos para quem busca um poke sofisticado, equilibrado e cheio de personalidade.",
-    price: 94,
-    images: pokeImages.shrimp,
-    sizes: [
-      { label: "Individual", price: 94 },
-      { label: "Duplo", price: 162 },
-      { label: "Família", price: 268 }
-    ],
-    addons: [
-      { label: "Bebida hibisco", price: 12 },
-      { label: "Chips de batata-doce", price: 10 },
-      { label: "Molho extra", price: 6 }
-    ],
-    featured: true
-  },
-  {
-    id: 4,
-    category: "Pratos Quentes",
-    name: "Kalua Pork Plate",
-    description: "Carne de porco desfiada, arroz de coco, salada de repolho e molho da ilha.",
-    detail: "Um prato clássico havaiano com textura suculenta e equilíbrio entre conforto e frescor. Excelente para refeições completas com visual apetitoso.",
-    price: 72,
-    images: pokeImages.warm,
-    sizes: [
-      { label: "Individual", price: 72 },
-      { label: "Duplo", price: 126 },
-      { label: "Família", price: 214 }
-    ],
-    addons: [
-      { label: "Abacaxi grelhado", price: 10 },
-      { label: "Arroz de coco", price: 8 },
-      { label: "Molho da ilha", price: 6 }
-    ],
-    featured: true
-  },
-  {
-    id: 5,
-    category: "Sobremesas Tropicais",
-    name: "Cheesecake de Coco e Maracujá",
-    description: "Base crocante, creme leve de coco e calda de maracujá com acabamento tropical.",
-    detail: "Uma sobremesa fresca para fechar a refeição com leveza e contraste. Funciona bem para delivery, menu do dia e combos especiais.",
-    price: 34,
-    images: pokeImages.dessert,
-    sizes: [
-      { label: "Individual", price: 34 },
-      { label: "Duplo", price: 58 },
-      { label: "Família", price: 98 }
-    ],
-    addons: [
-      { label: "Coco tostado", price: 6 },
-      { label: "Calda extra", price: 5 },
-      { label: "Frutas tropicais", price: 9 }
-    ]
-  },
-  {
-    id: 6,
     category: "Pokes",
-    name: "Tradicional Atum",
-    description: "Atum fresco, pepino japonês e cebola roxa com finalização artesanal.",
-    detail: "Versão clássica de poke com atum fresco, textura equilibrada e montagem premium para uma refeição tropical e sofisticada.",
+    name: "Atum Premium",
+    description: "Atum fresco em cubos generosos com vegetais crocantes e gergelim torrado.",
+    detail: "Uma escolha clássica que destaca a qualidade da proteína com acompanhamentos selecionados.",
     price: 59,
     images: pokeImages.tuna,
     sizes: [
       { label: "Individual", price: 59 },
-      { label: "Duplo", price: 102 },
-      { label: "Família", price: 176 }
+      { label: "Duplo", price: 99 },
+      { label: "Família", price: 178 }
     ],
     addons: [
-      { label: "Abacate", price: 10 },
-      { label: "Cebola crispy", price: 8 },
-      { label: "Molho extra", price: 6 }
-    ]
+      { label: "Alga nori", price: 5 },
+      { label: "Gergelim branco", price: 4 }
+    ],
+    featured: false
+  },
+  {
+    id: 3,
+    category: "Pratos Quentes",
+    name: "Loco Moco da Ilha",
+    description: "Arroz, carne moída, ovo mollet, molho especial e hortaliças.",
+    detail: "Prato quente havaiano tradicional com apresentação executiva.",
+    price: 68,
+    images: pokeImages.warm,
+    sizes: [
+      { label: "Individual", price: 68 },
+      { label: "Duplo", price: 114 }
+    ],
+    addons: [
+      { label: "Ovo extra", price: 6 },
+      { label: "Bacon crocante", price: 8 }
+    ],
+    featured: false
+  },
+  {
+    id: 4,
+    category: "Combos",
+    name: "Combo Tropical Deluxe",
+    description: "Poke salmão + prato quente + bebida + sobremesa.",
+    detail: "Combinação premium que oferece uma experiência completa da culinária havaiana.",
+    price: 189,
+    images: pokeImages.salmonMango,
+    sizes: [
+      { label: "Para 1 pessoa", price: 189 },
+      { label: "Para 2 pessoas", price: 359 }
+    ],
+    addons: [],
+    featured: false
+  },
+  {
+    id: 5,
+    category: "Sobremesas",
+    name: "Cheesecake de Maracujá",
+    description: "Cremoso e refrescante com cobertura de frutas tropicais.",
+    detail: "Sobremesa gelada perfeita para finalizar a experiência havaiana.",
+    price: 32,
+    images: pokeImages.dessert,
+    sizes: [
+      { label: "Porção individual", price: 32 },
+      { label: "Porção family", price: 64 }
+    ],
+    addons: [],
+    featured: false
   }
 ];
 
 const testimonials = [
   {
-    name: "Renata Prado",
-    event: "Almoço de família",
-    quote: "O poke chegou lindo, muito fresco e com montagem impecável. Passa uma imagem premium sem perder a sensação caseira.",
-    rating: 5
+    name: "Marina Costa",
+    role: "Gerente de Restaurante",
+    text: "Excelente qualidade e atendimento impecável. Já pedi várias vezes e sempre chega fresquinho!",
+    rating: 5,
+    avatar: "👩‍💼"
   },
   {
-    name: "Larissa Monteiro",
-    event: "Pedido corporativo",
-    quote: "Os combos foram perfeitos para nosso evento. Entrega pontual e visual que realmente impressiona na apresentação.",
-    rating: 5
+    name: "Roberto Silva",
+    role: "Executivo",
+    text: "Entrega rápida, poke bem montado e ingredientes de primeira qualidade. Virou meu almoço de sexta!",
+    rating: 5,
+    avatar: "👨‍💼"
   },
   {
-    name: "Marina Faria",
-    event: "Delivery do dia",
-    quote: "A comida veio saborosa, leve e muito bem montada. Parece um restaurante de alto padrão desde a embalagem.",
-    rating: 5
+    name: "Juliana Lima",
+    role: "Estudante",
+    text: "Adorei a personalização! Consegui montar exatamente do meu jeito. Recomendo demais!",
+    rating: 4,
+    avatar: "👩‍🎓"
   }
 ];
 
-const adminOrders = [
-  {
-    id: "ONO-4201",
-    customer: "Helena Siqueira",
-    phone: "(11) 99820-1144",
-    items: ["Poke Bowl Maui", "Bebida hibisco"],
-    total: "R$ 112,00",
-    status: "Em produção",
-    channel: "Delivery",
-    payment: "Pix",
-    mode: "Entrega",
-    eta: "12 min"
-  },
-  {
-    id: "ONO-4202",
-    customer: "Clara Menezes",
-    phone: "(11) 99741-2203",
-    items: ["Combo Waikiki", "Chips de batata-doce"],
-    total: "R$ 245,00",
-    status: "Pronto",
-    channel: "App",
-    payment: "Cartão",
-    mode: "Retirada",
-    eta: "Pronto para chamar"
-  },
-  {
-    id: "ONO-4203",
-    customer: "Bianca Freitas",
-    phone: "(11) 99688-9901",
-    items: ["Loco Moco da Ilha"],
-    total: "R$ 158,00",
-    status: "Saiu para entrega",
-    channel: "WhatsApp",
-    payment: "Pix",
-    mode: "Entrega",
-    eta: "5 min"
-  },
-  {
-    id: "ONO-4204",
-    customer: "Patrícia Lins",
-    phone: "(11) 99555-1040",
-    items: ["Frango Huli Huli", "Calda extra"],
-    total: "R$ 98,00",
-    status: "Novo pedido",
-    channel: "Mesa",
-    payment: "Dinheiro",
-    mode: "Retirada",
-    eta: "Aguardando"
-  }
-];
-
-const adminMetrics = [
-  { icon: "fa-solid fa-sack-dollar", label: "Faturamento do mês", value: "R$ 18.450" },
-  { icon: "fa-solid fa-bag-shopping", label: "Pedidos ativos", value: "32" },
-  { icon: "fa-solid fa-circle-check", label: "Pedidos prontos", value: "9" },
-  { icon: "fa-solid fa-clock", label: "Tempo médio", value: "24 min" }
-];
-
-const adminStatusFlow = ["Novo pedido", "Confirmado", "Em produção", "Pronto", "Saiu para entrega", "Entregue"];
-const kdsStorageKey = "onopoke_kds_orders";
-let lastTvReadyOrderId = null;
-
-function mapAdminStatusToKds(status) {
-  if (status === "Pronto") return "pronto";
-  if (status === "Em produção") return "preparo";
-  if (status === "Novo pedido" || status === "Confirmado") return "aguardando";
-  return "aguardando";
-}
-
-function mapOrderSourceToKds(order) {
-  const channel = String(order.channel || "").toLowerCase();
-  if (channel === "mesa") return "local";
-  return "online";
-}
-
-function syncKdsOrders() {
-  const kdsOrders = adminOrders
-    .filter((order) => order.status !== "Entregue")
-    .map((order) => ({
-      id: order.id,
-      cliente: order.customer,
-      origem: mapOrderSourceToKds(order),
-      status: mapAdminStatusToKds(order.status),
-      itens: order.items.map((itemName) => ({ qty: 1, nome: itemName })),
-      updatedAt: Date.now()
-    }));
-
-  localStorage.setItem(kdsStorageKey, JSON.stringify(kdsOrders));
-}
-
-function getStatusClass(status) {
-  return status
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\s+/g, "-");
-}
-
-const deliveryFee = 18;
-const whatsappPhone = "5519971160068";
-
-const elements = {
-  views: [...document.querySelectorAll(".view")],
-  navLinks: [...document.querySelectorAll("[data-nav]")],
-  menuToggle: document.getElementById("menuToggle"),
-  mainNav: document.getElementById("mainNav"),
-  heroPhoto: document.getElementById("heroPhoto"),
-  bestSellersGrid: document.getElementById("bestSellersGrid"),
-  testimonialGrid: document.getElementById("testimonialGrid"),
-  categoryChips: document.getElementById("categoryChips"),
-  menuGrid: document.getElementById("menuGrid"),
-  searchInput: document.getElementById("searchInput"),
-  productCategoryTag: document.getElementById("productCategoryTag"),
-  productTitle: document.getElementById("productTitle"),
-  productDescription: document.getElementById("productDescription"),
-  productPrice: document.getElementById("productPrice"),
-  productMainImage: document.getElementById("productMainImage"),
-  productThumbRow: document.getElementById("productThumbRow"),
-  sizeOptions: document.getElementById("sizeOptions"),
-  addonList: document.getElementById("addonList"),
-  productNotes: document.getElementById("productNotes"),
-  addProductButton: document.getElementById("addProductButton"),
-  cartItems: document.getElementById("cartItems"),
-  cartSubtotal: document.getElementById("cartSubtotal"),
-  cartDeliveryFee: document.getElementById("cartDeliveryFee"),
-  cartTotal: document.getElementById("cartTotal"),
-  cartCount: document.getElementById("cartCount"),
-  cartNotes: document.getElementById("cartNotes"),
-  goToCheckout: document.getElementById("goToCheckout"),
-  checkoutSummary: document.getElementById("checkoutSummary"),
-  checkoutForm: document.getElementById("checkoutForm"),
-  customerName: document.getElementById("customerName"),
-  customerPhone: document.getElementById("customerPhone"),
-  customerAddress: document.getElementById("customerAddress"),
-  deliveryOptions: document.getElementById("deliveryOptions"),
-  paymentOptions: document.getElementById("paymentOptions"),
-  orderNumber: document.getElementById("orderNumber"),
-  whatsappButton: document.getElementById("whatsappButton"),
-  ordersList: document.getElementById("ordersList"),
-  adminMetrics: document.getElementById("adminMetrics"),
-  trackingPanel: document.getElementById("trackingPanel"),
-  tvClock: document.getElementById("tvClock"),
-  tvColMain: document.getElementById("tvColMain"),
-  tvNextList: document.getElementById("tvNextList"),
-  tvReadyBanner: document.getElementById("tvReadyBanner")
+const state = {
+  activeView: "login",
+  activeCategory: "Todos",
+  activeProductId: 1,
+  activeImageIndex: 0,
+  activeAdminOrderId: "ONO-4201",
+  cart: [],
+  checkout: {},
+  currentUser: null
 };
 
-function updateTvClock() {
-  if (!elements.tvClock) return;
-  elements.tvClock.textContent = new Date().toLocaleTimeString("pt-BR");
-}
+// Expor variáveis globalmente
+window.state = state;
+window.bestSellerHighlights = bestSellerHighlights;
+window.testimonials = testimonials;
+window.products = products;
 
-function normalizeKdsStatus(statusRaw) {
-  const status = String(statusRaw || "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+// ========== GERENCIAMENTO DE AUTENTICAÇÃO ==========
+function login(email, password) {
+  const users = {
+    admin: {
+      email: "admin@onopoke.com",
+      password: "admin123",
+      name: "Admin Ono Poke",
+      role: "admin",
+      avatar: "👨‍💼"
+    },
+    customer: {
+      email: "cliente@onopoke.com",
+      password: "cliente123",
+      name: "João Silva",
+      role: "customer",
+      avatar: "👤"
+    }
+  };
 
-  if (status.includes("cancel")) return "cancelado";
-  if (status.includes("pronto")) return "pronto";
-  if (status.includes("producao") || status.includes("preparo")) return "preparo";
-  if (status.includes("novo") || status.includes("confirmado") || status.includes("aguardando")) return "aguardando";
-  return "aguardando";
-}
-
-function getKdsOrdersFromStorage() {
-  const parsed = JSON.parse(localStorage.getItem(kdsStorageKey) || "[]");
-
-  if (!Array.isArray(parsed)) return [];
-
-  return parsed
-    .map((order) => ({
-      id: order.id,
-      cliente: order.cliente || "Cliente",
-      origem: order.origem === "local" ? "local" : "online",
-      status: normalizeKdsStatus(order.status),
-      itens: Array.isArray(order.itens) ? order.itens : []
-    }))
-    .filter((order) => order.status !== "cancelado");
-}
-
-function formatTvOrderNumber(orderId) {
-  if (typeof orderId === "number") return `#${String(orderId).padStart(3, "0")}`;
-  const text = String(orderId || "").trim();
-  if (!text) return "#---";
-  return text.startsWith("#") ? text : `#${text}`;
-}
-
-function renderTvBannerReady() {
-  if (!elements.tvReadyBanner) return;
-  elements.tvReadyBanner.classList.add("show");
-  setTimeout(() => elements.tvReadyBanner.classList.remove("show"), 4000);
-}
-
-function renderTvPanel() {
-  if (!elements.tvColMain || !elements.tvNextList) return;
-
-  const pedidos = getKdsOrdersFromStorage();
-  const prontos = pedidos.filter((order) => order.status === "pronto");
-  const emPreparo = pedidos.filter((order) => order.status === "preparo");
-  const aguardando = pedidos.filter((order) => order.status === "aguardando");
-  const fila = pedidos.filter((order) => order.status !== "pronto");
-  const destaque = prontos[0] || emPreparo[0] || aguardando[0] || null;
-
-  if (prontos.length && prontos[0].id !== lastTvReadyOrderId) {
-    lastTvReadyOrderId = prontos[0].id;
-    renderTvBannerReady();
+  for (const [key, user] of Object.entries(users)) {
+    if (user.email === email && user.password === password) {
+      state.currentUser = { ...user, loginTime: new Date().toLocaleString('pt-BR') };
+      localStorage.setItem('onoPokeSessão', JSON.stringify(state.currentUser));
+      setupUIForRole();
+      navigateTo(state.currentUser.role === 'admin' ? 'dashboard' : 'home');
+      return { success: true };
+    }
   }
+  return { success: false, error: "Email ou senha inválidos" };
+}
 
-  if (!destaque) {
-    elements.tvColMain.innerHTML = `
-      <div class="tv-empty-state">
-        <div class="icon-big">🍽️</div>
-        <p>Aguardando pedidos...</p>
-      </div>`;
-  } else {
-    const statusLabel = {
-      aguardando: "⏳ Aguardando",
-      preparo: "🔥 Em preparo",
-      pronto: "✅ Pronto!"
-    };
+function logout() {
+  state.currentUser = null;
+  localStorage.removeItem('onoPokeSessão');
+  state.cart = [];
+  state.activeView = "login";
+  setupUIForRole();
+  navigateTo('login');
+}
 
-    const itemsHtml = destaque.itens
-      .map((item) => `
-        <div class="tv-item-highlight">
-          <span class="qty">${item.qty || 1}x</span>
-          <span>${item.nome || "Item"}</span>
-        </div>`)
-      .join("");
-
-    elements.tvColMain.innerHTML = `
-      <div class="tv-label-call">${statusLabel[destaque.status] || ""}</div>
-      <div class="tv-order-number">${formatTvOrderNumber(destaque.id)}</div>
-      <div class="tv-customer">${destaque.cliente}</div>
-      <div class="tv-divider"></div>
-      <div class="tv-items-highlight">${itemsHtml || '<div class="tv-item-highlight"><span>Sem itens</span></div>'}</div>
-      <div class="tv-origin-badge ${destaque.origem}">
-        ${destaque.origem === "online" ? "🌐 Pedido online" : "🏠 Pedido presencial"}
-      </div>`;
+function checkSession() {
+  const saved = localStorage.getItem('onoPokeSessão');
+  if (saved) {
+    state.currentUser = JSON.parse(saved);
+    setupUIForRole();
+    navigateTo(state.currentUser.role === 'admin' ? 'dashboard' : 'home');
+    return true;
   }
+  return false;
+}
 
-  const proximos = fila.filter((order) => order.id !== destaque?.id).slice(0, 12);
+function setupUIForRole() {
+  const header = document.getElementById('siteHeader');
+  const footer = document.getElementById('siteFooter');
+  const mainNav = document.getElementById('mainNav');
+  const mainNavAdmin = document.getElementById('mainNavAdmin');
+  const cartButton = document.getElementById('cartShortcut');
+  const tvButton = document.getElementById('tvPanelButton');
+  const userMenu = document.getElementById('userMenuWrapper');
 
-  if (!proximos.length) {
-    elements.tvNextList.innerHTML = '<div style="padding:24px;color:#555;font-size:.85rem;text-align:center;">Nenhum pedido aguardando.</div>';
+  if (!state.currentUser) {
+    // Não autenticado
+    if (header) header.style.display = 'none';
+    if (footer) footer.style.display = 'none';
     return;
   }
 
-  const statusLabel = {
-    aguardando: "Aguardando",
-    preparo: "Em preparo"
+  // Autenticado
+  if (header) header.style.display = '';
+  if (footer) footer.style.display = '';
+
+  if (state.currentUser.role === 'admin') {
+    // Admin
+    if (mainNav) mainNav.style.display = 'none';
+    if (mainNavAdmin) mainNavAdmin.style.display = 'flex';
+    if (cartButton) cartButton.style.display = 'none';
+    if (tvButton) tvButton.style.display = 'block';
+  } else {
+    // Customer
+    if (mainNav) mainNav.style.display = 'flex';
+    if (mainNavAdmin) mainNavAdmin.style.display = 'none';
+    if (cartButton) cartButton.style.display = 'flex';
+    if (tvButton) tvButton.style.display = 'none';
+  }
+
+  // Atualizar menu do usuário
+  if (userMenu) {
+    userMenu.style.display = 'flex';
+    document.getElementById('userAvatar').textContent = state.currentUser.avatar;
+    document.getElementById('userName').textContent = state.currentUser.name.split(' ')[0];
+    document.getElementById('userAvatarLarge').textContent = state.currentUser.avatar;
+    document.getElementById('userNameDropdown').textContent = state.currentUser.name;
+    document.getElementById('userRoleDropdown').textContent = state.currentUser.role === 'admin' ? 'Administrador' : 'Cliente';
+  }
+}
+
+// ========== NAVEGAÇÃO ==========
+function showView(viewId) {
+  document.querySelectorAll('.view').forEach(view => {
+    view.classList.remove('is-active');
+  });
+  const target = document.getElementById(viewId);
+  if (target) {
+    target.classList.add('is-active');
+    state.activeView = viewId;
+  }
+}
+
+function navigateTo(view) {
+  const viewMap = {
+    'login': 'loginView',
+    'home': 'homeView',
+    'menu': 'menuView',
+    'product': 'productView',
+    'cart': 'cartView',
+    'checkout': 'checkoutView',
+    'confirmation': 'confirmationView',
+    'tv': 'tvView',
+    'dashboard': 'dashboardView',
+    'orders': 'ordersView',
+    'financial': 'financialView',
+    'reports': 'reportsView',
+    'customers': 'customersView',
+    'products': 'productsView'
   };
 
-  elements.tvNextList.innerHTML = proximos
-    .map((order) => {
-      const itensResumo = order.itens.map((item) => `${item.qty || 1}x ${item.nome || "Item"}`).join(" · ");
-      return `
-        <div class="tv-next-item">
-          <div class="tv-next-number">${formatTvOrderNumber(order.id)}</div>
-          <div class="tv-next-info">
-            <div class="tv-next-name">${order.cliente}</div>
-            <div class="tv-next-items">${itensResumo || "Sem itens"}</div>
-          </div>
-          <div class="tv-next-status ${order.status}">${statusLabel[order.status] || order.status}</div>
-        </div>`;
-    })
-    .join("");
+  // Verificar permissões
+  if (!state.currentUser && view !== 'login') {
+    navigateTo('login');
+    return;
+  }
+
+  if (state.currentUser && view !== 'login' && view !== 'tv') {
+    const isAdminView = ['dashboard', 'orders', 'financial', 'reports', 'customers', 'products'].includes(view);
+    const isCustomerView = ['home', 'menu', 'product', 'cart', 'checkout', 'confirmation'].includes(view);
+
+    if (isAdminView && state.currentUser.role !== 'admin') {
+      navigateTo('home');
+      return;
+    }
+
+    if (isCustomerView && state.currentUser.role !== 'customer') {
+      navigateTo('dashboard');
+      return;
+    }
+  }
+
+  const viewId = viewMap[view];
+  if (viewId) {
+    showView(viewId);
+  }
 }
 
-function formatPrice(value) {
-  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-}
-
-function getCategories() {
-  return ["Todos", ...new Set(products.map((product) => product.category))];
-}
-
-function getActiveProduct() {
-  return products.find((product) => product.id === state.activeProductId) || products[0];
-}
-
-function getSelectedSize(product) {
-  const selected = product.sizes.find((size) => size.label === state.selectedSize);
-  return selected || product.sizes[0];
-}
-
-function setupInitialState() {
-  const featuredProduct = products.find((product) => product.featured) || products[0];
-  state.activeProductId = featuredProduct.id;
-  state.selectedSize = featuredProduct.sizes[0].label;
-  state.selectedAddons = [];
-  state.cart = state.cart.map((item) => {
-    const product = products.find((productEntry) => productEntry.id === item.productId);
-    return product ? { ...item, image: product.images[0] } : item;
-  });
-  elements.customerName.value = state.checkout.name;
-  elements.customerPhone.value = state.checkout.phone;
-  elements.customerAddress.value = state.checkout.address;
-  elements.cartDeliveryFee.textContent = formatPrice(deliveryFee);
-}
-
+// ========== RENDERIZAÇÃO DE DADOS ==========
 function renderBestSellers() {
-  elements.bestSellersGrid.innerHTML = bestSellerHighlights
-    .map((item) => createBestSellerCard(item))
-    .join("");
-}
+  const grid = document.getElementById('bestSellersGrid');
+  if (!grid) return;
 
-function createBestSellerCard(item) {
-  return `
-    <article class="product-card">
+  grid.innerHTML = bestSellerHighlights.map(item => `
+    <div class="product-card">
       <div class="product-image-wrap">
-        <div class="product-image" style="background-image: url('${item.image}')"></div>
+        <div class="product-image" style="background-image: url('${item.image}'); background-size: cover; background-position: center;"></div>
       </div>
       <div class="product-card-content">
+        <h3>${item.emoji} ${item.title}</h3>
         <div class="product-copy">
-          <span class="product-tag">${item.emoji} Mais pedido</span>
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
+          <span>${item.description}</span>
         </div>
       </div>
-    </article>
-  `;
+    </div>
+  `).join('');
 }
 
 function renderTestimonials() {
-  elements.testimonialGrid.innerHTML = testimonials
-    .map(
-      (testimonial) => `
-        <article class="testimonial-card">
-          <div class="stars">${'<i class="fa-solid fa-star"></i>'.repeat(testimonial.rating)}</div>
-          <p>“${testimonial.quote}”</p>
-          <footer>
-            <div>
-              <strong>${testimonial.name}</strong>
-              <span>${testimonial.event}</span>
-            </div>
-            <i class="fa-solid fa-heart"></i>
-          </footer>
-        </article>
-      `
-    )
-    .join("");
-}
+  const grid = document.getElementById('testimonialGrid');
+  if (!grid) return;
 
-function renderCategoryChips() {
-  elements.categoryChips.innerHTML = getCategories()
-    .map(
-      (category) => `
-        <button class="chip ${category === state.activeCategory ? "active" : ""}" data-category="${category}">
-          ${category}
-        </button>
-      `
-    )
-    .join("");
-}
-
-function createProductCard(product, compact = false) {
-  return `
-    <article class="product-card" data-product-id="${product.id}">
-      <div class="product-image-wrap">
-        <div class="product-image" style="background-image: url('${product.images[0]}')"></div>
-      </div>
-      <div class="product-card-content">
-        <div class="product-copy">
-          <span class="product-tag">${product.category}</span>
-          <h3>${product.name}</h3>
-          <p>${product.description}</p>
+  grid.innerHTML = testimonials.map(t => `
+    <article class="testimonial-card">
+      <div class="stars">${'⭐'.repeat(t.rating)}</div>
+      <p>${t.text}</p>
+      <footer>
+        <div>
+          <strong>${t.name}</strong>
+          <small>${t.role}</small>
         </div>
-        <div class="product-card-footer">
-          <div>
-            <span class="product-tag">A partir de</span>
-            <div class="product-price">${formatPrice(product.price)}</div>
-          </div>
-          <div class="hero-actions">
-            <button class="icon-button" data-open-product="${product.id}" aria-label="Ver produto">
-              <i class="fa-solid fa-eye"></i>
-            </button>
-            <button class="btn ${compact ? "btn-secondary" : "btn-primary"}" data-add-quick="${product.id}">
-              <i class="fa-solid fa-bag-shopping"></i>
-              Adicionar ao Carrinho
-            </button>
-          </div>
-        </div>
-      </div>
+        <span style="font-size: 2rem;">${t.avatar}</span>
+      </footer>
     </article>
-  `;
+  `).join('');
 }
 
-function renderMenuGrid() {
-  const query = elements.searchInput.value.trim().toLowerCase();
-  const filtered = products.filter((product) => {
-    const matchesCategory = state.activeCategory === "Todos" || product.category === state.activeCategory;
-    const matchesSearch = [product.name, product.description, product.category].join(" ").toLowerCase().includes(query);
-    return matchesCategory && matchesSearch;
-  });
+function renderMenu() {
+  const grid = document.getElementById('menuGrid');
+  const chips = document.getElementById('categoryChips');
+  if (!grid) return;
 
-  elements.menuGrid.innerHTML = filtered.length
-    ? filtered.map((product) => createProductCard(product)).join("")
-    : '<div class="empty-state">Nenhum produto encontrado para os filtros atuais.</div>';
-}
+  // Renderizar categorias
+  const categories = ['Todos', ...new Set(products.map(p => p.category))];
+  if (chips) {
+    chips.innerHTML = categories.map(cat => `
+      <button class="chip ${cat === 'Todos' ? 'active' : ''}" data-category="${cat}">${cat}</button>
+    `).join('');
 
-function setActiveProduct(productId) {
-  const product = products.find((item) => item.id === productId);
-  if (!product) return;
-
-  state.activeProductId = productId;
-  state.selectedSize = product.sizes[0].label;
-  state.selectedAddons = [];
-  state.activeImageIndex = 0;
-  elements.productNotes.value = "";
-  renderProductDetail();
-}
-
-function renderProductDetail() {
-  const product = getActiveProduct();
-  const selectedSize = getSelectedSize(product);
-
-  elements.productCategoryTag.textContent = product.category;
-  elements.productTitle.textContent = product.name;
-  elements.productDescription.textContent = product.detail;
-  elements.productPrice.textContent = formatPrice(selectedSize.price);
-  elements.productMainImage.style.backgroundImage = `url(${product.images[state.activeImageIndex]})`;
-
-  elements.productThumbRow.innerHTML = product.images
-    .map(
-      (image, index) => `
-        <button class="thumb-button ${index === state.activeImageIndex ? "active" : ""}" data-thumb-index="${index}">
-          <div class="thumb-image" style="background-image: url('${image}')"></div>
-        </button>
-      `
-    )
-    .join("");
-
-  elements.sizeOptions.innerHTML = product.sizes
-    .map(
-      (size) => `
-        <label class="size-chip ${size.label === selectedSize.label ? "active" : ""}">
-          <input type="radio" name="productSize" value="${size.label}" ${size.label === selectedSize.label ? "checked" : ""}>
-          <span>${size.label} · ${formatPrice(size.price)}</span>
-        </label>
-      `
-    )
-    .join("");
-
-  elements.addonList.innerHTML = product.addons
-    .map(
-      (addon) => `
-        <label class="addon-chip ${state.selectedAddons.includes(addon.label) ? "active" : ""}">
-          <input type="checkbox" value="${addon.label}" ${state.selectedAddons.includes(addon.label) ? "checked" : ""}>
-          <span>${addon.label} · +${formatPrice(addon.price)}</span>
-        </label>
-      `
-    )
-    .join("");
-}
-
-function calculateCartTotals() {
-  const subtotal = state.cart.reduce((total, item) => total + item.unitPrice * item.quantity, 0);
-  const total = subtotal + (state.cart.length ? deliveryFee : 0);
-  return { subtotal, total };
-}
-
-function renderCart() {
-  elements.cartCount.textContent = state.cart.reduce((count, item) => count + item.quantity, 0);
-
-  if (!state.cart.length) {
-    elements.cartItems.innerHTML = '<div class="empty-state">Seu carrinho está vazio. Explore o cardápio e adicione produtos para continuar.</div>';
-  } else {
-    elements.cartItems.innerHTML = state.cart
-      .map(
-        (item, index) => `
-          <article class="cart-item">
-            <div class="cart-item-image" style="background-image: url('${item.image}')"></div>
-            <div class="cart-item-content">
-              <div class="order-item-head">
-                <div>
-                  <h3>${item.name}</h3>
-                  <span>${item.size}</span>
-                </div>
-                <strong>${formatPrice(item.unitPrice * item.quantity)}</strong>
-              </div>
-              <p>${item.addons.length ? `Adicionais: ${item.addons.join(", ")}.` : "Sem adicionais."} ${item.notes || ""}</p>
-              <div class="cart-item-footer">
-                <div class="quantity-controls">
-                  <button data-qty-action="decrease" data-cart-index="${index}">-</button>
-                  <strong>${item.quantity}</strong>
-                  <button data-qty-action="increase" data-cart-index="${index}">+</button>
-                </div>
-                <button class="icon-button" data-remove-cart="${index}" aria-label="Remover item">
-                  <i class="fa-solid fa-trash"></i>
-                </button>
-              </div>
-            </div>
-          </article>
-        `
-      )
-      .join("");
-  }
-
-  const totals = calculateCartTotals();
-  elements.cartSubtotal.textContent = formatPrice(totals.subtotal);
-  elements.cartTotal.textContent = formatPrice(totals.total);
-}
-
-function renderCheckoutSummary() {
-  const totals = calculateCartTotals();
-
-  elements.checkoutSummary.innerHTML = `
-    ${state.cart
-      .map(
-        (item) => `
-          <div class="checkout-summary-item">
-            <strong>${item.quantity}x ${item.name}</strong>
-            <span>${item.size}</span>
-            <div class="summary-line">
-              <span>${item.addons.length ? item.addons.join(", ") : "Sem adicionais"}</span>
-              <strong>${formatPrice(item.unitPrice * item.quantity)}</strong>
-            </div>
-          </div>
-        `
-      )
-      .join("")}
-    <div class="summary-line">
-      <span>Subtotal</span>
-      <strong>${formatPrice(totals.subtotal)}</strong>
-    </div>
-    <div class="summary-line">
-      <span>Entrega</span>
-      <strong>${formatPrice(state.cart.length ? deliveryFee : 0)}</strong>
-    </div>
-    <div class="summary-line total-line">
-      <span>Total</span>
-      <strong>${formatPrice(totals.total)}</strong>
-    </div>
-  `;
-}
-
-function renderAdmin() {
-  syncKdsOrders();
-
-  elements.adminMetrics.innerHTML = adminMetrics
-    .map(
-      (metric) => `
-        <article class="metric-card">
-          <i class="${metric.icon}"></i>
-          <span>${metric.label}</span>
-          <strong>${metric.value}</strong>
-        </article>
-      `
-    )
-    .join("");
-
-  elements.ordersList.innerHTML = adminOrders
-    .map(
-      (order) => `
-        <div class="order-item admin-order-card ${order.id === state.activeAdminOrderId ? "active" : ""}">
-          <div class="order-item-head">
-            <div>
-              <strong>#${order.id}</strong>
-              <span>${order.customer} · ${order.channel}</span>
-            </div>
-            <span class="order-status status-${getStatusClass(order.status)}">${order.status}</span>
-          </div>
-          <div class="admin-order-details">
-            <span>${order.items.join(", ")}</span>
-            <strong>${order.total}</strong>
-          </div>
-          <div class="admin-order-meta">
-            <span><i class="fa-solid fa-user"></i> ${order.customer}</span>
-            <span><i class="fa-solid fa-phone"></i> ${order.phone}</span>
-            <span><i class="fa-solid fa-credit-card"></i> ${order.payment}</span>
-            <span><i class="fa-solid fa-motorcycle"></i> ${order.mode}</span>
-          </div>
-          <div class="order-progress" aria-hidden="true">
-            <span style="width: ${Math.max(18, (adminStatusFlow.indexOf(order.status) / (adminStatusFlow.length - 1)) * 100)}%"></span>
-          </div>
-          <div class="order-action-row">
-            <button type="button" class="btn btn-secondary btn-small" data-admin-select="${order.id}">Ver pedido</button>
-            <button type="button" class="btn btn-primary btn-small" data-admin-advance="${order.id}">Avançar status</button>
-          </div>
-        </div>
-      `
-    )
-    .join("");
-
-  const activeOrder = adminOrders.find((order) => order.id === state.activeAdminOrderId) || adminOrders[0];
-  const activeStatusIndex = Math.max(adminStatusFlow.indexOf(activeOrder.status), 0);
-
-  elements.trackingPanel.innerHTML = `
-    <div class="tracking-header">
-      <div>
-        <span class="eyebrow">Acompanhamento do cliente</span>
-        <h3>${activeOrder.customer}</h3>
-      </div>
-      <span class="order-status status-${getStatusClass(activeOrder.status)}">${activeOrder.status}</span>
-    </div>
-    <div class="tracking-order-number">${activeOrder.id}</div>
-    <div class="tracking-summary">
-      <div>
-        <span>Itens</span>
-        <strong>${activeOrder.items.join(", ")}</strong>
-      </div>
-      <div>
-        <span>Previsão</span>
-        <strong>${activeOrder.eta}</strong>
-      </div>
-      <div>
-        <span>Pagamento</span>
-        <strong>${activeOrder.payment}</strong>
-      </div>
-      <div>
-        <span>Contato</span>
-        <strong>${activeOrder.phone}</strong>
-      </div>
-    </div>
-    <div class="tracking-timeline">
-      ${adminStatusFlow
-        .map(
-          (status, index) => `
-            <div class="tracking-step ${index < activeStatusIndex ? "done" : ""} ${index === activeStatusIndex ? "current" : ""}">
-              <span></span>
-              <div>
-                <strong>${status}</strong>
-                <small>${index === activeStatusIndex ? "Etapa atual" : index < activeStatusIndex ? "Concluída" : "Pendente"}</small>
-              </div>
-            </div>
-          `
-        )
-        .join("")}
-    </div>
-    <div class="tracking-note ${activeOrder.status === "Pronto" ? "ready" : ""}">
-      ${activeOrder.status === "Pronto" ? "Pedido pronto para retirada ou despacho." : `Pedido em ${activeOrder.status.toLowerCase()}.`}
-    </div>
-  `;
-}
-
-function renderAll() {
-  renderBestSellers();
-  renderTestimonials();
-  renderCategoryChips();
-  renderMenuGrid();
-  renderProductDetail();
-  renderCart();
-  renderCheckoutSummary();
-  renderAdmin();
-  renderTvPanel();
-}
-
-function toggleNav(forceOpen) {
-  const shouldOpen = typeof forceOpen === "boolean" ? forceOpen : !elements.mainNav.classList.contains("is-open");
-  elements.mainNav.classList.toggle("is-open", shouldOpen);
-}
-
-function setActiveView(viewName) {
-  state.activeView = viewName;
-  elements.views.forEach((view) => view.classList.toggle("is-active", view.dataset.view === viewName));
-  document.querySelectorAll(".main-nav a").forEach((link) => {
-    link.classList.toggle("is-current", link.dataset.nav === viewName);
-  });
-
-  if (viewName === "tv") {
-    syncKdsOrders();
-    renderTvPanel();
-    updateTvClock();
-  }
-
-  toggleNav(false);
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function quickAddProduct(productId) {
-  const product = products.find((item) => item.id === productId);
-  if (!product) return;
-  const defaultSize = product.sizes[0];
-  const existingItem = state.cart.find((item) => item.productId === product.id && item.size === defaultSize.label && item.addons.length === 0);
-
-  if (existingItem) {
-    existingItem.quantity += 1;
-  } else {
-    state.cart.push({
-      productId: product.id,
-      name: product.name,
-      size: defaultSize.label,
-      quantity: 1,
-      image: product.images[0],
-      unitPrice: defaultSize.price,
-      notes: "",
-      addons: []
+    chips.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        state.activeCategory = chip.dataset.category;
+        renderMenu();
+      });
     });
   }
 
-  renderCart();
-  renderCheckoutSummary();
+  // Renderizar produtos
+  const filtered = state.activeCategory === 'Todos'
+    ? products
+    : products.filter(p => p.category === state.activeCategory);
+
+  grid.innerHTML = filtered.map(product => `
+    <div class="product-card" data-product-id="${product.id}">
+      <div class="product-image-wrap">
+        <div class="product-image" style="background-image: url('${product.images[0]}'); background-size: cover; background-position: center;"></div>
+      </div>
+      <div class="product-card-content">
+        <h3>${product.name}</h3>
+        <div class="product-copy">
+          <span>${product.description}</span>
+        </div>
+        <div class="product-card-footer">
+          <strong class="product-price">R$ ${product.price.toFixed(2)}</strong>
+          <button class="icon-button" data-product-id="${product.id}">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.icon-button').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const productId = parseInt(btn.dataset.productId);
+      state.activeProductId = productId;
+      renderProductDetail();
+      navigateTo('product');
+    });
+  });
 }
 
-function addConfiguredProductToCart() {
-  const product = getActiveProduct();
-  const size = getSelectedSize(product);
-  const selectedAddonData = product.addons.filter((addon) => state.selectedAddons.includes(addon.label));
-  const addonsTotal = selectedAddonData.reduce((total, addon) => total + addon.price, 0);
+function renderProductDetail() {
+  const product = products.find(p => p.id === state.activeProductId);
+  if (!product) return;
+
+  document.getElementById('productCategoryTag').textContent = product.category;
+  document.getElementById('productTitle').textContent = product.name;
+  document.getElementById('productDescription').textContent = product.detail;
+  document.getElementById('productPrice').textContent = `R$ ${product.price.toFixed(2)}`;
+
+  // Imagens
+  const mainImage = document.getElementById('productMainImage');
+  if (mainImage) {
+    mainImage.style.backgroundImage = `url('${product.images[state.activeImageIndex]}')`;
+    mainImage.style.backgroundSize = 'cover';
+    mainImage.style.backgroundPosition = 'center';
+  }
+
+  const thumbRow = document.getElementById('productThumbRow');
+  if (thumbRow) {
+    thumbRow.innerHTML = product.images.map((img, i) => `
+      <button class="thumb-button ${i === state.activeImageIndex ? 'active' : ''}" data-index="${i}">
+        <div class="thumb-image" style="background-image: url('${img}'); background-size: cover;"></div>
+      </button>
+    `).join('');
+
+    thumbRow.querySelectorAll('.thumb-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.activeImageIndex = parseInt(btn.dataset.index);
+        renderProductDetail();
+      });
+    });
+  }
+
+  // Tamanhos
+  const sizeOptions = document.getElementById('sizeOptions');
+  if (sizeOptions) {
+    sizeOptions.innerHTML = product.sizes.map((size, i) => `
+      <label class="size-chip ${i === 0 ? 'active' : ''}">
+        <input type="radio" name="size" value="${size.label}" ${i === 0 ? 'checked' : ''}>
+        <span>${size.label} - R$ ${size.price.toFixed(2)}</span>
+      </label>
+    `).join('');
+  }
+
+  // Adicionais
+  const addonList = document.getElementById('addonList');
+  if (addonList) {
+    addonList.innerHTML = product.addons.map(addon => `
+      <label class="addon-chip">
+        <input type="checkbox" name="addon" value="${addon.label}">
+        <span>+ ${addon.label} (R$ ${addon.price.toFixed(2)})</span>
+      </label>
+    `).join('');
+  }
+}
+
+function renderCart() {
+  const container = document.getElementById('cartItems');
+  const subtotal = document.getElementById('cartSubtotal');
+  const total = document.getElementById('cartTotal');
+
+  if (state.cart.length === 0) {
+    container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-bag-shopping"></i><p>Seu carrinho está vazio</p></div>';
+    if (subtotal) subtotal.textContent = 'R$ 0,00';
+    if (total) total.textContent = 'R$ 0,00';
+    return;
+  }
+
+  let totalValue = 0;
+  container.innerHTML = state.cart.map((item, idx) => {
+    const itemTotal = item.unitPrice * item.quantity;
+    totalValue += itemTotal;
+    return `
+      <div class="cart-item">
+        <div class="cart-item-image" style="background-image: url('${item.image}');"></div>
+        <div>
+          <h3>${item.name}</h3>
+          <div class="product-copy">
+            <span>${item.size} • ${item.quantity}x R$ ${item.unitPrice.toFixed(2)}</span>
+          </div>
+          <div style="margin-top: 0.8rem;">
+            <div class="quantity-controls">
+              <button onclick="updateCartQuantity(${idx}, -1)">−</button>
+              <span>${item.quantity}</span>
+              <button onclick="updateCartQuantity(${idx}, 1)">+</button>
+            </div>
+            <button onclick="removeFromCart(${idx})" style="margin-left: 0.5rem; color: var(--accent); font-size: 0.9rem;"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <strong>R$ ${itemTotal.toFixed(2)}</strong>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const deliveryFee = 18;
+  const finalTotal = totalValue + deliveryFee;
+
+  if (subtotal) subtotal.textContent = `R$ ${totalValue.toFixed(2)}`;
+  if (total) total.textContent = `R$ ${finalTotal.toFixed(2)}`;
+}
+
+function updateCartQuantity(idx, change) {
+  state.cart[idx].quantity += change;
+  if (state.cart[idx].quantity <= 0) {
+    removeFromCart(idx);
+  } else {
+    renderCart();
+  }
+}
+
+function removeFromCart(idx) {
+  state.cart.splice(idx, 1);
+  renderCart();
+  document.getElementById('cartCount').textContent = state.cart.length;
+}
+
+function addProductToCart() {
+  const product = products.find(p => p.id === state.activeProductId);
+  const sizeInput = document.querySelector('input[name="size"]:checked');
+  const size = sizeInput ? sizeInput.value : product.sizes[0].label;
+  const quantity = 1;
 
   state.cart.push({
     productId: product.id,
     name: product.name,
-    size: size.label,
-    quantity: 1,
+    size: size,
+    quantity: quantity,
     image: product.images[0],
-    unitPrice: size.price + addonsTotal,
-    notes: elements.productNotes.value.trim(),
-    addons: selectedAddonData.map((addon) => addon.label)
+    unitPrice: product.price
   });
 
-  renderCart();
-  renderCheckoutSummary();
-  setActiveView("cart");
+  document.getElementById('cartCount').textContent = state.cart.length;
+  alert(`${product.name} adicionado ao carrinho!`);
 }
 
-function handleCartQuantity(index, action) {
-  const item = state.cart[index];
-  if (!item) return;
+// ========== RENDERIZAÇÃO ADMIN ==========
+function renderDashboardMetrics() {
+  const container = document.getElementById('dashboardMetrics');
+  if (!container) return;
 
-  if (action === "increase") {
-    item.quantity += 1;
+  container.innerHTML = `
+    <article class="metric-card">
+      <i class="fa-solid fa-shopping-bag"></i>
+      <strong>245</strong>
+      <span>Pedidos hoje</span>
+    </article>
+    <article class="metric-card">
+      <i class="fa-solid fa-dollar-sign"></i>
+      <strong>R$ 12.450</strong>
+      <span>Faturamento hoje</span>
+    </article>
+    <article class="metric-card">
+      <i class="fa-solid fa-users"></i>
+      <strong>180</strong>
+      <span>Clientes ativos</span>
+    </article>
+    <article class="metric-card">
+      <i class="fa-solid fa-star"></i>
+      <strong>4.8</strong>
+      <span>Avaliação média</span>
+    </article>
+  `;
+}
+
+function renderOrders() {
+  const container = document.getElementById('ordersTableBody');
+  if (!container) return;
+
+  const mockOrders = [
+    { id: 'ONO-5234', customer: 'João Silva', date: '10:30', value: 156.50, status: 'novo' },
+    { id: 'ONO-5233', customer: 'Maria Santos', date: '10:15', value: 89.90, status: 'preparando' },
+    { id: 'ONO-5232', customer: 'Carlos Costa', date: '09:45', value: 234.80, status: 'pronto' },
+    { id: 'ONO-5231', customer: 'Ana Lima', date: '09:20', value: 112.40, status: 'entregue' }
+  ];
+
+  container.innerHTML = mockOrders.map(order => `
+    <tr>
+      <td><strong>${order.id}</strong></td>
+      <td>${order.customer}</td>
+      <td>${order.date}</td>
+      <td>R$ ${order.value.toFixed(2)}</td>
+      <td>
+        <span class="status-badge status-${order.status}">
+          ${order.status === 'novo' ? '🆕 Novo' : order.status === 'preparando' ? '👨‍🍳 Preparando' : order.status === 'pronto' ? '✅ Pronto' : '🚚 Entregue'}
+        </span>
+      </td>
+      <td>
+        <div class="table-action-buttons">
+          <button class="btn-table-action" title="Editar"><i class="fa-solid fa-pencil"></i></button>
+          <button class="btn-table-action" title="Detalhes"><i class="fa-solid fa-eye"></i></button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderFinancialMetrics() {
+  const container = document.getElementById('financialMetrics');
+  if (!container) return;
+
+  container.innerHTML = `
+    <article class="metric-card">
+      <i class="fa-solid fa-money-bill-wave"></i>
+      <strong>R$ 45.890</strong>
+      <span>Receita mês</span>
+    </article>
+    <article class="metric-card">
+      <i class="fa-solid fa-trending-up"></i>
+      <strong>+12.5%</strong>
+      <span>Crescimento</span>
+    </article>
+    <article class="metric-card">
+      <i class="fa-solid fa-receipt"></i>
+      <strong>R$ 187.40</strong>
+      <span>Ticket médio</span>
+    </article>
+    <article class="metric-card">
+      <i class="fa-solid fa-credit-card"></i>
+      <strong>68%</strong>
+      <span>Cartão/PIX</span>
+    </article>
+  `;
+}
+
+function renderProducts() {
+  const container = document.getElementById('productsGrid');
+  if (!container) return;
+
+  container.innerHTML = products.map(p => `
+    <div class="product-card-admin">
+      <div class="product-card-admin-image">
+        <img src="${p.images[0]}" alt="${p.name}" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+      <div class="product-card-admin-content">
+        <h4>${p.name}</h4>
+        <div class="product-card-admin-meta">
+          <span class="product-card-admin-category">${p.category}</span>
+          <span class="product-card-admin-price">R$ ${p.price.toFixed(2)}</span>
+        </div>
+        <div class="product-card-admin-actions">
+          <button title="Editar">✏️ Editar</button>
+          <button title="Deletar">🗑️ Deletar</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderCustomers() {
+  const container = document.getElementById('customersTableBody');
+  if (!container) return;
+
+  const mockCustomers = [
+    { name: 'João Silva', email: 'joao@email.com', phone: '(11) 99999-1111', orders: 15, spent: 1850, avg: 123.33 },
+    { name: 'Maria Santos', email: 'maria@email.com', phone: '(11) 99999-2222', orders: 8, spent: 956, avg: 119.50 },
+    { name: 'Carlos Costa', email: 'carlos@email.com', phone: '(11) 99999-3333', orders: 23, spent: 2780, avg: 120.87 }
+  ];
+
+  container.innerHTML = mockCustomers.map(c => `
+    <tr>
+      <td><strong>${c.name}</strong></td>
+      <td>${c.email}</td>
+      <td>${c.phone}</td>
+      <td>${c.orders}</td>
+      <td>R$ ${c.spent.toFixed(2)}</td>
+      <td>R$ ${c.avg.toFixed(2)}</td>
+      <td>
+        <div class="table-action-buttons">
+          <button class="btn-table-action" title="Ver detalhes"><i class="fa-solid fa-eye"></i></button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// ========== EVENT LISTENERS ==========
+document.addEventListener('DOMContentLoaded', () => {
+  // Inicialização
+  checkSession();
+
+  // Login Form
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const result = login(email, password);
+
+      if (!result.success) {
+        const error = document.getElementById('loginError');
+        if (error) {
+          error.textContent = result.error;
+          error.style.display = 'block';
+        }
+      }
+    });
   }
 
-  if (action === "decrease") {
-    item.quantity -= 1;
-    if (item.quantity <= 0) {
-      state.cart.splice(index, 1);
-    }
-  }
-
-  renderCart();
-  renderCheckoutSummary();
-}
-
-function removeCartItem(index) {
-  state.cart.splice(index, 1);
-  renderCart();
-  renderCheckoutSummary();
-}
-
-function selectAdminOrder(orderId) {
-  state.activeAdminOrderId = orderId;
-  renderAdmin();
-}
-
-function advanceAdminOrder(orderId) {
-  const order = adminOrders.find((item) => item.id === orderId);
-  if (!order) return;
-
-  const currentIndex = adminStatusFlow.indexOf(order.status);
-  const nextIndex = Math.min(currentIndex + 1, adminStatusFlow.length - 1);
-  order.status = adminStatusFlow[nextIndex];
-  state.activeAdminOrderId = order.id;
-  renderAdmin();
-}
-
-function updateOptionPills(container) {
-  container.querySelectorAll(".pill-option").forEach((pill) => {
-    const input = pill.querySelector("input");
-    pill.classList.toggle("active", input.checked);
-  });
-}
-
-function buildWhatsappLink(orderId) {
-  const deliveryMode = document.querySelector('input[name="deliveryMode"]:checked')?.value || "entrega";
-  const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value || "Pix";
-
-  const customerAddress = elements.customerAddress.value.trim();
-  const cartNotes = elements.cartNotes.value.trim();
-
-  const summaryText = state.cart
-    .map((item) => {
-      const addonsText = item.addons.length
-        ? ` | Adicionais: ${item.addons.join(", ")}`
-        : "";
-
-      const notesText = item.notes
-        ? ` | Obs: ${item.notes}`
-        : "";
-
-      return `${item.quantity}x ${item.name} (${item.size}) - ${formatPrice(item.unitPrice * item.quantity)}${addonsText}${notesText}`;
-    })
-    .join("\n");
-
-  const message = [
-    `Olá! Segue o pedido ${orderId}.`,
-    "",
-    `Cliente: ${elements.customerName.value.trim()}`,
-    `Telefone: ${elements.customerPhone.value.trim()}`,
-    customerAddress ? `Endereço: ${customerAddress}` : null,
-    `Recebimento: ${deliveryMode}`,
-    `Pagamento: ${paymentMethod}`,
-    cartNotes ? `Observações gerais: ${cartNotes}` : null,
-    "",
-    "Itens:",
-    summaryText || "Carrinho vazio"
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  return `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`;
-}
-
-function syncWhatsappLink() {
-  const orderId = elements.orderNumber.textContent?.trim() || "#DEC-0000";
-  elements.whatsappButton.href = buildWhatsappLink(orderId);
-}
-
-function submitCheckout(event) {
-  event.preventDefault();
-
-  if (!state.cart.length) {
-    setActiveView("menu");
-    return;
-  }
-
-  state.checkout = {
-    name: elements.customerName.value.trim(),
-    phone: elements.customerPhone.value.trim(),
-    address: elements.customerAddress.value.trim()
-  };
-
-  const orderId = `#DEC-${Math.floor(1000 + Math.random() * 9000)}`;
-  elements.orderNumber.textContent = orderId;
-  elements.whatsappButton.href = buildWhatsappLink(orderId);
-  setActiveView("confirmation");
-}
-
-function bindEvents() {
-  elements.menuToggle.addEventListener("click", () => toggleNav());
-
-  elements.navLinks.forEach((element) => {
-    element.addEventListener("click", (event) => {
-      const viewName = element.dataset.nav;
-      if (!viewName) return;
-      event.preventDefault();
-      setActiveView(viewName);
+  // Demo buttons
+  document.querySelectorAll('.login-demo-card').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const demo = btn.dataset.demo;
+      const creds = {
+        admin: { email: 'admin@onopoke.com', password: 'admin123' },
+        customer: { email: 'cliente@onopoke.com', password: 'cliente123' }
+      };
+      if (creds[demo]) {
+        login(creds[demo].email, creds[demo].password);
+      }
     });
   });
 
-  elements.searchInput.addEventListener("input", renderMenuGrid);
+  // Logout
+  const logoutBtn = document.getElementById('logoutButton');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      logout();
+    });
+  }
 
-  elements.categoryChips.addEventListener("click", (event) => {
-    const target = event.target.closest("[data-category]");
-    if (!target) return;
-    state.activeCategory = target.dataset.category;
-    renderCategoryChips();
-    renderMenuGrid();
+  // User menu toggle
+  const userMenuToggle = document.getElementById('userMenuToggle');
+  const userMenuWrapper = document.getElementById('userMenuWrapper');
+  if (userMenuToggle) {
+    userMenuToggle.addEventListener('click', () => {
+      userMenuWrapper.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!userMenuWrapper.contains(e.target)) {
+        userMenuWrapper.classList.remove('active');
+      }
+    });
+  }
+
+  // Navegação
+  document.querySelectorAll('[data-nav]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const nav = link.dataset.nav;
+      navigateTo(nav);
+    });
   });
 
-  document.body.addEventListener("click", (event) => {
-    const adminSelectButton = event.target.closest("[data-admin-select]");
-    if (adminSelectButton) {
-      selectAdminOrder(adminSelectButton.dataset.adminSelect);
-      return;
-    }
+  // Add to cart
+  const addBtn = document.getElementById('addProductButton');
+  if (addBtn) {
+    addBtn.addEventListener('click', addProductToCart);
+  }
 
-    const adminAdvanceButton = event.target.closest("[data-admin-advance]");
-    if (adminAdvanceButton) {
-      advanceAdminOrder(adminAdvanceButton.dataset.adminAdvance);
-      return;
-    }
+  // Go to checkout
+  const checkoutBtn = document.getElementById('goToCheckout');
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+      if (state.cart.length > 0) {
+        navigateTo('checkout');
+      } else {
+        alert('Adicione itens ao carrinho');
+      }
+    });
+  }
 
-    const openProductButton = event.target.closest("[data-open-product]");
-    if (openProductButton) {
-      setActiveProduct(Number(openProductButton.dataset.openProduct));
-      setActiveView("product");
-      return;
-    }
+  // Checkout form
+  const checkoutForm = document.getElementById('checkoutForm');
+  if (checkoutForm) {
+    checkoutForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const orderNum = `#DEC-${Math.floor(Math.random() * 9000) + 1000}`;
+      document.getElementById('orderNumber').textContent = orderNum;
+      navigateTo('confirmation');
+    });
+  }
 
-    const addQuickButton = event.target.closest("[data-add-quick]");
-    if (addQuickButton) {
-      quickAddProduct(Number(addQuickButton.dataset.addQuick));
-      return;
-    }
+  // Renderizar conteúdo inicial
+  if (state.currentUser && state.currentUser.role === 'customer') {
+    renderBestSellers();
+    renderTestimonials();
+    renderMenu();
+  } else if (state.currentUser && state.currentUser.role === 'admin') {
+    renderDashboardMetrics();
+    renderOrders();
+    renderFinancialMetrics();
+    renderProducts();
+    renderCustomers();
+  }
 
-    const thumbButton = event.target.closest("[data-thumb-index]");
-    if (thumbButton) {
-      state.activeImageIndex = Number(thumbButton.dataset.thumbIndex);
-      renderProductDetail();
-      return;
-    }
-
-    const qtyButton = event.target.closest("[data-qty-action]");
-    if (qtyButton) {
-      handleCartQuantity(Number(qtyButton.dataset.cartIndex), qtyButton.dataset.qtyAction);
-      return;
-    }
-
-    const removeButton = event.target.closest("[data-remove-cart]");
-    if (removeButton) {
-      removeCartItem(Number(removeButton.dataset.removeCart));
-    }
-  });
-
-  elements.sizeOptions.addEventListener("change", (event) => {
-    const input = event.target.closest('input[name="productSize"]');
-    if (!input) return;
-    state.selectedSize = input.value;
-    renderProductDetail();
-  });
-
-  elements.addonList.addEventListener("change", (event) => {
-    const input = event.target.closest('input[type="checkbox"]');
-    if (!input) return;
-
-    if (input.checked) {
-      state.selectedAddons.push(input.value);
-    } else {
-      state.selectedAddons = state.selectedAddons.filter((addon) => addon !== input.value);
-    }
-
-    renderProductDetail();
-  });
-
-  elements.addProductButton.addEventListener("click", addConfiguredProductToCart);
-  elements.goToCheckout.addEventListener("click", () => setActiveView("checkout"));
-  elements.checkoutForm.addEventListener("submit", submitCheckout);
-  elements.checkoutForm.addEventListener("input", syncWhatsappLink);
-  elements.cartNotes.addEventListener("input", syncWhatsappLink);
-
-  elements.deliveryOptions.addEventListener("change", () => {
-    updateOptionPills(elements.deliveryOptions);
-    syncWhatsappLink();
-  });
-
-  elements.paymentOptions.addEventListener("change", () => {
-    updateOptionPills(elements.paymentOptions);
-    syncWhatsappLink();
-  });
-
-  document.addEventListener("click", (event) => {
-    if (!event.target.closest(".header-inner")) {
-      toggleNav(false);
-    }
-  });
-}
-
-setupInitialState();
-renderAll();
-bindEvents();
-setActiveView("home");
-updateOptionPills(elements.deliveryOptions);
-updateOptionPills(elements.paymentOptions);
-syncWhatsappLink();
-updateTvClock();
-setInterval(updateTvClock, 1000);
-setInterval(renderTvPanel, 2000);
+  // TV Clock
+  const tvClock = document.getElementById('tvClock');
+  if (tvClock) {
+    setInterval(() => {
+      const now = new Date();
+      tvClock.textContent = now.toLocaleTimeString('pt-BR');
+    }, 1000);
+  }
+});

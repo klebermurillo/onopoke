@@ -16,7 +16,8 @@
   <div class="page-glow page-glow-left"></div>
   <div class="page-glow page-glow-right"></div>
 
-  <header class="site-header" id="siteHeader">
+  <!-- HEADER PRINCIPAL -->
+  <header class="site-header" id="siteHeader" style="display: none;">
     <div class="container header-inner">
       <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
         <span></span>
@@ -32,6 +33,7 @@
         </span>
       </a>
 
+      <!-- NAVEGAÇÃO CLIENTE -->
       <nav class="main-nav" id="mainNav" aria-label="Principal">
         <a href="#home" data-nav="home">Home</a>
         <a href="#menu" data-nav="menu">Cardápio</a>
@@ -39,20 +41,110 @@
         <a href="#cart" data-nav="cart">Carrinho</a>
         <a href="#checkout" data-nav="checkout">Checkout</a>
         <a href="#confirmation" data-nav="confirmation">Confirmação</a>
-        <a href="#admin" data-nav="admin">Painel</a>
-        <a href="#tv" data-nav="tv">Painel TV</a>
       </nav>
 
-      <button class="cart-pill" id="cartShortcut" data-nav="cart" aria-label="Abrir carrinho">
-        <i class="fa-solid fa-bag-shopping"></i>
-        <span>Carrinho</span>
-        <strong id="cartCount">0</strong>
-      </button>
+      <!-- NAVEGAÇÃO ADMIN (oculta inicialmente) -->
+      <nav class="main-nav" id="mainNavAdmin" aria-label="Administrativo" style="display: none;">
+        <a href="#dashboard" data-nav="dashboard">Dashboard</a>
+        <a href="#orders" data-nav="orders">Pedidos</a>
+        <a href="#financial" data-nav="financial">Financeiro</a>
+        <a href="#reports" data-nav="reports">Relatórios</a>
+        <a href="#customers" data-nav="customers">Clientes</a>
+        <a href="#products" data-nav="products">Produtos</a>
+      </nav>
+
+      <!-- ELEMENTOS DO HEADER -->
+      <div class="header-right">
+        <button class="cart-pill" id="cartShortcut" data-nav="cart" aria-label="Abrir carrinho">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span>Carrinho</span>
+          <strong id="cartCount">0</strong>
+        </button>
+
+        <button class="btn-header-icon" id="tvPanelButton" data-nav="tv" title="Painel TV" style="display: none;">
+          <i class="fa-solid fa-tv"></i>
+        </button>
+
+        <div class="user-menu-wrapper" id="userMenuWrapper" style="display: none;">
+          <button class="user-menu-toggle" id="userMenuToggle">
+            <span class="user-avatar" id="userAvatar">👤</span>
+            <span class="user-name" id="userName">Usuário</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="user-menu-dropdown" id="userMenuDropdown">
+            <div class="user-menu-header">
+              <span class="user-avatar-large" id="userAvatarLarge">👤</span>
+              <div>
+                <strong id="userNameDropdown">Usuário</strong>
+                <small id="userRoleDropdown">Cliente</small>
+              </div>
+            </div>
+            <hr>
+            <a href="#" id="logoutButton">
+              <i class="fa-solid fa-sign-out-alt"></i> Sair
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
   <main>
-    <section class="view is-active" id="homeView" data-view="home" aria-labelledby="homeTitle">
+    <!-- PÁGINA DE LOGIN -->
+    <section class="view is-active" id="loginView" data-view="login" aria-labelledby="loginTitle">
+      <div class="login-wrapper">
+        <div class="login-card">
+          <div class="login-header">
+            <div class="login-brand">
+              <img src="img/hibisco.png" alt="Ono Poke" class="login-logo">
+              <h1><span style="color: var(--primary);">Ono</span> <span style="color: var(--accent);">Poke</span></h1>
+              <p>Sistema de Gestão e Pedidos</p>
+            </div>
+          </div>
+
+          <form id="loginForm" class="login-form">
+            <div class="form-group">
+              <label for="loginEmail">Email</label>
+              <input type="email" id="loginEmail" name="email" placeholder="seu@email.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="loginPassword">Senha</label>
+              <input type="password" id="loginPassword" name="password" placeholder="Sua senha" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+
+            <div id="loginError" class="login-error" style="display: none;"></div>
+          </form>
+
+          <div class="login-divider">Credenciais de teste</div>
+
+          <div class="login-demo-cards">
+            <button type="button" class="login-demo-card" data-demo="admin">
+              <i class="fa-solid fa-user-tie"></i>
+              <strong>Admin</strong>
+              <small>admin@onopoke.com</small>
+              <span class="demo-label">admin123</span>
+            </button>
+
+            <button type="button" class="login-demo-card" data-demo="customer">
+              <i class="fa-solid fa-user"></i>
+              <strong>Cliente</strong>
+              <small>cliente@onopoke.com</small>
+              <span class="demo-label">cliente123</span>
+            </button>
+          </div>
+
+          <div class="login-footer">
+            <p>Protótipo interativo • <strong>Ono Poke</strong> 🍛</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOME - CLIENTE -->
+    <section class="view" id="homeView" data-view="home" aria-labelledby="homeTitle">
       <div class="container hero-grid">
         <div class="hero-copy reveal">
           <span class="eyebrow">Poke bowls, pratos quentes e combos tropicais</span>
@@ -164,6 +256,7 @@
       </div>
     </section>
 
+    <!-- MENU - CLIENTE -->
     <section class="view" id="menuView" data-view="menu" aria-labelledby="menuTitle">
       <div class="container section-shell">
         <div class="section-heading split-heading">
@@ -186,6 +279,7 @@
       </div>
     </section>
 
+    <!-- PRODUTO - CLIENTE -->
     <section class="view" id="productView" data-view="product" aria-labelledby="productTitle">
       <div class="container section-shell product-layout">
         <div class="product-gallery-panel">
@@ -232,6 +326,7 @@
       </div>
     </section>
 
+    <!-- CARRINHO - CLIENTE -->
     <section class="view" id="cartView" data-view="cart" aria-labelledby="cartTitle">
       <div class="container section-shell cart-layout">
         <div class="cart-items-panel">
@@ -265,6 +360,7 @@
       </div>
     </section>
 
+    <!-- CHECKOUT - CLIENTE -->
     <section class="view" id="checkoutView" data-view="checkout" aria-labelledby="checkoutTitle">
       <div class="container section-shell checkout-layout">
         <form class="checkout-form" id="checkoutForm">
@@ -330,6 +426,7 @@
       </div>
     </section>
 
+    <!-- CONFIRMAÇÃO - CLIENTE -->
     <section class="view" id="confirmationView" data-view="confirmation" aria-labelledby="confirmationTitle">
       <div class="container confirmation-wrap section-shell">
         <div class="confirmation-card">
@@ -351,98 +448,7 @@
       </div>
     </section>
 
-    <section class="view" id="adminView" data-view="admin" aria-labelledby="adminTitle">
-      <div class="container section-shell">
-        <div class="section-heading split-heading">
-          <div>
-            <span class="eyebrow">Painel administrativo</span>
-            <h2 id="adminTitle">Demonstração visual para gestão do restaurante</h2>
-          </div>
-          <p>Uma proposta de dashboard elegante para pedidos, estoque visual e acompanhamento comercial.</p>
-        </div>
-
-        <div class="admin-metrics" id="adminMetrics"></div>
-
-        <div class="admin-grid">
-          <article class="admin-card">
-            <div class="admin-card-head">
-              <h3>Pedidos recentes</h3>
-              <span>Atualizado hoje</span>
-            </div>
-            <div id="ordersList" class="orders-list"></div>
-          </article>
-
-          <article class="admin-card">
-            <div class="admin-card-head">
-              <h3>Acompanhamento do cliente</h3>
-              <span>Exibição em tempo real</span>
-            </div>
-            <div id="trackingPanel" class="tracking-panel"></div>
-          </article>
-
-          <article class="admin-card">
-            <div class="admin-card-head">
-              <h3>Cadastro de produtos</h3>
-              <span>Visual demonstrativo</span>
-            </div>
-            <form class="admin-form">
-              <label>
-                Nome do produto
-                <input type="text" value="Poke de Atum Premium">
-              </label>
-              <label>
-                Categoria
-                <select>
-                  <option>Pokes</option>
-                  <option selected>Pratos Quentes</option>
-                  <option>Combos</option>
-                  <option>Sobremesas Tropicais</option>
-                </select>
-              </label>
-              <label>
-                Preço
-                <input type="text" value="R$ 59,00">
-              </label>
-              <label>
-                Descrição
-                <textarea rows="4">Atum fresco, manga, pepino, arroz japonês e molho cítrico com apresentação premium.</textarea>
-              </label>
-              <button type="button" class="btn btn-primary btn-block">Salvar produto</button>
-            </form>
-          </article>
-
-          <article class="admin-card admin-card-wide">
-            <div class="admin-card-head">
-              <h3>Estatísticas rápidas</h3>
-              <span>Últimos 30 dias</span>
-            </div>
-            <div class="stats-bars">
-              <div class="stats-bar-row">
-                <span>Pokes</span>
-                <div class="stats-track"><div class="stats-fill fill-1"></div></div>
-                <strong>78%</strong>
-              </div>
-              <div class="stats-bar-row">
-                <span>Pratos quentes</span>
-                <div class="stats-track"><div class="stats-fill fill-2"></div></div>
-                <strong>61%</strong>
-              </div>
-              <div class="stats-bar-row">
-                <span>Combos</span>
-                <div class="stats-track"><div class="stats-fill fill-3"></div></div>
-                <strong>84%</strong>
-              </div>
-              <div class="stats-bar-row">
-                <span>Sobremesas tropicais</span>
-                <div class="stats-track"><div class="stats-fill fill-4"></div></div>
-                <strong>43%</strong>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
+    <!-- PAINEL TV -->
     <section class="view" id="tvView" data-view="tv" aria-labelledby="tvTitle">
       <div class="container tv-shell">
         <div class="tv-board">
@@ -472,15 +478,386 @@
         </div>
       </div>
     </section>
+
+    <!-- DASHBOARD ADMIN -->
+    <section class="view" id="dashboardView" data-view="dashboard" aria-labelledby="dashboardTitle">
+      <div class="container section-shell">
+        <div class="section-heading split-heading">
+          <div>
+            <span class="eyebrow">Dashboard</span>
+            <h2 id="dashboardTitle">Visão geral do negócio</h2>
+          </div>
+          <p>Acompanhe os principais indicadores e métricas do seu restaurante em tempo real.</p>
+        </div>
+
+        <div class="admin-metrics" id="dashboardMetrics"></div>
+
+        <div class="admin-grid">
+          <article class="admin-card">
+            <div class="admin-card-head">
+              <h3>Pedidos hoje</h3>
+              <span id="todayDate">Hoje</span>
+            </div>
+            <div class="stats-bars" id="todayOrdersStats"></div>
+          </article>
+
+          <article class="admin-card">
+            <div class="admin-card-head">
+              <h3>Produtos mais vendidos</h3>
+              <span>Últimos 7 dias</span>
+            </div>
+            <div class="stats-bars" id="topProductsStats"></div>
+          </article>
+
+          <article class="admin-card admin-card-wide">
+            <div class="admin-card-head">
+              <h3>Faturamento por canal</h3>
+              <span>Últimos 30 dias</span>
+            </div>
+            <div class="channel-comparison" id="channelComparison"></div>
+          </article>
+
+          <article class="admin-card admin-card-wide">
+            <div class="admin-card-head">
+              <h3>Pedidos recentes</h3>
+              <span>Acompanhamento em tempo real</span>
+            </div>
+            <div id="dashboardRecentOrders" class="orders-list"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- GERENCIAMENTO DE PEDIDOS ADMIN -->
+    <section class="view" id="ordersView" data-view="orders" aria-labelledby="ordersTitle">
+      <div class="container section-shell">
+        <div class="section-heading split-heading">
+          <div>
+            <span class="eyebrow">Gestão de Pedidos</span>
+            <h2 id="ordersTitle">Controle de todas as encomendas</h2>
+          </div>
+          <p>Visualize, edite e acompanhe o status de todos os pedidos realizados.</p>
+        </div>
+
+        <div class="toolbar-card">
+          <div class="search-field">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" id="ordersSearchInput" placeholder="Busque por número, cliente ou status..." aria-label="Buscar pedidos">
+          </div>
+          <div class="category-chips" id="orderStatusFilter">
+            <button class="chip active" data-filter="all">Todos</button>
+            <button class="chip" data-filter="novo">Novo</button>
+            <button class="chip" data-filter="preparando">Preparando</button>
+            <button class="chip" data-filter="pronto">Pronto</button>
+            <button class="chip" data-filter="entregue">Entregue</button>
+          </div>
+        </div>
+
+        <div class="orders-table-wrapper">
+          <table class="orders-table" id="ordersTable">
+            <thead>
+              <tr>
+                <th>Pedido</th>
+                <th>Cliente</th>
+                <th>Data/Hora</th>
+                <th>Valor</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINANCEIRO ADMIN -->
+    <section class="view" id="financialView" data-view="financial" aria-labelledby="financialTitle">
+      <div class="container section-shell">
+        <div class="section-heading split-heading">
+          <div>
+            <span class="eyebrow">Financeiro</span>
+            <h2 id="financialTitle">Análise de receita e despesas</h2>
+          </div>
+          <p>Visualize a saúde financeira do seu negócio com gráficos detalhados e relatórios.</p>
+        </div>
+
+        <div class="financial-filters">
+          <div class="date-range-picker">
+            <input type="date" id="financeStartDate">
+            <input type="date" id="financeEndDate">
+            <button class="btn btn-secondary" id="applyFinanceFilter">Aplicar</button>
+          </div>
+        </div>
+
+        <div class="admin-metrics" id="financialMetrics"></div>
+
+        <div class="admin-grid">
+          <article class="admin-card admin-card-wide">
+            <div class="admin-card-head">
+              <h3>Receita acumulada</h3>
+              <span id="financeFilter">Período selecionado</span>
+            </div>
+            <div class="financial-chart" id="revenueChart"></div>
+          </article>
+
+          <article class="admin-card">
+            <div class="admin-card-head">
+              <h3>Formas de pagamento</h3>
+              <span>Distribuição</span>
+            </div>
+            <div class="payment-methods-list" id="paymentMethodsList"></div>
+          </article>
+
+          <article class="admin-card">
+            <div class="admin-card-head">
+              <h3>Canais de venda</h3>
+              <span>Comparativo</span>
+            </div>
+            <div class="sales-channels-list" id="salesChannelsList"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATÓRIOS ADMIN -->
+    <section class="view" id="reportsView" data-view="reports" aria-labelledby="reportsTitle">
+      <div class="container section-shell">
+        <div class="section-heading split-heading">
+          <div>
+            <span class="eyebrow">Relatórios</span>
+            <h2 id="reportsTitle">Análises e estatísticas detalhadas</h2>
+          </div>
+          <p>Gere relatórios customizados sobre vendas, performance e tendências do seu negócio.</p>
+        </div>
+
+        <div class="reports-grid" id="reportsGrid">
+          <article class="report-card">
+            <i class="fa-solid fa-chart-bar"></i>
+            <h3>Vendas por período</h3>
+            <p>Análise completa de receita diária, semanal e mensal com variações percentuais.</p>
+            <button class="btn btn-secondary btn-small">Gerar relatório</button>
+          </article>
+
+          <article class="report-card">
+            <i class="fa-solid fa-star"></i>
+            <h3>Produtos populares</h3>
+            <p>Ranking de produtos mais vendidos com volume e lucratividade.</p>
+            <button class="btn btn-secondary btn-small">Gerar relatório</button>
+          </article>
+
+          <article class="report-card">
+            <i class="fa-solid fa-users"></i>
+            <h3>Comportamento de clientes</h3>
+            <p>Perfil dos compradores, frequência, ticket médio e preferências.</p>
+            <button class="btn btn-secondary btn-small">Gerar relatório</button>
+          </article>
+
+          <article class="report-card">
+            <i class="fa-solid fa-user-clock"></i>
+            <h3>Horários de pico</h3>
+            <p>Análise de demanda por hora para otimizar equipe e estoque.</p>
+            <button class="btn btn-secondary btn-small">Gerar relatório</button>
+          </article>
+
+          <article class="report-card">
+            <i class="fa-solid fa-map-marker"></i>
+            <h3>Entregas por região</h3>
+            <p>Mapa de distribuição de pedidos e análise de custos de logística.</p>
+            <button class="btn btn-secondary btn-small">Gerar relatório</button>
+          </article>
+
+          <article class="report-card">
+            <i class="fa-solid fa-exclamation-triangle"></i>
+            <h3>Devoluções e reclamações</h3>
+            <p>Monitoramento de problemas e tendências para melhoria contínua.</p>
+            <button class="btn btn-secondary btn-small">Gerar relatório</button>
+          </article>
+        </div>
+
+        <article class="admin-card admin-card-wide">
+          <div class="admin-card-head">
+            <h3>Relatório customizado</h3>
+            <span>Gere seu próprio relatório</span>
+          </div>
+          <form class="admin-form" id="customReportForm">
+            <label>
+              Período
+              <select>
+                <option>Últimas 24 horas</option>
+                <option selected>Últimos 7 dias</option>
+                <option>Últimos 30 dias</option>
+                <option>Este mês</option>
+                <option>Período customizado</option>
+              </select>
+            </label>
+            <label>
+              Métrica
+              <select>
+                <option selected>Receita</option>
+                <option>Quantidade de pedidos</option>
+                <option>Ticket médio</option>
+                <option>Satisfação do cliente</option>
+              </select>
+            </label>
+            <label>
+              Formato de exportação
+              <select>
+                <option>Visualizar na tela</option>
+                <option>Exportar como PDF</option>
+                <option>Exportar como CSV</option>
+              </select>
+            </label>
+            <button type="submit" class="btn btn-primary">Gerar relatório</button>
+          </form>
+        </article>
+      </div>
+    </section>
+
+    <!-- GERENCIAMENTO DE CLIENTES ADMIN -->
+    <section class="view" id="customersView" data-view="customers" aria-labelledby="customersTitle">
+      <div class="container section-shell">
+        <div class="section-heading split-heading">
+          <div>
+            <span class="eyebrow">Clientes</span>
+            <h2 id="customersTitle">Base de dados de clientes</h2>
+          </div>
+          <p>Gerencie informações de clientes, histórico de pedidos e preferências.</p>
+        </div>
+
+        <div class="toolbar-card">
+          <div class="search-field">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" id="customersSearchInput" placeholder="Busque por nome, email ou telefone..." aria-label="Buscar clientes">
+          </div>
+          <button class="btn btn-secondary">
+            <i class="fa-solid fa-download"></i> Exportar lista
+          </button>
+        </div>
+
+        <div class="customers-table-wrapper">
+          <table class="customers-table" id="customersTable">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Pedidos</th>
+                <th>Gasto total</th>
+                <th>Ticket médio</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="customersTableBody">
+            </tbody>
+          </table>
+        </div>
+
+        <article class="admin-card admin-card-wide">
+          <div class="admin-card-head">
+            <h3>Adicionar novo cliente</h3>
+            <span>Cadastro manual</span>
+          </div>
+          <form class="admin-form" id="addCustomerForm">
+            <div class="form-grid">
+              <label>
+                Nome completo
+                <input type="text" placeholder="João Silva" required>
+              </label>
+              <label>
+                Email
+                <input type="email" placeholder="joao@email.com" required>
+              </label>
+              <label>
+                Telefone
+                <input type="tel" placeholder="(11) 99999-9999" required>
+              </label>
+              <label>
+                Data de cadastro
+                <input type="date" required>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Adicionar cliente</button>
+          </form>
+        </article>
+      </div>
+    </section>
+
+    <!-- GERENCIAMENTO DE PRODUTOS ADMIN -->
+    <section class="view" id="productsView" data-view="products" aria-labelledby="productsTitle">
+      <div class="container section-shell">
+        <div class="section-heading split-heading">
+          <div>
+            <span class="eyebrow">Produtos</span>
+            <h2 id="productsTitle">Catálogo de itens do cardápio</h2>
+          </div>
+          <p>Edite, crie e gerencie todos os produtos disponíveis para venda.</p>
+        </div>
+
+        <div class="toolbar-card">
+          <div class="search-field">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" id="productsSearchInput" placeholder="Busque por nome ou categoria..." aria-label="Buscar produtos">
+          </div>
+          <button class="btn btn-primary" id="newProductButton">
+            <i class="fa-solid fa-plus"></i> Novo produto
+          </button>
+        </div>
+
+        <div class="products-grid" id="productsGrid"></div>
+
+        <article class="admin-card admin-card-wide">
+          <div class="admin-card-head">
+            <h3>Adicionar novo produto</h3>
+            <span>Preenchimento do catálogo</span>
+          </div>
+          <form class="admin-form" id="addProductForm">
+            <div class="form-grid">
+              <label>
+                Nome do produto
+                <input type="text" placeholder="Nome do prato" required>
+              </label>
+              <label>
+                Categoria
+                <select required>
+                  <option>Pokes</option>
+                  <option>Pratos Quentes</option>
+                  <option>Combos</option>
+                  <option>Sobremesas Tropicais</option>
+                </select>
+              </label>
+              <label>
+                Preço
+                <input type="number" placeholder="0.00" step="0.01" required>
+              </label>
+              <label>
+                Status
+                <select>
+                  <option selected>Ativo</option>
+                  <option>Inativo</option>
+                  <option>Fora de estoque</option>
+                </select>
+              </label>
+              <label class="span-2">
+                Descrição
+                <textarea rows="3" placeholder="Descreva o produto..." required></textarea>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Criar produto</button>
+          </form>
+        </article>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" id="siteFooter" style="display: none;">
     <div class="container footer-grid">
       <div>
         <a href="#home" class="brand footer-brand" data-nav="home">
-          <span class="brand-mark"><i class="fa-solid fa-bowl-food"></i></span>
+          <span class="brand-mark"><img src="img/hibisco.png" alt="Ono Poke" style="width: 100%; height: 100%; object-fit: contain;"></span>
           <span class="brand-copy">
-            <strong>Ono Poke</strong>
+            <strong><span style="color: var(--primary);">Ono</span> <span style="color: var(--accent);">Poke</span></strong>
             <small>Comida havaiana premium</small>
           </span>
         </a>
@@ -492,8 +869,6 @@
           <li><a href="#home" data-nav="home">Home</a></li>
           <li><a href="#menu" data-nav="menu">Cardápio</a></li>
           <li><a href="#cart" data-nav="cart">Carrinho</a></li>
-          <li><a href="#admin" data-nav="admin">Painel</a></li>
-          <li><a href="#tv" data-nav="tv">Painel TV</a></li>
         </ul>
       </div>
       <div>
@@ -519,6 +894,7 @@
     </div>
   </footer>
 
+  <script src="auth.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

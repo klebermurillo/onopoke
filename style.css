@@ -1781,3 +1781,671 @@ main {
   color: var(--primary-strong);
   font-weight: 600;
 }
+
+/* ========== LOGIN PAGE ========== */
+.login-wrapper {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background: linear-gradient(180deg, #faf6ee 0%, #f5efe4 100%);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2.4rem;
+  border-radius: var(--radius-xl);
+  background: #ffffff;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-brand {
+  display: grid;
+  place-items: center;
+  gap: 0.8rem;
+}
+
+.login-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.login-brand h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.login-brand p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.login-form {
+  display: grid;
+  gap: 1.2rem;
+  margin-bottom: 1.8rem;
+}
+
+.form-group {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.form-group input {
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+}
+
+.login-error {
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(233, 118, 128, 0.14);
+  border: 1px solid rgba(233, 118, 128, 0.3);
+  color: var(--accent);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.login-divider {
+  text-align: center;
+  margin: 1.5rem 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+}
+
+.login-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--line);
+  z-index: -1;
+}
+
+.login-divider::after {
+  content: attr(data-text);
+  background: #ffffff;
+  padding: 0 1rem;
+}
+
+.login-demo-cards {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+}
+
+.login-demo-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.94);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.login-demo-card:hover {
+  border-color: var(--primary);
+  background: rgba(49, 158, 169, 0.08);
+}
+
+.login-demo-card i {
+  font-size: 1.8rem;
+  color: var(--primary);
+  width: 48px;
+  display: grid;
+  place-items: center;
+}
+
+.login-demo-card strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.login-demo-card small {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.demo-label {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.login-footer {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.login-footer p {
+  margin: 0;
+}
+
+/* ========== USER MENU ========== */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-header-icon {
+  width: 48px;
+  height: 48px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-header-icon:hover {
+  background: rgba(49, 158, 169, 0.16);
+  border-color: var(--primary);
+}
+
+.user-menu-wrapper {
+  position: relative;
+}
+
+.user-menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.user-menu-toggle:hover {
+  background: rgba(49, 158, 169, 0.16);
+  border-color: var(--primary);
+}
+
+.user-avatar {
+  display: inline-grid;
+  place-items: center;
+  font-size: 1.1rem;
+}
+
+.user-avatar-large {
+  font-size: 2rem;
+}
+
+.user-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: 280px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: var(--transition);
+}
+
+.user-menu-wrapper.active .user-menu-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.user-menu-header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+
+.user-menu-dropdown strong {
+  display: block;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.user-menu-dropdown small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.user-menu-dropdown hr {
+  margin: 0.5rem 0;
+  border: none;
+  border-top: 1px solid var(--line);
+}
+
+.user-menu-dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  transition: var(--transition);
+}
+
+.user-menu-dropdown a:hover {
+  background: rgba(49, 158, 169, 0.16);
+  color: var(--primary);
+}
+
+/* ========== ADMIN TABLES ========== */
+.orders-table-wrapper,
+.customers-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+}
+
+.orders-table,
+.customers-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders-table thead,
+.customers-table thead {
+  background: rgba(49, 158, 169, 0.08);
+}
+
+.orders-table th,
+.customers-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+  border-bottom: 1px solid var(--line);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.orders-table td,
+.customers-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.orders-table tbody tr:hover,
+.customers-table tbody tr:hover {
+  background: rgba(49, 158, 169, 0.06);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.status-novo {
+  background: rgba(233, 118, 128, 0.18);
+  color: var(--accent);
+}
+
+.status-preparando {
+  background: rgba(255, 193, 7, 0.18);
+  color: #ff9800;
+}
+
+.status-pronto {
+  background: rgba(76, 175, 80, 0.18);
+  color: #4caf50;
+}
+
+.status-entregue {
+  background: rgba(49, 158, 169, 0.18);
+  color: var(--primary);
+}
+
+.table-action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-table-action {
+  width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(49, 158, 169, 0.16);
+  border: 1px solid transparent;
+  color: var(--primary);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.btn-table-action:hover {
+  background: rgba(49, 158, 169, 0.26);
+  border-color: var(--primary);
+}
+
+/* ========== FINANCIAL PAGE ========== */
+.financial-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.date-range-picker {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.date-range-picker input {
+  padding: 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.financial-chart,
+.payment-methods-list,
+.sales-channels-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.financial-chart-bar,
+.payment-method-item,
+.sales-channel-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 0;
+}
+
+.financial-chart-label,
+.payment-method-label,
+.sales-channel-label {
+  min-width: 120px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.financial-chart-bar-container {
+  flex: 1;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(49, 158, 169, 0.1);
+  overflow: hidden;
+}
+
+.financial-chart-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary-strong), var(--accent));
+}
+
+.financial-chart-value,
+.payment-method-value,
+.sales-channel-value {
+  min-width: 100px;
+  text-align: right;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ========== REPORTS PAGE ========== */
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.report-card {
+  padding: 1.6rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 0.8rem;
+  transition: var(--transition);
+}
+
+.report-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.report-card i {
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+.report-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.report-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.channel-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.channel-item {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(49, 158, 169, 0.06);
+}
+
+.channel-item strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.channel-item span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.channel-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+/* ========== PRODUCTS GRID ADMIN ========== */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.product-card-admin {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.product-card-admin:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+.product-card-admin-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(135deg, var(--soft), var(--surface-soft));
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+}
+
+.product-card-admin-content {
+  padding: 1rem;
+}
+
+.product-card-admin h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.product-card-admin-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.85rem;
+}
+
+.product-card-admin-category {
+  color: var(--muted);
+}
+
+.product-card-admin-price {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.product-card-admin-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.product-card-admin-actions button {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.product-card-admin-actions button:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1080px) {
+  .reports-grid,
+  .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .channel-comparison {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 780px) {
+  .login-card {
+    padding: 1.8rem;
+  }
+
+  .reports-grid,
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .date-range-picker {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .date-range-picker input,
+  .date-range-picker button {
+    width: 100%;
+  }
+
+  .orders-table,
+  .customers-table {
+    font-size: 0.85rem;
+  }
+
+  .orders-table th,
+  .customers-table th,
+  .orders-table td,
+  .customers-table td {
+    padding: 0.8rem;
+  }
+}
