@@ -897,34 +897,105 @@ if (!state.categories) {
 
 // Produtos de Bebidas
 const beverageProducts = [
+  // Águas
   {
     id: 101,
     category: 'Bebidas',
-    name: 'Refrigerante Tropical',
-    description: 'Refrigerante gelado de frutas tropicais, perfeito para acompanhar seu poke.',
-    price: 8.90,
-    images: ['https://thumbs.dreamstime.com/b/latas-de-marcas-populares-refrigerantes-poznan-pol-refrigerante-incluindo-coca-cola-fanta-dr-pepper-sprite-lipton-ice-tea-e-220229107.jpg'],
+    name: 'Água Mineral',
+    description: 'Água mineral gelada, perfeita para hidratar.',
+    price: 4.00,
+    images: ['https://static.paodeacucar.com/img/uploads/1/626/24660626.png'],
     featured: false
   },
   {
     id: 102,
     category: 'Bebidas',
-    name: 'Água Natural',
-    description: 'Água natural fresca, hidratante e refrescante.',
-    price: 12.90,
+    name: 'Água com Gás',
+    description: 'Água mineral com gás, refrescante e leve.',
+    price: 5.00,
     images: ['https://static.paodeacucar.com/img/uploads/1/626/24660626.png'],
-    sizes: [
-      { label: 'Sem gás', price: 12.90 },
-      { label: 'Com gás', price: 14.90 }
-    ],
     featured: false
   },
+  // Refrigerantes
   {
     id: 103,
     category: 'Bebidas',
-    name: 'Suco Natural de Frutas',
-    description: 'Suco fresco feito com frutas selecionadas, sem conservantes.',
-    price: 14.90,
+    name: 'Coca-Cola',
+    description: 'Refrigerante gelado clássico.',
+    price: 7.00,
+    images: ['https://thumbs.dreamstime.com/b/latas-de-marcas-populares-refrigerantes-poznan-pol-refrigerante-incluindo-coca-cola-fanta-dr-pepper-sprite-lipton-ice-tea-e-220229107.jpg'],
+    featured: false
+  },
+  {
+    id: 104,
+    category: 'Bebidas',
+    name: 'Coca-Cola Zero',
+    description: 'Refrigerante sem açúcar, mesmo sabor.',
+    price: 7.00,
+    images: ['https://thumbs.dreamstime.com/b/latas-de-marcas-populares-refrigerantes-poznan-pol-refrigerante-incluindo-coca-cola-fanta-dr-pepper-sprite-lipton-ice-tea-e-220229107.jpg'],
+    featured: false
+  },
+  {
+    id: 105,
+    category: 'Bebidas',
+    name: 'Guaraná',
+    description: 'Refrigerante energizante com gosto de guaraná.',
+    price: 7.00,
+    images: ['https://thumbs.dreamstime.com/b/latas-de-marcas-populares-refrigerantes-poznan-pol-refrigerante-incluindo-coca-cola-fanta-dr-pepper-sprite-lipton-ice-tea-e-220229107.jpg'],
+    featured: false
+  },
+  {
+    id: 106,
+    category: 'Bebidas',
+    name: 'Guaraná Zero',
+    description: 'Guaraná sem açúcar, mesmo vigor.',
+    price: 7.00,
+    images: ['https://thumbs.dreamstime.com/b/latas-de-marcas-populares-refrigerantes-poznan-pol-refrigerante-incluindo-coca-cola-fanta-dr-pepper-sprite-lipton-ice-tea-e-220229107.jpg'],
+    featured: false
+  },
+  // Sucos
+  {
+    id: 107,
+    category: 'Bebidas',
+    name: 'Laranja Natural',
+    description: 'Suco natural fresco de laranja, sem conservantes.',
+    price: 9.00,
+    images: ['https://s2-ge.glbimg.com/64QeEkjeZkr4WG0cQY0gFzTCAC4=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2022/3/3/92w4EYREyRINApxl77eQ/suco-frutas.jpg'],
+    featured: false
+  },
+  {
+    id: 108,
+    category: 'Bebidas',
+    name: 'Maracujá',
+    description: 'Suco natural refrescante de maracujá tropical.',
+    price: 9.00,
+    images: ['https://s2-ge.glbimg.com/64QeEkjeZkr4WG0cQY0gFzTCAC4=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2022/3/3/92w4EYREyRINApxl77eQ/suco-frutas.jpg'],
+    featured: false
+  },
+  {
+    id: 109,
+    category: 'Bebidas',
+    name: 'Limão',
+    description: 'Suco natural fresco de limão, desintoxicante.',
+    price: 9.00,
+    images: ['https://s2-ge.glbimg.com/64QeEkjeZkr4WG0cQY0gFzTCAC4=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2022/3/3/92w4EYREyRINApxl77eQ/suco-frutas.jpg'],
+    featured: false
+  },
+  {
+    id: 110,
+    category: 'Bebidas',
+    name: 'Tropical',
+    description: 'Suco natural com mix de frutas tropicais.',
+    price: 10.00,
+    images: ['https://s2-ge.glbimg.com/64QeEkjeZkr4WG0cQY0gFzTCAC4=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2022/3/3/92w4EYREyRINApxl77eQ/suco-frutas.jpg'],
+    featured: false
+  },
+  {
+    id: 111,
+    category: 'Bebidas',
+    name: 'Suco Verde',
+    description: 'Suco natural detox com vegetais verdes e frutas.',
+    price: 10.00,
     images: ['https://s2-ge.glbimg.com/64QeEkjeZkr4WG0cQY0gFzTCAC4=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2022/3/3/92w4EYREyRINApxl77eQ/suco-frutas.jpg'],
     featured: false
   }
