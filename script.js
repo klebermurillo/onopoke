@@ -904,7 +904,7 @@ const beverageProducts = [
     name: 'Água',
     description: 'Escolha entre água mineral ou com gás.',
     price: 4.00,
-    images: ['https://static.paodeacucar.com/img/uploads/1/626/24660626.png'],
+    images: ['https://images.unsplash.com/photo-1554283505-83cedc7cb605?w=800&q=80'],
     sizes: [
       { label: 'Água Mineral', price: 4.00 },
       { label: 'Água com Gás', price: 5.00 }
@@ -918,7 +918,7 @@ const beverageProducts = [
     name: 'Refrigerante',
     description: 'Escolha entre os principais refrigerantes gelados.',
     price: 7.00,
-    images: ['https://thumbs.dreamstime.com/b/latas-de-marcas-populares-refrigerantes-poznan-pol-refrigerante-incluindo-coca-cola-fanta-dr-pepper-sprite-lipton-ice-tea-e-220229107.jpg'],
+    images: ['https://images.unsplash.com/photo-1554524221-acf6f0cfea6e?w=800&q=80'],
     sizes: [
       { label: 'Coca-Cola', price: 7.00 },
       { label: 'Coca-Cola Zero', price: 7.00 },
@@ -934,7 +934,7 @@ const beverageProducts = [
     name: 'Suco Natural',
     description: 'Escolha entre nossos sucos naturais frescos.',
     price: 9.00,
-    images: ['https://s2-ge.glbimg.com/64QeEkjeZkr4WG0cQY0gFzTCAC4=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2022/3/3/92w4EYREyRINApxl77eQ/suco-frutas.jpg'],
+    images: ['https://images.unsplash.com/photo-1600271886742-f049cd1f9a89?w=800&q=80'],
     sizes: [
       { label: 'Laranja Natural', price: 9.00 },
       { label: 'Maracujá', price: 9.00 },
