@@ -364,10 +364,13 @@ function navigateTo(view) {
 // Toggle navegação mobile
 function toggleNav(forceOpen) {
   const mainNav = document.getElementById('mainNav');
-  if (!mainNav) return;
+  const mainNavAdmin = document.getElementById('mainNavAdmin');
+  const activeNav = mainNav.style.display !== 'none' ? mainNav : mainNavAdmin;
   
-  const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : !mainNav.classList.contains('is-open');
-  mainNav.classList.toggle('is-open', shouldOpen);
+  if (!activeNav) return;
+  
+  const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : !activeNav.classList.contains('is-open');
+  activeNav.classList.toggle('is-open', shouldOpen);
 }
 
 // ========== RENDERIZAÇÃO DE DADOS ==========
@@ -1219,6 +1222,8 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const nav = link.dataset.nav;
       navigateTo(nav);
+      // Fechar menu mobile após seleção
+      toggleNav(false);
     });
   });
 
