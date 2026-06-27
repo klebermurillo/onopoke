@@ -175,7 +175,8 @@ const state = {
   activeAdminOrderId: "ONO-4201",
   cart: [],
   checkout: {},
-  currentUser: null
+  currentUser: null,
+  registeredUsers: []
 };
 
 // Expor variáveis globalmente
@@ -203,6 +204,7 @@ function login(email, password) {
     }
   };
 
+  // Verificar usuários hardcoded
   for (const [key, user] of Object.entries(users)) {
     if (user.email === email && user.password === password) {
       state.currentUser = { ...user, loginTime: new Date().toLocaleString('pt-BR') };
@@ -212,6 +214,17 @@ function login(email, password) {
       return { success: true };
     }
   }
+  
+  // Verificar usuários registrados
+  const registered = state.registeredUsers.find(u => u.email === email && u.password === password);
+  if (registered) {
+    state.currentUser = { ...registered, loginTime: new Date().toLocaleString('pt-BR') };
+    localStorage.setItem('onoPokeSessão', JSON.stringify(state.currentUser));
+    setupUIForRole();
+    navigateTo(state.currentUser.role === 'admin' ? 'dashboard' : 'home');
+    return { success: true };
+  }
+  
   return { success: false, error: "Email ou senha inválidos" };
 }
 
@@ -334,6 +347,17 @@ function navigateTo(view) {
   const viewId = viewMap[view];
   if (viewId) {
     showView(viewId);
+    
+    // Chamar renderização de dados específicos da view
+    if (view === 'customers') {
+      renderCustomers();
+    } else if (view === 'products') {
+      renderProducts();
+    } else if (view === 'orders') {
+      renderOrders();
+    } else if (view === 'financial') {
+      renderFinancialMetrics();
+    }
   }
 }
 
@@ -694,7 +718,13 @@ function renderCustomers() {
     { name: 'Carlos Costa', email: 'carlos@email.com', phone: '(11) 99999-3333', orders: 23, spent: 2780, avg: 120.87 }
   ];
 
-  container.innerHTML = mockCustomers.map(c => `
+  // Combinar com usuários registrados
+  const allCustomers = [
+    ...mockCustomers,
+    ...state.registeredUsers
+  ];
+
+  container.innerHTML = allCustomers.map(c => `
     <tr>
       <td><strong>${c.name}</strong></td>
       <td>${c.email}</td>
@@ -799,7 +829,8 @@ function viewCustomer(customerName) {
       { order: 'ONO-5232', date: '2026-06-27' },
       { order: 'ONO-5230', date: '2026-06-25' },
       { order: 'ONO-5228', date: '2026-06-23' }
-    ]}
+    ]},
+    ...state.registeredUsers
   ];
   
   const customer = mockCustomers.find(c => c.name === customerName);
@@ -828,6 +859,27 @@ function viewCustomer(customerName) {
     
     // Mostrar modal
     document.getElementById('viewCustomerModal').style.display = 'flex';
+  }
+}
+
+// ========== RECUPERAR DADOS DO LOCALSTORAGE ==========
+// Recuperar usuários registrados (armazenados separadamente)
+const savedRegisteredUsers = localStorage.getItem('onoPoke_registeredUsers');
+if (savedRegisteredUsers) {
+  try {
+    state.registeredUsers = JSON.parse(savedRegisteredUsers);
+  } catch (e) {
+    console.log('Erro ao recuperar usuários registrados');
+  }
+}
+
+// Recuperar sessão atual do usuário
+const savedSessionData = localStorage.getItem('onoPokeSessão');
+if (savedSessionData) {
+  try {
+    state.currentUser = JSON.parse(savedSessionData);
+  } catch (e) {
+    console.log('Erro ao recuperar sessão');
   }
 }
 
@@ -976,6 +1028,14 @@ function signup(name, email, password, phone) {
     return false;
   }
   
+  // Verificar se email já existe
+  const emailExists = state.registeredUsers.some(u => u.email === email);
+  if (emailExists) {
+    document.getElementById('signupError').textContent = 'Este email já está registrado!';
+    document.getElementById('signupError').style.display = 'block';
+    return false;
+  }
+  
   // "Registrar" usuário (em um app real, seria via API)
   const newUser = {
     email: email,
@@ -983,8 +1043,18 @@ function signup(name, email, password, phone) {
     name: name,
     phone: phone || '',
     role: 'customer',
-    avatar: '👤'
+    avatar: '👤',
+    registeredAt: new Date().toLocaleString('pt-BR'),
+    orders: 0,
+    spent: 0,
+    avg: 0,
+    lastOrder: null,
+    history: []
   };
+  
+  // Salvar usuário registrado
+  state.registeredUsers.push(newUser);
+  localStorage.setItem('onoPoke_registeredUsers', JSON.stringify(state.registeredUsers));
   
   // Mostrar mensagem de sucesso
   document.getElementById('signupError').style.display = 'none';
